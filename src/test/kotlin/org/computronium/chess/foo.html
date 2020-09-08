@@ -1,0 +1,53 @@
+<html>
+<head>
+    <style type="text/css">
+        .chess_board { border:1px solid #333; }
+        .chess_board td {
+            background:#fff; background:-moz-linear-gradient(top, #fff, #eee);
+            background:-webkit-gradient(linear,0 0, 0 100%, from(#fff), to(#eee));
+            box-shadow:inset 0 0 0 1px #fff;
+            -moz-box-shadow:inset 0 0 0 1px #fff;
+            -webkit-box-shadow:inset 0 0 0 1px #fff;
+            height:40px; text-align:center; vertical-align:middle; width:40px; font-size:30px;}
+        .chess_board tr:nth-child(odd) td:nth-child(even),
+        .chess_board tr:nth-child(even) td:nth-child(odd) {
+            background:#ccc; background:-moz-linear-gradient(top, #ccc, #eee);
+            background:-webkit-gradient(linear,0 0, 0 100%, from(#ccc), to(#eee));
+            box-shadow:inset 0 0 10px rgba(0,0,0,.4);
+            -moz-box-shadow:inset 0 0 10px rgba(0,0,0,.4);
+            -webkit-box-shadow:inset 0 0 10px rgba(0,0,0,.4); }
+    </style>
+    <script type="text/javascript">
+        function renderFen(fentxt) {
+            fentxt = fentxt.replace(/ .*/g, '');
+            fentxt = fentxt.replace(/r/g, 'x'); // Convert black rooks to 'x' to avoid mixup with <tr></tr> tags
+            fentxt = fentxt.replace(/\//g, '</tr><tr>');
+            fentxt = fentxt.replace(/1/g, '<td></td>');
+            fentxt = fentxt.replace(/2/g, '<td></td><td></td>');
+            fentxt = fentxt.replace(/3/g, '<td></td><td></td><td></td>');
+            fentxt = fentxt.replace(/4/g, '<td></td><td></td><td></td><td></td>');
+            fentxt = fentxt.replace(/5/g, '<td></td><td></td><td></td><td></td><td></td>');
+            fentxt = fentxt.replace(/6/g, '<td></td><td></td><td></td><td></td><td></td><td></td>');
+            fentxt = fentxt.replace(/7/g, '<td></td><td></td><td></td><td></td><td></td><td></td><td></td>');
+            fentxt = fentxt.replace(/8/g, '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>');
+            fentxt = fentxt.replace(/K/g, '<td>&#9812;</td>');
+            fentxt = fentxt.replace(/Q/g, '<td>&#9813;</td>');
+            fentxt = fentxt.replace(/R/g, '<td>&#9814;</td>');
+            fentxt = fentxt.replace(/B/g, '<td>&#9815;</td>');
+            fentxt = fentxt.replace(/N/g, '<td>&#9816;</td>');
+            fentxt = fentxt.replace(/P/g, '<td>&#9817;</td>');
+            fentxt = fentxt.replace(/k/g, '<td>&#9818;</td>');
+            fentxt = fentxt.replace(/q/g, '<td>&#9819;</td>');
+            fentxt = fentxt.replace(/x/g, '<td>&#9820;</td>');
+            fentxt = fentxt.replace(/b/g, '<td>&#9821;</td>');
+            fentxt = fentxt.replace(/n/g, '<td>&#9822;</td>');
+            fentxt = fentxt.replace(/p/g, '<td>&#9823;</td>');
+            return '<table class="chess_board" cellspacing="0" cellpadding="0"><tr>' + fentxt + '</tr></table>';
+        }
+    </script>
+</head>
+<body>
+<script type="text/javascript">
+    document.write(renderFen('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'));
+</script>
+</body>
