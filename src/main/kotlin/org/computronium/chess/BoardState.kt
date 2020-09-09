@@ -23,7 +23,7 @@ class BoardState(private val board: Array<Piece?>) {
             113
         ))
 
-    var whoseTurn = 0
+    var whoseTurn = WHITE
 
     var moveNumber = 0
 

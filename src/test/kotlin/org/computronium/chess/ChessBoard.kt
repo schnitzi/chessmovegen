@@ -11,48 +11,67 @@ import javax.swing.border.BevelBorder
  * Chessboard renderer, converted from a StackOverflow answer in Java.
  *
  * @author Andrew Thompson
- * @see https://stackoverflow.com/a/18686753/215403
+ * @see {@link https://stackoverflow.com/a/18686753/215403}
  */
-internal object ChessBoard {
-    /**
-     * Unicode values for chess pieces.
-     */
-    private val pieces = arrayOf(
-        "\u2654", "\u2655", "\u2656", "\u2657", "\u2658", "\u2659"
-    )
-    private const val KING = 0
-    private const val QUEEN = 1
-    private const val CASTLE = 2
-    private const val BISHOP = 3
-    private const val KNIGHT = 4
-    private const val PAWN = 5
-    private val order = intArrayOf(
-        CASTLE,
-        KNIGHT,
-        BISHOP,
-        QUEEN,
-        KING,
-        BISHOP,
-        KNIGHT,
-        CASTLE
-    )
+internal class ChessBoard : JPanel(GridLayout(0, 8, 0, 0)) {
+
+    companion object {
+        private const val KING = 0
+        private const val QUEEN = 1
+        private const val CASTLE = 2
+        private const val BISHOP = 3
+        private const val KNIGHT = 4
+        private const val PAWN = 5
+
+        private const val WHITE = 0
+        private const val BLACK = 1
+
+        /**
+         * Unicode values for chess pieces.
+         */
+        private val pieces = arrayOf("\u2654", "\u2655", "\u2656", "\u2657", "\u2658", "\u2659")
+        private val order = intArrayOf(CASTLE, KNIGHT, BISHOP, QUEEN, KING, BISHOP, KNIGHT, CASTLE)
+
+        @JvmStatic
+        fun main(args: Array<String>) {
+
+            val pawnRow = intArrayOf(PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN)
+
+            val r = Runnable {
+
+                val gradientFill = true
+                val gui = ChessBoard()
+                gui.border = BevelBorder(BevelBorder.LOWERED, Color.GRAY.brighter(), Color.GRAY, Color.GRAY.darker(), Color.GRAY)
+                // set up a chess board
+                gui.addPiecesToContainer(gui, WHITE, BLACK, order, gradientFill)
+                gui.addPiecesToContainer(gui, BLACK, BLACK, pawnRow, gradientFill)
+                gui.addBlankLabelRow(gui, WHITE)
+                gui.addBlankLabelRow(gui, BLACK)
+                gui.addBlankLabelRow(gui, WHITE)
+                gui.addBlankLabelRow(gui, BLACK)
+                gui.addPiecesToContainer(gui, WHITE, WHITE, pawnRow, gradientFill)
+                gui.addPiecesToContainer(gui, BLACK, WHITE, order, gradientFill)
+                JOptionPane.showMessageDialog(null, gui, "Chessboard", JOptionPane.INFORMATION_MESSAGE)
+                val tileSet = JPanel(GridLayout(0, 6, 0, 0))
+                tileSet.isOpaque = false
+                val tileSetOrder = intArrayOf(KING, QUEEN, CASTLE, KNIGHT, BISHOP, PAWN)
+                gui.addPiecesToContainer(tileSet, Color(0, 0, 0, 0), BLACK, tileSetOrder, gradientFill)
+                gui.addPiecesToContainer(tileSet, Color(0, 0, 0, 0), WHITE, tileSetOrder, gradientFill)
+            }
+            SwingUtilities.invokeLater(r)
+        }
+    }
 
     /*
      * Colors..
      */
     private val outlineColor = Color.DARK_GRAY
-    private val pieceColors = arrayOf(
-        Color(203, 203, 197),
-        Color(192, 142, 60)
-    )
-    private const val WHITE = 0
-    private const val BLACK = 1
+    private val pieceColors = arrayOf(Color(203, 203, 197), Color(192, 142, 60))
+    private val squareColors = arrayOf(Color.WHITE, Color.BLACK)
 
-    /*
-     * Font. The images use the font size X size.
-     */
-    private var font = Font("Sans-Serif", Font.PLAIN, 64)
-
+    init {
+        font = Font("Sans-Serif", Font.PLAIN, 64)
+    }
 
     private fun separateShapeIntoRegions(shape: Shape): ArrayList<Shape> {
         val regions = ArrayList<Shape>()
@@ -105,9 +124,7 @@ internal object ChessBoard {
         val r = shape1.bounds
         val spaceX = sz - r.width
         val spaceY = sz - r.height
-        val trans = AffineTransform.getTranslateInstance(
-            -r.x + (spaceX / 2).toDouble(), -r.y + (spaceY / 2).toDouble()
-        )
+        val trans = AffineTransform.getTranslateInstance(-r.x + (spaceX / 2).toDouble(), -r.y + (spaceY / 2).toDouble())
         val shapeCentered = trans.createTransformedShape(shape1)
         val imageShape: Shape = Rectangle2D.Double(0.0, 0.0, sz.toDouble(), sz.toDouble())
         val imageShapeArea = Area(imageShape)
@@ -119,11 +136,8 @@ internal object ChessBoard {
         val baseColor = pieceColors[side]
         if (gradient) {
             val c1 = baseColor.brighter()
-            val gp = GradientPaint(
-                (sz / 2 - r.width / 4).toFloat(), (sz / 2 - r.height / 4).toFloat(), c1,
-                (sz / 2 + r.width / 4).toFloat(), (sz / 2 + r.height / 4).toFloat(), baseColor,
-                false
-            )
+            val gp = GradientPaint((sz / 2 - r.width / 4).toFloat(), (sz / 2 - r.height / 4).toFloat(), c1,
+                (sz / 2 + r.width / 4).toFloat(), (sz / 2 + r.height / 4).toFloat(), baseColor, false)
             g.paint = gp
         } else {
             g.color = baseColor
@@ -164,40 +178,11 @@ internal object ChessBoard {
         var squareColor = initialSquareColor
         for (ii in 0..7) {
             val l = JLabel()
-            val bg =
-                if (squareColor++ % 2 == BLACK) Color.BLACK else Color.WHITE
+            val bg = squareColors[squareColor]
+            squareColor = 1 - squareColor
             l.background = bg
             l.isOpaque = true
             c.add(l)
         }
-    }
-
-    @JvmStatic
-    fun main(args: Array<String>) {
-
-        val pawnRow = intArrayOf(PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN)
-
-        val r = Runnable {
-
-            val gradientFill = true
-            val gui = JPanel(GridLayout(0, 8, 0, 0))
-            gui.border = BevelBorder(BevelBorder.LOWERED, Color.GRAY.brighter(), Color.GRAY, Color.GRAY.darker(), Color.GRAY)
-            // set up a chess board
-            addPiecesToContainer(gui, WHITE, BLACK, order, gradientFill)
-            addPiecesToContainer(gui, BLACK, BLACK, pawnRow, gradientFill)
-            addBlankLabelRow(gui, WHITE)
-            addBlankLabelRow(gui, BLACK)
-            addBlankLabelRow(gui, WHITE)
-            addBlankLabelRow(gui, BLACK)
-            addPiecesToContainer(gui, WHITE, WHITE, pawnRow, gradientFill)
-            addPiecesToContainer(gui, BLACK, WHITE, order, gradientFill)
-            JOptionPane.showMessageDialog(null, gui, "Chessboard", JOptionPane.INFORMATION_MESSAGE)
-            val tileSet = JPanel(GridLayout(0, 6, 0, 0))
-            tileSet.isOpaque = false
-            val tileSetOrder = intArrayOf(KING, QUEEN, CASTLE, KNIGHT, BISHOP, PAWN)
-            addPiecesToContainer(tileSet, Color(0, 0, 0, 0), BLACK, tileSetOrder, gradientFill)
-            addPiecesToContainer(tileSet, Color(0, 0, 0, 0), WHITE, tileSetOrder, gradientFill)
-        }
-        SwingUtilities.invokeLater(r)
     }
 }
