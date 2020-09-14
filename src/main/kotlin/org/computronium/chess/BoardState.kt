@@ -5,7 +5,7 @@ import java.util.*
 /**
  * The main class representing a complete board state.
  */
-class BoardState(private val board: Array<Piece?>) {
+class BoardState(private val board: Array<Piece?>) : IBoardState {
 
 
     val sideConfig = arrayOf(
@@ -23,13 +23,13 @@ class BoardState(private val board: Array<Piece?>) {
             113
         ))
 
-    var whoseTurn = WHITE
+    override var whoseTurn = WHITE
 
-    var moveNumber = 0
+    override var moveNumber = 0
 
-    var enPassantCapturePos: Int? = null
+    override var enPassantCapturePos: Int? = null
 
-    var halfMovesSinceCaptureOrPawnAdvance = 0
+    override var halfMovesSinceCaptureOrPawnAdvance = 0
 
     init {
         // Save the coordinate for each king, so we can figure out if the king is in check.
@@ -55,6 +55,10 @@ class BoardState(private val board: Array<Piece?>) {
 
         sb.append("$whoseTurn to move")
         return sb.toString()
+    }
+
+    override fun pieceAt(file: Int, rank: Int) : Piece? {
+        return board[indexOf(file, rank)]
     }
 
     fun toFEN() : String {
