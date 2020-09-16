@@ -17,9 +17,6 @@ class TestMoveGenerator {
         val jsonTextList : List<TestCase> = Gson().fromJson(jsonString, testCaseType)
 
         for (testCase in jsonTextList) {
-
-
-
             println("Testing '${testCase.description ?: "<no description>"}' (${testCase.start})")
             val startPos = SearchNode.fromFEN(testCase.start)
             val actual = startPos.moves.map {
@@ -34,5 +31,4 @@ class TestMoveGenerator {
         }
     }
 
-    class TestCase(val description: String?, val start: String, val expected: Set<String>)
 }

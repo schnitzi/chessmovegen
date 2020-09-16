@@ -259,7 +259,7 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
         }
 
 
-        private fun indexOf(file: Int, rank: Int) : Int {
+        fun indexOf(file: Int, rank: Int) : Int {
             return 25 + 12*rank + file
         }
 
