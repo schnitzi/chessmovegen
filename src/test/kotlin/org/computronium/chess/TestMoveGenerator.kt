@@ -18,7 +18,7 @@ class TestMoveGenerator {
 
         for (testCase in jsonTextList) {
             println("Testing '${testCase.description ?: "<no description>"}' (${testCase.start})")
-            val startPos = SearchNode.fromFEN(testCase.start)
+            val startPos = SearchNode.fromFEN(testCase.start.fen)
             val actual = startPos.moves.map {
                 it.apply(startPos.boardState)
                 val fen = startPos.boardState.toFEN()

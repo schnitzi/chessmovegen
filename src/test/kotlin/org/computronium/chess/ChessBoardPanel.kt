@@ -2,19 +2,23 @@ package org.computronium.chess
 
 import java.awt.*
 import javax.swing.*
+import kotlin.math.exp
 
 /**
  * Utility for browsing chess starting positions and the resulting set of move positions.
  */
-internal class ChessBoardPanel(private var fens: Array<String>) : JPanel() {
+internal class ChessBoardPanel(var fens: Array<String>) : JPanel() {
 
 
-    fun setFenList(expected: Set<String>) {
+    fun setFenList(expected: List<String>) {
+        setFenList(expected, if (expected.isEmpty()) -1 else 0)
+    }
+
+    fun setFenList(expected: List<String>, selectedIndex: Int) {
         fens = expected.toTypedArray()
         fenComboBox.removeAllItems()
-        fenComboBox.selectedIndex = -1
         fenComboBox.model = DefaultComboBoxModel(fens)
-        fenComboBox.selectedIndex = 0
+        fenComboBox.selectedIndex = selectedIndex
     }
 
     internal val fenComboBox = JComboBox<String>(fens)

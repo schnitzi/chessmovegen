@@ -72,7 +72,8 @@ internal class ChessBoardViewPanel : JPanel() {
                 "White ${if (boardState.sideConfig[BoardState.WHITE].canKingSideCastle) "can" else "can't"} castle kingside.\n" +
                 "White ${if (boardState.sideConfig[BoardState.WHITE].canQueenSideCastle) "can" else "can't"} castle queenside.\n" +
                 "Black ${if (boardState.sideConfig[BoardState.BLACK].canKingSideCastle) "can" else "can't"} castle kingside.\n" +
-                "Black ${if (boardState.sideConfig[BoardState.BLACK].canQueenSideCastle) "can" else "can't"} castle queenside.\n"
+                "Black ${if (boardState.sideConfig[BoardState.BLACK].canQueenSideCastle) "can" else "can't"} castle queenside.\n" +
+                "${if (boardState.enPassantCapturePos == null) "No en passant capture possible" else "En passant capture possible at " + BoardState.squareName(boardState.enPassantCapturePos!!)}.\n"
         }
 
         revalidate()
@@ -80,7 +81,7 @@ internal class ChessBoardViewPanel : JPanel() {
     }
 
     private fun squareColor(rank: Int, file: Int, boardState: BoardState) : Color {
-        return if (boardState.enPassantCapturePos == BoardState.indexOf(rank, file)) {
+        return if (boardState.enPassantCapturePos == BoardState.indexOf(file, rank)) {
             EN_PASSANT_CAPTURE_SQUARE_COLOR
         } else {
             squareColors[(rank + file) % 2]

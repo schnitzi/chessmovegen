@@ -245,6 +245,7 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
         // An efficient array for testing if a particular index is on the boardState.
         private val ON_BOARD = BooleanArray(142) { false }
 
+        // Holds the nice name for a given index on the board, e.g. "f3".
         private val SQUARES = Array(142) { "" }
 
         init {
@@ -329,7 +330,7 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
             return SQUARES[pos]
         }
 
-        fun squareFor(square: String) : Int {
+        private fun squareFor(square: String) : Int {
             return SQUARES.indexOf(square)
         }
 
