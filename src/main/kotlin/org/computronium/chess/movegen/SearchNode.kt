@@ -1,9 +1,9 @@
-package org.computronium.chess
+package org.computronium.chess.movegen
 
-import org.computronium.chess.BoardState.Companion.QUEEN_MOVE_OFFSETS
-import org.computronium.chess.BoardState.Companion.ROOK_MOVE_OFFSETS
-import org.computronium.chess.BoardState.Companion.onBoard
-import org.computronium.chess.moves.*
+import org.computronium.chess.movegen.BoardState.Companion.QUEEN_MOVE_OFFSETS
+import org.computronium.chess.movegen.BoardState.Companion.ROOK_MOVE_OFFSETS
+import org.computronium.chess.movegen.BoardState.Companion.onBoard
+import org.computronium.chess.movegen.moves.*
 
 class SearchNode(val boardState: BoardState) {
 

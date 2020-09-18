@@ -1,7 +1,8 @@
-package org.computronium.chess
+package org.computronium.chess.testcaseeditor
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.computronium.chess.movegen.SearchNode
 import java.awt.*
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
@@ -16,8 +17,8 @@ import kotlin.system.exitProcess
  * that a correct move generator should generate.
  *
  * TODO show move along with resulting board
- * TODO implement mvc
- * TODO fix adding of start FENs
+ * TODO buttons to move through boards
+ * TODO select new fen after adding
  * TODO allow comments on data sets, start FENs, and result FENs
  * TODO dropdowns sorted by whether there are comments
  * TODO allow file open
@@ -27,7 +28,7 @@ import kotlin.system.exitProcess
  * TODO clean up bottom text
  * TODO allow board construction
  */
-internal class FENTestFileEditor(private var testCases: List<TestCase>) : JFrame() {
+internal class FENTestFileEditor(private var testCases : List<TestCase> = listOf()) : JFrame() {
 
     private val leftPanel: ChessBoardPanel
     private val rightPanel: ChessBoardPanel
@@ -76,13 +77,13 @@ internal class FENTestFileEditor(private var testCases: List<TestCase>) : JFrame
             val newFEN = JOptionPane.showInputDialog("New starting FEN:")
             val newRoot = SearchNode.fromFEN(newFEN)
             val newTestCase = TestCase(null,
-                TestCase.TestCasePosition(null, newFEN),
-                newRoot.moves.map {
-                    it.apply(newRoot.boardState)
-                    val fen = newRoot.boardState.toFEN()
-                    it.rollback(newRoot.boardState)
-                    TestCase.TestCasePosition(null, fen)
-                })
+                    TestCase.TestCasePosition(null, newFEN),
+                    newRoot.moves.map {
+                        it.apply(newRoot.boardState)
+                        val fen = newRoot.boardState.toFEN()
+                        it.rollback(newRoot.boardState)
+                        TestCase.TestCasePosition(null, fen)
+                    })
 
             setTestCases(testCases + newTestCase, testCases.size)
         }
@@ -104,6 +105,13 @@ internal class FENTestFileEditor(private var testCases: List<TestCase>) : JFrame
         return menuBar
     }
 
+    private fun loadFile(filename: String) {
+        val jsonString: String = File(filename).readText(Charsets.UTF_8)
+        val testCaseType = object : TypeToken<List<TestCase>>() {}.type
+        val testCases : List<TestCase> = Gson().fromJson(jsonString, testCaseType)
+        setTestCases(testCases)
+    }
+
     private fun setTestCases(testCases: List<TestCase>) {
         setTestCases(testCases, if (testCases.isEmpty()) -1 else 0)
     }
@@ -118,12 +126,11 @@ internal class FENTestFileEditor(private var testCases: List<TestCase>) : JFrame
         @JvmStatic
         fun main(args: Array<String>) {
             val r = Runnable {
-                val jsonString: String = File(args[0]).readText(Charsets.UTF_8)
-                val testCaseType = object : TypeToken<List<TestCase>>() {}.type
-                val testCases : List<TestCase> = Gson().fromJson(jsonString, testCaseType)
-
-                val frame = FENTestFileEditor(testCases)
+                val frame = FENTestFileEditor()
                 frame.isVisible = true
+                if (args.isNotEmpty()) {
+                    frame.loadFile(args[0])
+                }
             }
             SwingUtilities.invokeLater(r)
         }

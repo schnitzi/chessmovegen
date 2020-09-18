@@ -1,4 +1,4 @@
-package org.computronium.chess
+package org.computronium.chess.movegen
 
 data class Coordinate(val file : Int, val rank : Int) {
 

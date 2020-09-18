@@ -1,6 +1,6 @@
-package org.computronium.chess.moves
+package org.computronium.chess.movegen.moves
 
-import org.computronium.chess.BoardState
+import org.computronium.chess.movegen.BoardState
 
 /**
  * Interface representing a move that can be applied and rolled back.

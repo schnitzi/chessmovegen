@@ -1,13 +1,18 @@
-package org.computronium.chess.moves
+package org.computronium.chess.movegen.moves
 
-import org.computronium.chess.BoardState
+import org.computronium.chess.movegen.BoardState
+import org.computronium.chess.movegen.Piece
+import org.computronium.chess.movegen.PieceType
 
 /**
  * Class representing a move.
  */
-open class PawnMove(var from : Int, var to : Int) : Move() {
+open class StandardCapture(from : Int, to : Int) : StandardMove(from, to) {
 
-    private var halfMovesSinceCaptureOrPawnAdvance = 0
+
+    private var capturedPiece: Piece? = null
+
+    private var halfMovesSinceCaptureOrPawnAdvance: Int = 0
 
     /**
      * This will generate a simplified version of the last move in Algebraic notation that
@@ -18,21 +23,26 @@ open class PawnMove(var from : Int, var to : Int) : Move() {
     override fun toString(boardState: BoardState): String {
         val sb = StringBuilder()
         val piece = boardState[from]
-        sb.append(BoardState.squareName(to))
-        if (resultsInCheck) {
-            sb.append("+")
+        val capturedPiece = boardState[to]
+        if (piece!!.type != PieceType.PAWN) {
+            sb.append(piece.type.letter)
+        } else if (capturedPiece != null) {
+            sb.append(BoardState.fileChar(from))
         }
+        sb.append("x")
+        sb.append(to)
         return sb.toString()
     }
 
     override fun apply(boardState: BoardState): BoardState {
 
-        boardState.move(from, to)
+        capturedPiece = boardState[to]
 
         halfMovesSinceCaptureOrPawnAdvance = boardState.halfMovesSinceCaptureOrPawnAdvance
-        boardState.halfMovesSinceCaptureOrPawnAdvance = 0
 
         super.apply(boardState)
+
+        boardState.halfMovesSinceCaptureOrPawnAdvance = 0
         return boardState
     }
 
@@ -42,6 +52,6 @@ open class PawnMove(var from : Int, var to : Int) : Move() {
 
         boardState.halfMovesSinceCaptureOrPawnAdvance = halfMovesSinceCaptureOrPawnAdvance
 
-        boardState.move(to, from)
+        boardState[to] = capturedPiece
     }
 }

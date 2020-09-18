@@ -1,6 +1,6 @@
-package org.computronium.chess.moves
+package org.computronium.chess.movegen.moves
 
-import org.computronium.chess.BoardState
+import org.computronium.chess.movegen.BoardState
 
 class RookCapture(from : Int, to : Int) : StandardCapture(from, to) {
 

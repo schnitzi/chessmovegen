@@ -1,7 +1,7 @@
-package org.computronium.chess.moves
+package org.computronium.chess.movegen.moves
 
-import org.computronium.chess.BoardState
-import org.computronium.chess.Piece
+import org.computronium.chess.movegen.BoardState
+import org.computronium.chess.movegen.Piece
 
 class PawnEnPassantCapture(val from: Int) : Move() {
 

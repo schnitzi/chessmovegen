@@ -1,12 +1,12 @@
-package org.computronium.chess.moves
+package org.computronium.chess.movegen.moves.aspects
 
-import org.computronium.chess.BoardState
+import org.computronium.chess.movegen.BoardState
 
-class CastleKingSide : Move() {
+class CastleKingSideAspect : Aspect {
 
     var canQueenSideCastle = false
 
-    override fun apply(boardState: BoardState): BoardState {
+    override fun apply(boardState: BoardState) {
 
         val config = boardState.whoseTurnConfig()
         val homeRankStart = config.homeRankStart
@@ -16,14 +16,9 @@ class CastleKingSide : Move() {
         canQueenSideCastle = config.canQueenSideCastle
         config.canQueenSideCastle = false
         config.canKingSideCastle = false
-
-        super.apply(boardState)
-        return boardState
     }
 
     override fun rollback(boardState: BoardState) {
-
-        super.rollback(boardState)
 
         val config = boardState.whoseTurnConfig()
         val homeRankStart = config.homeRankStart
@@ -33,23 +28,4 @@ class CastleKingSide : Move() {
         config.canQueenSideCastle = canQueenSideCastle
         config.canKingSideCastle = true
     }
-
-    override fun toString(boardState: BoardState): String {
-        return "O-O"
-    }
-
-    companion object {
-
-        fun isPossible(boardState: BoardState) : Boolean {
-
-            val config = boardState.whoseTurnConfig()
-            val homeRankStart = config.homeRankStart
-            return !config.isInCheck &&
-                    config.canKingSideCastle &&
-                    boardState.empty(homeRankStart+5) &&
-                    boardState.empty(homeRankStart+6) &&
-                    !boardState.isAttacked(homeRankStart+5, 1 - boardState.whoseTurn)
-        }
-    }
-
 }

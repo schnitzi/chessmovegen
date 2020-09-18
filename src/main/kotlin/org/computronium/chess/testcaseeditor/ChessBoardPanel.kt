@@ -1,8 +1,7 @@
-package org.computronium.chess
+package org.computronium.chess.testcaseeditor
 
 import java.awt.*
 import javax.swing.*
-import kotlin.math.exp
 
 /**
  * Utility for browsing chess starting positions and the resulting set of move positions.

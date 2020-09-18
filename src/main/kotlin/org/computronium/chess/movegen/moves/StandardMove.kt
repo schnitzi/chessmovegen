@@ -1,18 +1,14 @@
-package org.computronium.chess.moves
+package org.computronium.chess.movegen.moves
 
-import org.computronium.chess.BoardState
-import org.computronium.chess.Piece
-import org.computronium.chess.PieceType
+import org.computronium.chess.movegen.BoardState
+import org.computronium.chess.movegen.PieceType
 
 /**
  * Class representing a move.
  */
-open class StandardCapture(from : Int, to : Int) : StandardMove(from, to) {
+open class StandardMove(var from : Int, var to : Int) : Move() {
 
-
-    private var capturedPiece: Piece? = null
-
-    private var halfMovesSinceCaptureOrPawnAdvance: Int = 0
+    private var halfMovesSinceCaptureOrPawnAdvance = 0
 
     /**
      * This will generate a simplified version of the last move in Algebraic notation that
@@ -23,26 +19,29 @@ open class StandardCapture(from : Int, to : Int) : StandardMove(from, to) {
     override fun toString(boardState: BoardState): String {
         val sb = StringBuilder()
         val piece = boardState[from]
-        val capturedPiece = boardState[to]
         if (piece!!.type != PieceType.PAWN) {
             sb.append(piece.type.letter)
-        } else if (capturedPiece != null) {
-            sb.append(BoardState.fileChar(from))
         }
-        sb.append("x")
-        sb.append(to)
+        sb.append(BoardState.squareName(to))
+        if (resultsInCheck) {
+            sb.append("+")
+        }
         return sb.toString()
     }
 
     override fun apply(boardState: BoardState): BoardState {
 
-        capturedPiece = boardState[to]
+        boardState.move(from, to)
 
         halfMovesSinceCaptureOrPawnAdvance = boardState.halfMovesSinceCaptureOrPawnAdvance
+        boardState.halfMovesSinceCaptureOrPawnAdvance++
 
         super.apply(boardState)
 
-        boardState.halfMovesSinceCaptureOrPawnAdvance = 0
+        if (boardState[to]!!.type == PieceType.PAWN) {
+
+            boardState.halfMovesSinceCaptureOrPawnAdvance = 0
+        }
         return boardState
     }
 
@@ -52,6 +51,6 @@ open class StandardCapture(from : Int, to : Int) : StandardMove(from, to) {
 
         boardState.halfMovesSinceCaptureOrPawnAdvance = halfMovesSinceCaptureOrPawnAdvance
 
-        boardState[to] = capturedPiece
+        boardState.move(to, from)
     }
 }

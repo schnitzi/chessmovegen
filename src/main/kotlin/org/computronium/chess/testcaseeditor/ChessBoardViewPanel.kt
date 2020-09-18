@@ -1,5 +1,8 @@
-package org.computronium.chess
+package org.computronium.chess.testcaseeditor
 
+import org.computronium.chess.movegen.BoardState
+import org.computronium.chess.movegen.Piece
+import org.computronium.chess.movegen.PieceType
 import java.awt.*
 import java.awt.geom.*
 import java.awt.image.BufferedImage

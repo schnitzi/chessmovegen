@@ -1,12 +1,11 @@
-package org.computronium.chess.moves
+package org.computronium.chess.movegen.moves
 
-import org.computronium.chess.BoardState
-import org.computronium.chess.PieceType
+import org.computronium.chess.movegen.BoardState
 
 /**
  * Class representing a move.
  */
-open class StandardMove(var from : Int, var to : Int) : Move() {
+open class PawnMove(var from : Int, var to : Int) : Move() {
 
     private var halfMovesSinceCaptureOrPawnAdvance = 0
 
@@ -19,9 +18,6 @@ open class StandardMove(var from : Int, var to : Int) : Move() {
     override fun toString(boardState: BoardState): String {
         val sb = StringBuilder()
         val piece = boardState[from]
-        if (piece!!.type != PieceType.PAWN) {
-            sb.append(piece.type.letter)
-        }
         sb.append(BoardState.squareName(to))
         if (resultsInCheck) {
             sb.append("+")
@@ -34,14 +30,9 @@ open class StandardMove(var from : Int, var to : Int) : Move() {
         boardState.move(from, to)
 
         halfMovesSinceCaptureOrPawnAdvance = boardState.halfMovesSinceCaptureOrPawnAdvance
-        boardState.halfMovesSinceCaptureOrPawnAdvance++
+        boardState.halfMovesSinceCaptureOrPawnAdvance = 0
 
         super.apply(boardState)
-
-        if (boardState[to]!!.type == PieceType.PAWN) {
-
-            boardState.halfMovesSinceCaptureOrPawnAdvance = 0
-        }
         return boardState
     }
 

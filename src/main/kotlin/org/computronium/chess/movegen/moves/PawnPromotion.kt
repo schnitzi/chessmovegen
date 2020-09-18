@@ -1,8 +1,8 @@
-package org.computronium.chess.moves
+package org.computronium.chess.movegen.moves
 
-import org.computronium.chess.BoardState
-import org.computronium.chess.Piece
-import org.computronium.chess.PieceType
+import org.computronium.chess.movegen.BoardState
+import org.computronium.chess.movegen.Piece
+import org.computronium.chess.movegen.PieceType
 
 class PawnPromotion(from: Int, to: Int, private val promoteTo: PieceType) : PawnMove(from, to) {
 

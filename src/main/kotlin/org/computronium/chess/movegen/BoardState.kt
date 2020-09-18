@@ -1,4 +1,4 @@
-package org.computronium.chess
+package org.computronium.chess.movegen
 
 import java.util.*
 
@@ -9,19 +9,19 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
 
 
     val sideConfig = arrayOf(
-        SideConfig(
-            25,
-            37,
-            97,
-            12,
-            29),
-        SideConfig(
-            109,
-            97,
-            37,
-            -12,
-            113
-        ))
+            SideConfig(
+                    25,
+                    37,
+                    97,
+                    12,
+                    29),
+            SideConfig(
+                    109,
+                    97,
+                    37,
+                    -12,
+                    113
+            ))
 
     override var whoseTurn = WHITE
 

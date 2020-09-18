@@ -5,6 +5,8 @@ import com.tngtech.java.junit.dataprovider.DataProviderRunner
 import com.tngtech.java.junit.dataprovider.DataProviders.`$$`
 import com.tngtech.java.junit.dataprovider.DataProviders.`$`
 import com.tngtech.java.junit.dataprovider.UseDataProvider
+import org.computronium.chess.movegen.BoardState
+import org.computronium.chess.movegen.SearchNode
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

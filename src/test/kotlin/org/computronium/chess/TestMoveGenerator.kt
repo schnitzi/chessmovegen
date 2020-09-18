@@ -2,6 +2,8 @@ package org.computronium.chess
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.computronium.chess.movegen.SearchNode
+import org.computronium.chess.testcaseeditor.TestCase
 import org.junit.Assert
 import org.junit.Test
 import java.io.File

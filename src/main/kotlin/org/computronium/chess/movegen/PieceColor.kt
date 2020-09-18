@@ -1,4 +1,4 @@
-package org.computronium.chess
+package org.computronium.chess.movegen
 
 enum class PieceColor {
 
@@ -10,7 +10,7 @@ enum class PieceColor {
 
     companion object {
         fun from(c : Char) : PieceColor {
-            return if (c.isUpperCase()) PieceColor.WHITE else PieceColor.BLACK
+            return if (c.isUpperCase()) WHITE else BLACK
         }
     }
 }

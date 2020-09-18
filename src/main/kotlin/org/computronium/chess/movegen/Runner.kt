@@ -1,4 +1,4 @@
-package org.computronium.chess
+package org.computronium.chess.movegen
 
 import java.util.*
 import kotlin.system.exitProcess

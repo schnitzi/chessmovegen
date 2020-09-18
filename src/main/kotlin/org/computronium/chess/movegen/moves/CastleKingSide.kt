@@ -1,19 +1,19 @@
-package org.computronium.chess.moves
+package org.computronium.chess.movegen.moves
 
-import org.computronium.chess.BoardState
+import org.computronium.chess.movegen.BoardState
 
-class CastleQueenSide : Move() {
+class CastleKingSide : Move() {
 
-    var canKingSideCastle = false
+    var canQueenSideCastle = false
 
     override fun apply(boardState: BoardState): BoardState {
 
         val config = boardState.whoseTurnConfig()
         val homeRankStart = config.homeRankStart
-        boardState.move(homeRankStart+4, homeRankStart+2)    // move the king
-        config.kingPos = homeRankStart+2
-        boardState.move(homeRankStart, homeRankStart+3)    // move the rook
-        canKingSideCastle = config.canKingSideCastle
+        boardState.move(homeRankStart+4, homeRankStart+6)    // move the king
+        config.kingPos = homeRankStart+6
+        boardState.move(homeRankStart+7, homeRankStart+5)    // move the rook
+        canQueenSideCastle = config.canQueenSideCastle
         config.canQueenSideCastle = false
         config.canKingSideCastle = false
 
@@ -27,15 +27,15 @@ class CastleQueenSide : Move() {
 
         val config = boardState.whoseTurnConfig()
         val homeRankStart = config.homeRankStart
-        boardState.move(homeRankStart+2, homeRankStart+4)    // move the king back
+        boardState.move(homeRankStart+6, homeRankStart+4)    // move the king back
         config.kingPos = homeRankStart+4
-        boardState.move(homeRankStart+3, homeRankStart)    // move the rook back
-        config.canQueenSideCastle = true
-        config.canKingSideCastle = canKingSideCastle
+        boardState.move(homeRankStart+5, homeRankStart+7)    // move the rook back
+        config.canQueenSideCastle = canQueenSideCastle
+        config.canKingSideCastle = true
     }
 
     override fun toString(boardState: BoardState): String {
-        return "O-O-O"
+        return "O-O"
     }
 
     companion object {
@@ -45,10 +45,11 @@ class CastleQueenSide : Move() {
             val config = boardState.whoseTurnConfig()
             val homeRankStart = config.homeRankStart
             return !config.isInCheck &&
-                    config.canQueenSideCastle &&
+                    config.canKingSideCastle &&
                     boardState.empty(homeRankStart+5) &&
                     boardState.empty(homeRankStart+6) &&
                     !boardState.isAttacked(homeRankStart+5, 1 - boardState.whoseTurn)
         }
     }
+
 }

@@ -1,6 +1,6 @@
-package org.computronium.chess.moves.aspects
+package org.computronium.chess.movegen.moves.aspects
 
-import org.computronium.chess.BoardState
+import org.computronium.chess.movegen.BoardState
 
 interface Aspect {
 
