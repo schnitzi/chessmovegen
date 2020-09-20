@@ -5,5 +5,14 @@ class TestCase(val description: String?, val start: TestCasePosition, val expect
         return start.fen
     }
 
-    class TestCasePosition(val description: String?, val fen: String)
+    class TestCasePosition(val description: String?, val move: String?, val fen: String) {
+        override fun toString(): String {
+            return (if (move != null) "$move -> " else "") + fen
+        }
+
+        fun moveLabel(): String {
+            return "After $move"
+        }
+    }
+
 }

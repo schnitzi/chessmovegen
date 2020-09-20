@@ -17,7 +17,6 @@ open class PawnMove(var from : Int, var to : Int) : Move() {
      */
     override fun toString(boardState: BoardState): String {
         val sb = StringBuilder()
-        val piece = boardState[from]
         sb.append(BoardState.squareName(to))
         if (resultsInCheck) {
             sb.append("+")

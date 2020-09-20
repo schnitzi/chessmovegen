@@ -1,13 +1,22 @@
 package org.computronium.chess.testcaseeditor
 
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import org.computronium.chess.movegen.SearchNode
-import java.awt.*
+import java.awt.Dimension
+import java.awt.GridLayout
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import java.io.File
-import javax.swing.*
+import java.io.FileWriter
+import javax.swing.JFileChooser
+import javax.swing.JFrame
+import javax.swing.JMenu
+import javax.swing.JMenuBar
+import javax.swing.JMenuItem
+import javax.swing.JOptionPane
+import javax.swing.SwingUtilities
+import javax.swing.UIManager
+import javax.swing.WindowConstants
 import kotlin.system.exitProcess
 
 /**
@@ -16,19 +25,18 @@ import kotlin.system.exitProcess
  * files contain a set of starting positions (as FENs), and for each, the set of resulting FENs
  * that a correct move generator should generate.
  *
- * TODO show move along with resulting board
  * TODO buttons to move through boards
- * TODO select new fen after adding
  * TODO allow comments on data sets, start FENs, and result FENs
  * TODO dropdowns sorted by whether there are comments
- * TODO allow file open
  * TODO show filename in title, with "*" if modified
- * TODO allow start without filename
  * TODO labels above boards
  * TODO clean up bottom text
  * TODO allow board construction
+ * TODO allow deletion, with confirm
+ * TODO fix unicode writing of = on save
+ * TODO handle special cases in move names
  */
-internal class FENTestFileEditor(private var testCases : List<TestCase> = listOf()) : JFrame() {
+internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = TestCaseGroup(null)) : JFrame() {
 
     private val leftPanel: ChessBoardPanel
     private val rightPanel: ChessBoardPanel
@@ -37,12 +45,14 @@ internal class FENTestFileEditor(private var testCases : List<TestCase> = listOf
 
         jMenuBar = createJMenuBar()
 
-        leftPanel = ChessBoardPanel(arrayOf())
-        rightPanel = ChessBoardPanel(arrayOf())
+        leftPanel = ChessBoardPanel()
+        rightPanel = ChessBoardPanel()
 
         leftPanel.fenComboBox.addActionListener {
-            if (leftPanel.fenComboBox.selectedIndex >= 0) {
-                rightPanel.setFenList(testCases[leftPanel.fenComboBox.selectedIndex].expected.map { it.fen }.toList())
+            val index = leftPanel.fenComboBox.selectedIndex
+            if (index >= 0) {
+                rightPanel.setFenList(testCaseGroup.expectedFENsAt(index))
+                rightPanel.fenComboBox.selectedIndex = 0
             }
         }
 
@@ -63,8 +73,6 @@ internal class FENTestFileEditor(private var testCases : List<TestCase> = listOf
         setLocationRelativeTo(null)
         this.isFocusable = true
         this.requestFocus()
-
-        setTestCases(testCases)
     }
 
     private fun createJMenuBar(): JMenuBar {
@@ -77,23 +85,44 @@ internal class FENTestFileEditor(private var testCases : List<TestCase> = listOf
             val newFEN = JOptionPane.showInputDialog("New starting FEN:")
             val newRoot = SearchNode.fromFEN(newFEN)
             val newTestCase = TestCase(null,
-                    TestCase.TestCasePosition(null, newFEN),
+                    TestCase.TestCasePosition(null, null, newFEN),
                     newRoot.moves.map {
+                        val move = it.toString(newRoot.boardState)
                         it.apply(newRoot.boardState)
                         val fen = newRoot.boardState.toFEN()
                         it.rollback(newRoot.boardState)
-                        TestCase.TestCasePosition(null, fen)
+                        TestCase.TestCasePosition(null, move, fen)
                     })
 
-            setTestCases(testCases + newTestCase, testCases.size)
+            testCaseGroup.testCases.add(newTestCase)
+            testCaseGroupChanged()
+            leftPanel.selectFEN(testCaseGroup.getSize()-1)
         }
         val newMenu = JMenu("New")
         newMenu.add(newFileItem)
         newMenu.add(newStartFEN)
         fileMenu.add(newMenu)
+        
+        val openItem = JMenuItem("Open")
+        openItem.addActionListener {
+            val chooser = JFileChooser()
+            val result = chooser.showOpenDialog(this)
+            if (result == JFileChooser.APPROVE_OPTION) {
+                loadFile(chooser.selectedFile)
+            }
+        }
+        fileMenu.add(openItem)
 
         val saveItem = JMenuItem("Save")
-        saveItem.addActionListener { println("Saving") }
+        saveItem.addActionListener {
+            val chooser = JFileChooser()
+            val result = chooser.showSaveDialog(this)
+            if (result == JFileChooser.APPROVE_OPTION) {
+                val writer = FileWriter(chooser.selectedFile)
+                Gson().toJson(testCaseGroup, writer)
+                writer.close()
+            }
+        }
         fileMenu.add(saveItem)
 
         val quitItem = JMenuItem("Quit")
@@ -105,20 +134,14 @@ internal class FENTestFileEditor(private var testCases : List<TestCase> = listOf
         return menuBar
     }
 
-    private fun loadFile(filename: String) {
-        val jsonString: String = File(filename).readText(Charsets.UTF_8)
-        val testCaseType = object : TypeToken<List<TestCase>>() {}.type
-        val testCases : List<TestCase> = Gson().fromJson(jsonString, testCaseType)
-        setTestCases(testCases)
+    private fun loadFile(file: File) {
+        testCaseGroup = TestCaseGroup.fromFile(file)
+        testCaseGroupChanged()
+        leftPanel.selectFEN(0)
     }
 
-    private fun setTestCases(testCases: List<TestCase>) {
-        setTestCases(testCases, if (testCases.isEmpty()) -1 else 0)
-    }
-
-    private fun setTestCases(testCases: List<TestCase>, selectedIndex: Int) {
-        this.testCases = testCases
-        leftPanel.setFenList(testCases.map { it.start.fen }, selectedIndex)
+    private fun testCaseGroupChanged() {
+        leftPanel.setFenList(testCaseGroup.testCases.map { it.start })
     }
 
     companion object {
@@ -129,7 +152,7 @@ internal class FENTestFileEditor(private var testCases : List<TestCase> = listOf
                 val frame = FENTestFileEditor()
                 frame.isVisible = true
                 if (args.isNotEmpty()) {
-                    frame.loadFile(args[0])
+                    frame.loadFile(File(args[0]))
                 }
             }
             SwingUtilities.invokeLater(r)

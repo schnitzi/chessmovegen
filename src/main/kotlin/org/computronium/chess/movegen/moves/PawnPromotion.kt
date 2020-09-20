@@ -26,6 +26,11 @@ class PawnPromotion(from: Int, to: Int, private val promoteTo: PieceType) : Pawn
     }
 
     override fun toString(boardState: BoardState): String {
-        return BoardState.squareName(to) + "=" + promoteTo.letter
+        val sb = StringBuilder()
+        sb.append(BoardState.squareName(to)).append("=").append(promoteTo.letter)
+        if (resultsInCheck) {
+            sb.append("+")
+        }
+        return sb.toString()
     }
 }

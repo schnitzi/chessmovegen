@@ -55,21 +55,21 @@ internal class ChessBoardViewPanel : JPanel() {
         add(descriptionPanel)
     }
 
-    fun setBoardState(fen: String?) {
+    fun setBoardState(position: TestCase.TestCasePosition?) {
 
         innerPanel.removeAll()
         descriptionPanel.text = ""
 
-        if (fen != null) {
-            val boardState = BoardState.fromFEN(fen)
+        if (position != null) {
+            val boardState = BoardState.fromFEN(position.fen)
             for (rank in 7 downTo 0) {
                 for (file in 0..7) {
                     addLabel(innerPanel, boardState.pieceAt(file, rank), squareColor(rank, file, boardState))
                 }
             }
             descriptionPanel.text =
-                "FEN: $fen\n" +
-                "Fullmove ${boardState.moveNumber}.\n" +
+                (if (position.move != null) "After ${boardState.moveNumber}, ${position.move}\n" else "") +
+                "FEN: $position\n" +
                 "${boardState.halfMovesSinceCaptureOrPawnAdvance} half moves since capture or pawn move.\n" +
                 "${if (boardState.whoseTurn == BoardState.WHITE) "White" else "Black"}'s turn.\n" +
                 "White ${if (boardState.sideConfig[BoardState.WHITE].canKingSideCastle) "can" else "can't"} castle kingside.\n" +

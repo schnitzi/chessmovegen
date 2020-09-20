@@ -1,46 +1,131 @@
-[
-  {
-    "start": {
-      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-      "description": "Starting position"
-    },
-    "expected": [
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/N7/PPPPPPPP/R1BQKBNR b KQkq - 1 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/2N5/PPPPPPPP/R1BQKBNR b KQkq - 1 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b KQkq - 1 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/7N/PPPPPPPP/RNBQKB1R b KQkq - 1 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR b KQkq - 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/P7/8/1PPPPPPP/RNBQKBNR b KQkq a3 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/1P6/P1PPPPPP/RNBQKBNR b KQkq - 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/1P6/8/P1PPPPPP/RNBQKBNR b KQkq b3 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/2P5/PP1PPPPP/RNBQKBNR b KQkq - 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b KQkq c3 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/3P4/PPP1PPPP/RNBQKBNR b KQkq - 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq d3 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/4P3/PPPP1PPP/RNBQKBNR b KQkq - 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/5P2/PPPPP1PP/RNBQKBNR b KQkq - 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/5P2/8/PPPPP1PP/RNBQKBNR b KQkq f3 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/6P1/PPPPPP1P/RNBQKBNR b KQkq - 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/6P1/8/PPPPPP1P/RNBQKBNR b KQkq g3 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/8/7P/PPPPPPP1/RNBQKBNR b KQkq - 0 1"},
-      {"fen": "rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPP1/RNBQKBNR b KQkq h3 0 1"}
-    ]
-  },
-  {
-    "start": {
-      "fen": "1k6/5P2/8/8/8/8/8/4K3 w - - 20 1",
-      "description": "Pawn about to promote"},
-    "expected": [
-      {"fen": "1k6/5P2/8/8/8/8/8/3K4 b - - 21 1"},
-      {"fen": "1k6/5P2/8/8/8/8/8/5K2 b - - 21 1"},
-      {"fen": "1k6/5P2/8/8/8/8/3K4/8 b - - 21 1"},
-      {"fen": "1k6/5P2/8/8/8/8/4K3/8 b - - 21 1"},
-      {"fen": "1k6/5P2/8/8/8/8/5K2/8 b - - 21 1"},
-      {"fen": "1k3Q2/8/8/8/8/8/8/4K3 b - - 0 1"},
-      {"fen": "1k3R2/8/8/8/8/8/8/4K3 b - - 0 1"},
-      {"fen": "1k3N2/8/8/8/8/8/8/4K3 b - - 0 1"},
-      {"fen": "1k3B2/8/8/8/8/8/8/4K3 b - - 0 1"}
-    ]
-  }
-]
+{
+  "testCases": [
+    {
+      "start": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+      },
+      "expected": [
+        {
+          "first": "Na3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/N7/PPPPPPPP/R1BQKBNR b KQkq - 1 1"
+          }
+        },
+        {
+          "first": "Nc3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/2N5/PPPPPPPP/R1BQKBNR b KQkq - 1 1"
+          }
+        },
+        {
+          "first": "Nf3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b KQkq - 1 1"
+          }
+        },
+        {
+          "first": "Nh3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/7N/PPPPPPPP/RNBQKB1R b KQkq - 1 1"
+          }
+        },
+        {
+          "first": "a3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR b KQkq - 0 1"
+          }
+        },
+        {
+          "first": "a4",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/P7/8/1PPPPPPP/RNBQKBNR b KQkq a3 0 1"
+          }
+        },
+        {
+          "first": "b3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/1P6/P1PPPPPP/RNBQKBNR b KQkq - 0 1"
+          }
+        },
+        {
+          "first": "b4",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/1P6/8/P1PPPPPP/RNBQKBNR b KQkq b3 0 1"
+          }
+        },
+        {
+          "first": "c3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/2P5/PP1PPPPP/RNBQKBNR b KQkq - 0 1"
+          }
+        },
+        {
+          "first": "c4",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b KQkq c3 0 1"
+          }
+        },
+        {
+          "first": "d3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/3P4/PPP1PPPP/RNBQKBNR b KQkq - 0 1"
+          }
+        },
+        {
+          "first": "d4",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq d3 0 1"
+          }
+        },
+        {
+          "first": "e3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/4P3/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+          }
+        },
+        {
+          "first": "e4",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"
+          }
+        },
+        {
+          "first": "f3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/5P2/PPPPP1PP/RNBQKBNR b KQkq - 0 1"
+          }
+        },
+        {
+          "first": "f4",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/5P2/8/PPPPP1PP/RNBQKBNR b KQkq f3 0 1"
+          }
+        },
+        {
+          "first": "g3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/6P1/PPPPPP1P/RNBQKBNR b KQkq - 0 1"
+          }
+        },
+        {
+          "first": "g4",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/6P1/8/PPPPPP1P/RNBQKBNR b KQkq g3 0 1"
+          }
+        },
+        {
+          "first": "h3",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/8/7P/PPPPPPP1/RNBQKBNR b KQkq - 0 1"
+          }
+        },
+        {
+          "first": "h4",
+          "second": {
+            "fen": "rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPP1/RNBQKBNR b KQkq h3 0 1"
+          }
+        }
+      ]
+    }
+  ]
+}
