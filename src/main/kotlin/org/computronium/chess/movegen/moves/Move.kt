@@ -21,7 +21,7 @@ abstract class Move {
 
         whoseTurnIsInCheck = boardState.whoseTurnConfig().isInCheck
 
-        if (boardState.whoseTurn == BoardState.BLACK) {
+        if (boardState.whoseTurn == BoardState.WHITE) {
             boardState.moveNumber++
         }
 
@@ -34,7 +34,7 @@ abstract class Move {
 
         boardState.whoseTurn = 1 - boardState.whoseTurn
 
-        if (boardState.whoseTurn == BoardState.BLACK) {
+        if (boardState.whoseTurn == BoardState.WHITE) {
             boardState.moveNumber--
         }
 

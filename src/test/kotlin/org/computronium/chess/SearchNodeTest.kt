@@ -20,7 +20,6 @@ internal class SearchNodeTest {
         val startBoard = SearchNode.fromFEN(startFEN)
         println("$startBoard")
         println("start       = ${startBoard.boardState.toFEN()}")
-        val expected = BoardState.fromFEN(expectedMoveFEN)
 
         val actuals = mutableListOf<String>()
         var found = false

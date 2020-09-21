@@ -3,12 +3,26 @@ package org.computronium.chess.testcaseeditor
 import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.Piece
 import org.computronium.chess.movegen.PieceType
-import java.awt.*
-import java.awt.geom.*
+import java.awt.BasicStroke
+import java.awt.Color
+import java.awt.Container
+import java.awt.Dimension
+import java.awt.Font
+import java.awt.GradientPaint
+import java.awt.GridLayout
+import java.awt.RenderingHints
+import java.awt.Shape
+import java.awt.geom.AffineTransform
+import java.awt.geom.Area
+import java.awt.geom.GeneralPath
+import java.awt.geom.PathIterator
+import java.awt.geom.Rectangle2D
 import java.awt.image.BufferedImage
-import java.util.*
-import javax.swing.*
-import javax.swing.border.BevelBorder
+import java.util.ArrayList
+import javax.swing.ImageIcon
+import javax.swing.JLabel
+import javax.swing.JPanel
+import javax.swing.JTextArea
 
 /**
  * Chessboard renderer, converted from a StackOverflow answer in Java.
@@ -44,7 +58,7 @@ internal class ChessBoardViewPanel : JPanel() {
 
     init {
         font = Font("Sans-Serif", Font.PLAIN, 46)
-        border = BevelBorder(BevelBorder.LOWERED, Color.GRAY.brighter(), Color.GRAY, Color.GRAY.darker(), Color.GRAY)
+//        border = BevelBorder(BevelBorder.LOWERED, Color.GRAY.brighter(), Color.GRAY, Color.GRAY.darker(), Color.GRAY)
 
         innerPanel.layout = GridLayout(0, 8, 0, 0)
         innerPanel.preferredSize = Dimension(300, 300)
@@ -61,14 +75,17 @@ internal class ChessBoardViewPanel : JPanel() {
         descriptionPanel.text = ""
 
         if (position != null) {
-            val boardState = BoardState.fromFEN(position.fen)
+
+            val boardState = position.getBoardState()
+
             for (rank in 7 downTo 0) {
                 for (file in 0..7) {
                     addLabel(innerPanel, boardState.pieceAt(file, rank), squareColor(rank, file, boardState))
                 }
             }
+
             descriptionPanel.text =
-                (if (position.move != null) "After ${boardState.moveNumber}, ${position.move}\n" else "") +
+                (if (position.move != null) position.moveLabel() else "") +
                 "FEN: $position\n" +
                 "${boardState.halfMovesSinceCaptureOrPawnAdvance} half moves since capture or pawn move.\n" +
                 "${if (boardState.whoseTurn == BoardState.WHITE) "White" else "Black"}'s turn.\n" +

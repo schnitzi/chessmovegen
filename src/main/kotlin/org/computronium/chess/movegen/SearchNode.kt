@@ -19,6 +19,7 @@ class SearchNode(val boardState: BoardState) {
     }
 
     private fun maybeAddMove(move: Move) {
+
         move.apply(boardState)
         if (!boardState.isKingInCheck(1 - boardState.whoseTurn)) {
             move.resultsInCheck = boardState.isKingInCheck(boardState.whoseTurn)
@@ -26,6 +27,7 @@ class SearchNode(val boardState: BoardState) {
         }
         move.rollback(boardState)
     }
+
     private fun findMoves(index: Int) {
 
         when (boardState[index]?.type) {
@@ -43,7 +45,7 @@ class SearchNode(val boardState: BoardState) {
         for (offset in BoardState.KNIGHT_MOVE_OFFSETS) {
             val newPos = pos + offset
 
-            if (BoardState.onBoard(newPos) && boardState[newPos]?.color != boardState.whoseTurn) {
+            if (onBoard(newPos) && boardState[newPos]?.color != boardState.whoseTurn) {
                 maybeAddMove(StandardMove(pos, newPos))
             }
         }
@@ -54,7 +56,7 @@ class SearchNode(val boardState: BoardState) {
         for (offset in offsets) {
             var newIndex = from + offset
 
-            while (BoardState.onBoard(newIndex) && boardState.empty(newIndex)) {
+            while (onBoard(newIndex) && boardState.empty(newIndex)) {
                 maybeAddMove(StandardMove(from, newIndex))
                 newIndex += offset
             }
@@ -94,7 +96,7 @@ class SearchNode(val boardState: BoardState) {
         for (offset in ROOK_MOVE_OFFSETS) {
             var newIndex = from + offset
 
-            while (BoardState.onBoard(newIndex) && boardState.empty(newIndex)) {
+            while (onBoard(newIndex) && boardState.empty(newIndex)) {
                 maybeAddMove(RookMove(from, newIndex))
                 newIndex += offset
             }

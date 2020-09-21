@@ -34,19 +34,20 @@ import kotlin.system.exitProcess
  * TODO allow board construction
  * TODO allow deletion, with confirm
  * TODO fix unicode writing of = on save
+ * TODO highlight block of from move, to move
  * TODO handle special cases in move names
  */
 internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = TestCaseGroup(null)) : JFrame() {
 
-    private val leftPanel: ChessBoardPanel
-    private val rightPanel: ChessBoardPanel
+    private val leftPanel: SidePanel
+    private val rightPanel: SidePanel
 
     init {
 
         jMenuBar = createJMenuBar()
 
-        leftPanel = ChessBoardPanel()
-        rightPanel = ChessBoardPanel()
+        leftPanel = SidePanel()
+        rightPanel = SidePanel()
 
         leftPanel.fenComboBox.addActionListener {
             val index = leftPanel.fenComboBox.selectedIndex
