@@ -15,12 +15,15 @@ internal class SidePanel(private var fens : Array<TestCase.TestCasePosition> = a
 
     private var titleLabel = JLabel("")
     internal val fenComboBox = JComboBox<TestCase.TestCasePosition>(fens)
-    private val chessboard = ChessBoardViewPanel()
+    private val chessboardPanel = ChessboardPanel()
+    private val descriptionPanel = DescriptionPanel()
 
     init {
 
         fenComboBox.addActionListener {
-            chessboard.setBoardState(if (fenComboBox.selectedIndex == -1) null else fens[fenComboBox.selectedIndex])
+            val position = if (fenComboBox.selectedIndex == -1) null else fens[fenComboBox.selectedIndex]
+            chessboardPanel.setPosition(position)
+            descriptionPanel.setPosition(position)
             titleLabel.text = if (fenComboBox.selectedItem == null) "" else (fenComboBox.selectedItem as TestCase.TestCasePosition).moveLabel()
         }
 
@@ -29,11 +32,12 @@ internal class SidePanel(private var fens : Array<TestCase.TestCasePosition> = a
 
         val mainPanel = JPanel(BorderLayout())
         mainPanel.add(BorderLayout.NORTH, titleLabel)
-        mainPanel.add(BorderLayout.CENTER, chessboard)
+        mainPanel.add(BorderLayout.CENTER, chessboardPanel)
 
         layout = BorderLayout()
         add(BorderLayout.NORTH, fenComboBox)
         add(BorderLayout.CENTER, mainPanel)
+        add(BorderLayout.SOUTH, descriptionPanel)
     }
 
     fun setFenList(fens: List<TestCase.TestCasePosition>) {

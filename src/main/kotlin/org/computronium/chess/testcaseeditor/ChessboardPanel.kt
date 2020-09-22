@@ -22,14 +22,13 @@ import java.util.ArrayList
 import javax.swing.ImageIcon
 import javax.swing.JLabel
 import javax.swing.JPanel
-import javax.swing.JTextArea
 
 /**
  * Chessboard renderer, converted from a StackOverflow answer in Java.
  *
  * Adapted from code posted to StackOverflow by Andrew Thompson (https://stackoverflow.com/a/18686753/215403).
  */
-internal class ChessBoardViewPanel : JPanel() {
+internal class ChessboardPanel : JPanel() {
 
     companion object {
         /**
@@ -54,7 +53,6 @@ internal class ChessBoardViewPanel : JPanel() {
     private val squareColors = arrayOf(Color.BLACK, Color.WHITE)
 
     private val innerPanel = JPanel()
-    private val descriptionPanel = JTextArea()
 
     init {
         font = Font("Sans-Serif", Font.PLAIN, 46)
@@ -63,16 +61,12 @@ internal class ChessBoardViewPanel : JPanel() {
         innerPanel.layout = GridLayout(0, 8, 0, 0)
         innerPanel.preferredSize = Dimension(300, 300)
 
-        descriptionPanel.isEditable = false
-
         add(innerPanel)
-        add(descriptionPanel)
     }
 
-    fun setBoardState(position: TestCase.TestCasePosition?) {
+    fun setPosition(position: TestCase.TestCasePosition?) {
 
         innerPanel.removeAll()
-        descriptionPanel.text = ""
 
         if (position != null) {
 
@@ -83,17 +77,6 @@ internal class ChessBoardViewPanel : JPanel() {
                     addLabel(innerPanel, boardState.pieceAt(file, rank), squareColor(rank, file, boardState))
                 }
             }
-
-            descriptionPanel.text =
-                (if (position.move != null) position.moveLabel() else "") +
-                "FEN: $position\n" +
-                "${boardState.halfMovesSinceCaptureOrPawnAdvance} half moves since capture or pawn move.\n" +
-                "${if (boardState.whoseTurn == BoardState.WHITE) "White" else "Black"}'s turn.\n" +
-                "White ${if (boardState.sideConfig[BoardState.WHITE].canKingSideCastle) "can" else "can't"} castle kingside.\n" +
-                "White ${if (boardState.sideConfig[BoardState.WHITE].canQueenSideCastle) "can" else "can't"} castle queenside.\n" +
-                "Black ${if (boardState.sideConfig[BoardState.BLACK].canKingSideCastle) "can" else "can't"} castle kingside.\n" +
-                "Black ${if (boardState.sideConfig[BoardState.BLACK].canQueenSideCastle) "can" else "can't"} castle queenside.\n" +
-                "${if (boardState.enPassantCapturePos == null) "No en passant capture possible" else "En passant capture possible at " + BoardState.squareName(boardState.enPassantCapturePos!!)}.\n"
         }
 
         revalidate()

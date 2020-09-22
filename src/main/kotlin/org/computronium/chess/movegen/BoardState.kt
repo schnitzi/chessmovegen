@@ -31,17 +31,6 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
 
     override var halfMovesSinceCaptureOrPawnAdvance = 0
     
-    fun copy() : BoardState {
-        val boardCopy = board.copyOf()
-        val boardStateCopy = BoardState(boardCopy)
-        boardStateCopy.whoseTurn = whoseTurn
-        boardStateCopy.moveNumber = moveNumber
-        boardStateCopy.enPassantCapturePos = enPassantCapturePos
-        boardStateCopy.halfMovesSinceCaptureOrPawnAdvance = halfMovesSinceCaptureOrPawnAdvance
-        boardStateCopy.sideConfig[WHITE].copyFrom(sideConfig[WHITE])
-        boardStateCopy.sideConfig[BLACK].copyFrom(sideConfig[BLACK])
-        return boardStateCopy
-    }
 
     init {
         // Save the coordinate for each king, so we can figure out if the king is in check.
@@ -382,13 +371,6 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
 
         fun isAboutToPromote(pos: Int) : Boolean {
             return aboutToPromoteRankStart <= pos && pos <= aboutToPromoteRankStart + 7
-        }
-
-        fun copyFrom(other: SideConfig) {
-            kingPos = other.kingPos
-            isInCheck = other.isInCheck
-            canQueenSideCastle = other.canQueenSideCastle
-            canKingSideCastle = other.canKingSideCastle
         }
     }
 }

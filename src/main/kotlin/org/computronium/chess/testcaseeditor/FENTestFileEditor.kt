@@ -29,18 +29,20 @@ import kotlin.system.exitProcess
  * TODO allow comments on data sets, start FENs, and result FENs
  * TODO dropdowns sorted by whether there are comments
  * TODO show filename in title, with "*" if modified
- * TODO labels above boards
+ * TODO Fix move numbers
  * TODO clean up bottom text
  * TODO allow board construction
  * TODO allow deletion, with confirm
  * TODO fix unicode writing of = on save
  * TODO highlight block of from move, to move
  * TODO handle special cases in move names
+ * TODO below TODOs
  */
 internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = TestCaseGroup(null)) : JFrame() {
 
     private val leftPanel: SidePanel
     private val rightPanel: SidePanel
+    private var file: File? = null
 
     init {
 
@@ -81,9 +83,16 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         val fileMenu = JMenu("File")
 
         val newFileItem = JMenuItem("File")
-        val newStartFEN = JMenuItem("Starting FEN")
+        newFileItem.addActionListener {
+            // TODO saved current if modified
+            file = null
+            testCaseGroup = TestCaseGroup(null)
+            testCaseGroupChanged()
+            leftPanel.selectFEN(-1)
+        }
+        val newStartFEN = JMenuItem("Test case")
         newStartFEN.addActionListener {
-            val newFEN = JOptionPane.showInputDialog("New starting FEN:")
+            val newFEN = JOptionPane.showInputDialog("FEN of starting position:")
             val newRoot = SearchNode.fromFEN(newFEN)
             val newTestCase = TestCase(null,
                     TestCase.TestCasePosition(null, null, newFEN),
@@ -119,6 +128,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
             val chooser = JFileChooser()
             val result = chooser.showSaveDialog(this)
             if (result == JFileChooser.APPROVE_OPTION) {
+                // TODO confirm if overwrite
                 val writer = FileWriter(chooser.selectedFile)
                 Gson().toJson(testCaseGroup, writer)
                 writer.close()
@@ -136,6 +146,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
     }
 
     private fun loadFile(file: File) {
+        this.file = file
         testCaseGroup = TestCaseGroup.fromFile(file)
         testCaseGroupChanged()
         leftPanel.selectFEN(0)
