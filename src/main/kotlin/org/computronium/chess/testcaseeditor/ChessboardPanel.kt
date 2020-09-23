@@ -22,6 +22,7 @@ import java.util.ArrayList
 import javax.swing.ImageIcon
 import javax.swing.JLabel
 import javax.swing.JPanel
+import javax.swing.border.BevelBorder
 
 /**
  * Chessboard renderer, converted from a StackOverflow answer in Java.
@@ -64,7 +65,7 @@ internal class ChessboardPanel : JPanel() {
         add(innerPanel)
     }
 
-    fun setPosition(position: TestCase.TestCasePosition?) {
+    fun setPosition(position: TestCase.TestCasePosition?, otherPosition: TestCase.TestCasePosition?) {
 
         innerPanel.removeAll()
 
@@ -74,7 +75,9 @@ internal class ChessboardPanel : JPanel() {
 
             for (rank in 7 downTo 0) {
                 for (file in 0..7) {
-                    addLabel(innerPanel, boardState.pieceAt(file, rank), squareColor(rank, file, boardState))
+                    val piece = boardState.pieceAt(file, rank)
+                    val otherPiece = otherPosition?.getBoardState()?.pieceAt(file, rank)
+                    addLabel(innerPanel, piece, squareColor(rank, file, boardState), otherPosition != null && piece != otherPiece)
                 }
             }
         }
@@ -168,7 +171,7 @@ internal class ChessboardPanel : JPanel() {
         return bi
     }
 
-    private fun addLabel(c: Container, piece: Piece?, bg: Color?) {
+    private fun addLabel(c: Container, piece: Piece?, bg: Color?, highlight: Boolean) {
         val label: JLabel = if (piece == null) {
             JLabel()
         } else {
@@ -176,6 +179,10 @@ internal class ChessboardPanel : JPanel() {
         }
         label.background = bg
         label.isOpaque = true
+        if (highlight) {
+            label.border = BevelBorder(BevelBorder.LOWERED, Color.RED.brighter(), Color.RED, Color.RED.darker(), Color.RED)
+
+        }
         c.add(label)
     }
 }

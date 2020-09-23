@@ -1,26 +1,7 @@
 package org.computronium.chess.testcaseeditor
 
 import org.computronium.chess.movegen.BoardState
-import org.computronium.chess.movegen.Piece
-import org.computronium.chess.movegen.PieceType
-import java.awt.BasicStroke
-import java.awt.Color
-import java.awt.Container
-import java.awt.Dimension
 import java.awt.Font
-import java.awt.GradientPaint
-import java.awt.GridLayout
-import java.awt.RenderingHints
-import java.awt.Shape
-import java.awt.geom.AffineTransform
-import java.awt.geom.Area
-import java.awt.geom.GeneralPath
-import java.awt.geom.PathIterator
-import java.awt.geom.Rectangle2D
-import java.awt.image.BufferedImage
-import java.util.ArrayList
-import javax.swing.ImageIcon
-import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.JTextArea
 

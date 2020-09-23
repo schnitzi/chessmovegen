@@ -18,11 +18,13 @@ internal class SidePanel(private var fens : Array<TestCase.TestCasePosition> = a
     private val chessboardPanel = ChessboardPanel()
     private val descriptionPanel = DescriptionPanel()
 
+    var otherSidePanel: SidePanel? = null
+
     init {
 
         fenComboBox.addActionListener {
             val position = if (fenComboBox.selectedIndex == -1) null else fens[fenComboBox.selectedIndex]
-            chessboardPanel.setPosition(position)
+            chessboardPanel.setPosition(position, otherSidePanel?.fenComboBox?.selectedItem as TestCase.TestCasePosition?)
             descriptionPanel.setPosition(position)
             titleLabel.text = if (fenComboBox.selectedItem == null) "" else (fenComboBox.selectedItem as TestCase.TestCasePosition).moveLabel()
         }

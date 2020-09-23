@@ -50,6 +50,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
 
         leftPanel = SidePanel()
         rightPanel = SidePanel()
+        rightPanel.otherSidePanel = leftPanel
 
         leftPanel.fenComboBox.addActionListener {
             val index = leftPanel.fenComboBox.selectedIndex
