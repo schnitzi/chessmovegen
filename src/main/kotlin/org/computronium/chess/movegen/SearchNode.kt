@@ -40,13 +40,18 @@ class SearchNode(val boardState: BoardState) {
         }
     }
 
-    private fun findKnightMoves(pos: Int) {
+    private fun findKnightMoves(from: Int) {
 
         for (offset in BoardState.KNIGHT_MOVE_OFFSETS) {
-            val newPos = pos + offset
+            val newIndex = from + offset
 
-            if (onBoard(newPos) && boardState[newPos]?.color != boardState.whoseTurn) {
-                maybeAddMove(StandardMove(pos, newPos))
+            if (onBoard(newIndex) && boardState.empty(newIndex)) {
+                maybeAddMove(StandardMove(from, newIndex))
+            }
+
+            // see if capture
+            if (onBoard(newIndex) && boardState[newIndex]?.color == 1 - boardState.whoseTurn) {
+                maybeAddMove(StandardCapture(from, newIndex))
             }
         }
     }
@@ -71,9 +76,16 @@ class SearchNode(val boardState: BoardState) {
     private fun findKingMoves(from: Int) {
 
         for (offset in BoardState.KING_MOVE_OFFSETS) {
-            val to = from + offset
-            if (onBoard(to) && boardState[to]?.color != boardState.whoseTurn) {
-                maybeAddMove(KingMove(from, to))
+            var newIndex = from + offset
+
+            if (onBoard(newIndex) && boardState.empty(newIndex)) {
+                maybeAddMove(KingMove(from, newIndex))
+                newIndex += offset
+            }
+
+            if (onBoard(newIndex) && boardState[newIndex]?.color == 1 - boardState.whoseTurn) {
+                // see if capture
+                maybeAddMove(KingCapture(from, newIndex))
             }
         }
 

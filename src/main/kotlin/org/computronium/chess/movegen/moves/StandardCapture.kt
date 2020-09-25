@@ -30,7 +30,7 @@ open class StandardCapture(from : Int, to : Int) : StandardMove(from, to) {
             sb.append(BoardState.fileChar(from))
         }
         sb.append("x")
-        sb.append(to)
+        sb.append(BoardState.squareName(to))
         return sb.toString()
     }
 
@@ -43,6 +43,7 @@ open class StandardCapture(from : Int, to : Int) : StandardMove(from, to) {
         super.apply(boardState)
 
         boardState.halfMovesSinceCaptureOrPawnAdvance = 0
+
         return boardState
     }
 

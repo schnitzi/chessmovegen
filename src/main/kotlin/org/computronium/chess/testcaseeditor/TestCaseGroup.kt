@@ -4,7 +4,19 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.File
 
-class TestCaseGroup(var description: String?, internal var testCases: MutableList<TestCase> = mutableListOf()) {
+class TestCaseGroup(description: String?, testCases: List<TestCase> = listOf(), var modified: Boolean = false) {
+
+    var description: String? = description
+        set(value) {
+            modified = true
+            field = value
+        }
+
+    var testCases: List<TestCase> = testCases
+        set(value) {
+            modified = true
+            field = value
+        }
 
     operator fun get(index: Int) : TestCase {
         return testCases[index]
@@ -12,8 +24,18 @@ class TestCaseGroup(var description: String?, internal var testCases: MutableLis
 
     fun getSize() = testCases.size
 
+    fun add(testCase: TestCase) {
+        testCases = testCases + testCase
+    }
+
     fun expectedFENsAt(index: Int) : List<TestCase.TestCasePosition> {
         return testCases[index].expected
+    }
+
+    fun remove(index: Int) {
+        val mutableTestCases = testCases.toMutableList()
+        mutableTestCases.removeAt(index)
+        testCases = mutableTestCases.toList()
     }
 
     companion object {

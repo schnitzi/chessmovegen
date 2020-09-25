@@ -77,7 +77,7 @@ internal class ChessboardPanel : JPanel() {
                 for (file in 0..7) {
                     val piece = boardState.pieceAt(file, rank)
                     val otherPiece = otherPosition?.getBoardState()?.pieceAt(file, rank)
-                    addLabel(innerPanel, piece, squareColor(rank, file, boardState), otherPosition != null && piece != otherPiece)
+                    addSquare(innerPanel, piece, squareColor(rank, file, boardState), otherPosition != null && piece != otherPiece)
                 }
             }
         }
@@ -171,7 +171,7 @@ internal class ChessboardPanel : JPanel() {
         return bi
     }
 
-    private fun addLabel(c: Container, piece: Piece?, bg: Color?, highlight: Boolean) {
+    private fun addSquare(c: Container, piece: Piece?, bg: Color?, highlight: Boolean) {
         val label: JLabel = if (piece == null) {
             JLabel()
         } else {

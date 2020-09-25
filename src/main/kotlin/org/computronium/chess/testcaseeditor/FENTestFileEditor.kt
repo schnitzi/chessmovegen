@@ -34,8 +34,10 @@ import kotlin.system.exitProcess
  * TODO allow board construction
  * TODO allow deletion, with confirm
  * TODO fix unicode writing of = on save
- * TODO highlight block of from move, to move
  * TODO handle special cases in move names
+ * TODO are checks, mates, and stalemates out of scope?
+ * TODO save multiple move formats
+ * TODO regenerate file option?
  * TODO below TODOs
  */
 internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = TestCaseGroup(null)) : JFrame() {
@@ -81,69 +83,130 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
 
     private fun createJMenuBar(): JMenuBar {
 
-        val fileMenu = JMenu("File")
+        val menuBar = JMenuBar()
+        menuBar.add(createFileMenu())
+        menuBar.add(createActionMenu())
+        return menuBar
+    }
 
-        val newFileItem = JMenuItem("File")
+    private fun createFileMenu(): JMenu {
+
+        val newFileItem = JMenuItem("New")
         newFileItem.addActionListener {
-            // TODO saved current if modified
-            file = null
-            testCaseGroup = TestCaseGroup(null)
-            testCaseGroupChanged()
-            leftPanel.selectFEN(-1)
-        }
-        val newStartFEN = JMenuItem("Test case")
-        newStartFEN.addActionListener {
-            val newFEN = JOptionPane.showInputDialog("FEN of starting position:")
-            val newRoot = SearchNode.fromFEN(newFEN)
-            val newTestCase = TestCase(null,
-                    TestCase.TestCasePosition(null, null, newFEN),
-                    newRoot.moves.map {
-                        val move = it.toString(newRoot.boardState)
-                        it.apply(newRoot.boardState)
-                        val fen = newRoot.boardState.toFEN()
-                        it.rollback(newRoot.boardState)
-                        TestCase.TestCasePosition(null, move, fen)
-                    })
 
-            testCaseGroup.testCases.add(newTestCase)
-            testCaseGroupChanged()
-            leftPanel.selectFEN(testCaseGroup.getSize()-1)
-        }
-        val newMenu = JMenu("New")
-        newMenu.add(newFileItem)
-        newMenu.add(newStartFEN)
-        fileMenu.add(newMenu)
-        
-        val openItem = JMenuItem("Open")
-        openItem.addActionListener {
-            val chooser = JFileChooser()
-            val result = chooser.showOpenDialog(this)
-            if (result == JFileChooser.APPROVE_OPTION) {
-                loadFile(chooser.selectedFile)
+            if (okayToProceedToNewTestGroup()) {
+                file = null
+                testCaseGroup = TestCaseGroup(null)
+                testCaseGroupChanged()
+                leftPanel.selectFEN(-1)
             }
         }
-        fileMenu.add(openItem)
+
+        val openItem = JMenuItem("Open")
+        openItem.addActionListener {
+
+            if (okayToProceedToNewTestGroup()) {
+                val chooser = JFileChooser()
+                val result = chooser.showOpenDialog(this)
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    loadFile(chooser.selectedFile)
+                }
+            }
+        }
 
         val saveItem = JMenuItem("Save")
         saveItem.addActionListener {
-            val chooser = JFileChooser()
-            val result = chooser.showSaveDialog(this)
-            if (result == JFileChooser.APPROVE_OPTION) {
-                // TODO confirm if overwrite
-                val writer = FileWriter(chooser.selectedFile)
-                Gson().toJson(testCaseGroup, writer)
-                writer.close()
-            }
+            showSaveDialog()
         }
-        fileMenu.add(saveItem)
 
         val quitItem = JMenuItem("Quit")
         quitItem.addActionListener { exitProcess(0) }
+
+        val fileMenu = JMenu("File")
+        fileMenu.add(newFileItem)
+        fileMenu.add(openItem)
+        fileMenu.add(saveItem)
         fileMenu.add(quitItem)
 
-        val menuBar = JMenuBar()
-        menuBar.add(fileMenu)
-        return menuBar
+        return fileMenu
+    }
+
+    private fun createActionMenu(): JMenu {
+
+        val addTestCase = JMenuItem("Add test case")
+        addTestCase.addActionListener {
+            val newFEN = JOptionPane.showInputDialog("FEN of starting position:")
+            if (newFEN != null) {
+                val newRoot = SearchNode.fromFEN(newFEN)
+                val newTestCase = TestCase(null,
+                        TestCase.TestCasePosition(null, null, newFEN),
+                        newRoot.moves.map {
+                            val move = it.toString(newRoot.boardState)
+                            it.apply(newRoot.boardState)
+                            val fen = newRoot.boardState.toFEN()
+                            it.rollback(newRoot.boardState)
+                            TestCase.TestCasePosition(null, move, fen)
+                        })
+
+                testCaseGroup.add(newTestCase)
+                testCaseGroupChanged()
+                leftPanel.selectFEN(testCaseGroup.getSize() - 1)
+            }
+        }
+
+        val removeTestCase = JMenuItem("Remove test case")
+        removeTestCase.addActionListener {
+            val confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove the current test case?")
+            if (confirm == JOptionPane.YES_OPTION) {
+
+                testCaseGroup.remove(leftPanel.fenComboBox.selectedIndex)
+                testCaseGroupChanged()
+                leftPanel.selectFEN(testCaseGroup.getSize() - 1)
+            }
+        }
+
+        val actionMenu = JMenu("Action")
+        actionMenu.add(addTestCase)
+        actionMenu.add(removeTestCase)
+        return actionMenu
+    }
+
+    private fun showSaveDialog() : Boolean {
+        val chooser = JFileChooser()
+        val result = chooser.showSaveDialog(this)
+        if (result == JFileChooser.APPROVE_OPTION) {
+            // TODO confirm if overwrite
+            val writer = FileWriter(chooser.selectedFile)
+            Gson().toJson(testCaseGroup, writer)
+            writer.close()
+            return true
+        }
+        return false
+    }
+
+    private fun okayToProceedToNewTestGroup() : Boolean {
+        if (testCaseGroup.modified) {
+            val options = arrayOf("Save", "Discard", "Cancel")
+            val choice = JOptionPane.showOptionDialog(this, "Test group not saved.  Save it?",
+                    "Not saved",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0])
+            when (choice) {
+                0 -> {
+                    return showSaveDialog()
+                }
+                1 -> {
+                    return true
+                }
+                2 -> {
+                    return false
+                }
+            }
+        }
+        return true
     }
 
     private fun loadFile(file: File) {

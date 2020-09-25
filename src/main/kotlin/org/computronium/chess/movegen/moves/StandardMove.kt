@@ -42,6 +42,9 @@ open class StandardMove(var from : Int, var to : Int) : Move() {
 
             boardState.halfMovesSinceCaptureOrPawnAdvance = 0
         }
+
+        println("apply: boardState.toString() = $boardState")
+
         return boardState
     }
 
@@ -52,5 +55,7 @@ open class StandardMove(var from : Int, var to : Int) : Move() {
         boardState.halfMovesSinceCaptureOrPawnAdvance = halfMovesSinceCaptureOrPawnAdvance
 
         boardState.move(to, from)
+
+        println("rollback: boardState.toString() = $boardState")
     }
 }

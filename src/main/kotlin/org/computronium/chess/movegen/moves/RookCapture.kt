@@ -4,7 +4,6 @@ import org.computronium.chess.movegen.BoardState
 
 class RookCapture(from : Int, to : Int) : StandardCapture(from, to) {
 
-
     private var canQueenSideCastle = false
     private var canKingSideCastle = false
 

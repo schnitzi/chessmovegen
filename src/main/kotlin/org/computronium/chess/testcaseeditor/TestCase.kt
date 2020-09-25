@@ -5,7 +5,13 @@ import org.computronium.chess.movegen.BoardState
 class TestCase(val description: String?, val start: TestCasePosition, val expected: List<TestCasePosition>) {
 
 
-    class TestCasePosition(val description: String?, val move: String?, val fen: String) {
+    class TestCasePosition(description: String? = null, val move: String?, val fen: String, var modified: Boolean = false) {
+
+        var description: String? = description
+            set(value) {
+            modified = true
+            field = value
+        }
 
         private var state: BoardState? = null
 
