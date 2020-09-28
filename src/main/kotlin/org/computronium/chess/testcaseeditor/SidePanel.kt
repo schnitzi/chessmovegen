@@ -1,7 +1,7 @@
 package org.computronium.chess.testcaseeditor
 
 import java.awt.BorderLayout
-import java.awt.Component
+import java.awt.Color
 import java.awt.Font
 import java.awt.GridBagLayout
 import javax.swing.DefaultComboBoxModel
@@ -10,11 +10,12 @@ import javax.swing.JComboBox
 import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.SwingConstants
+import javax.swing.border.BevelBorder
 
 /**
  * Utility for browsing chess starting positions and the resulting set of move positions.
  */
-internal class SidePanel(private var fens : Array<TestCase.TestCasePosition> = arrayOf()) : JPanel() {
+internal class SidePanel(private var fens : Array<TestCase.TestCasePosition> = arrayOf()) : JPanel(BorderLayout()) {
 
     private var titleLabel = JLabel("")
     internal val fenComboBox = JComboBox<TestCase.TestCasePosition>(fens)
@@ -54,12 +55,13 @@ internal class SidePanel(private var fens : Array<TestCase.TestCasePosition> = a
         mainPanel.add(BorderLayout.NORTH, titleLabel)
         mainPanel.add(BorderLayout.CENTER, chessboardPanel)
 
-        layout = BorderLayout()
         add(BorderLayout.NORTH, fenComboBox)
         add(BorderLayout.CENTER, mainPanel)
         add(BorderLayout.SOUTH, descriptionPanel)
         add(BorderLayout.WEST, prevPanel)
         add(BorderLayout.EAST, nextPanel)
+
+        border = BevelBorder(BevelBorder.LOWERED, Color.GRAY.brighter(), Color.GRAY, Color.GRAY.darker(), Color.GRAY)
     }
 
     fun setFenList(fens: List<TestCase.TestCasePosition>) {

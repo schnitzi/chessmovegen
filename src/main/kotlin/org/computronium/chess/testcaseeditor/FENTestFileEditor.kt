@@ -1,7 +1,8 @@
 package org.computronium.chess.testcaseeditor
 
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import org.computronium.chess.movegen.SearchNode
+import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.GridLayout
 import java.awt.event.WindowAdapter
@@ -14,10 +15,15 @@ import javax.swing.JMenu
 import javax.swing.JMenuBar
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
+import javax.swing.JPanel
+import javax.swing.JTextArea
 import javax.swing.SwingUtilities
 import javax.swing.UIManager
 import javax.swing.WindowConstants
+import javax.swing.event.DocumentEvent
+import javax.swing.event.DocumentListener
 import kotlin.system.exitProcess
+
 
 /**
  * Utility to create and edit test files for chess move generators.  Boards referred to in short
@@ -25,23 +31,25 @@ import kotlin.system.exitProcess
  * files contain a set of starting positions (as FENs), and for each, the set of resulting FENs
  * that a correct move generator should generate.
  *
- * TODO buttons to move through boards
  * TODO allow comments on data sets, start FENs, and result FENs
  * TODO dropdowns sorted by whether there are comments
  * TODO show filename in title, with "*" if modified
  * TODO Fix move numbers
  * TODO clean up bottom text
  * TODO allow board construction
- * TODO allow deletion, with confirm
  * TODO fix unicode writing of = on save
+ * TODO format JSON on save
+ * TODO warn before overwriting file on save
  * TODO handle special cases in move names
  * TODO are checks, mates, and stalemates out of scope?
- * TODO save multiple move formats
+ * TODO save multiple move formats?
+ * TODO save as (to other file)
  * TODO regenerate file option?
  * TODO below TODOs
  */
 internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = TestCaseGroup(null)) : JFrame() {
 
+    private val descriptionPanel: JTextArea
     private val leftPanel: SidePanel
     private val rightPanel: SidePanel
     private var file: File? = null
@@ -50,6 +58,21 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
 
         jMenuBar = createJMenuBar()
 
+        descriptionPanel = JTextArea()
+        descriptionPanel.document.addDocumentListener(object : DocumentListener {
+            override fun changedUpdate(e: DocumentEvent?) {
+                testCaseGroup.description = descriptionPanel.text
+            }
+
+            override fun insertUpdate(e: DocumentEvent?) {
+                testCaseGroup.description = descriptionPanel.text
+            }
+
+            override fun removeUpdate(e: DocumentEvent?) {
+                testCaseGroup.description = descriptionPanel.text
+            }
+        })
+
         leftPanel = SidePanel()
         rightPanel = SidePanel()
         rightPanel.otherSidePanel = leftPanel
@@ -57,14 +80,19 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         leftPanel.fenComboBox.addActionListener {
             val index = leftPanel.fenComboBox.selectedIndex
             if (index >= 0) {
-                rightPanel.setFenList(testCaseGroup.expectedFENsAt(index))
-                rightPanel.fenComboBox.selectedIndex = 0
+                val fens = testCaseGroup.expectedFENsAt(index)
+                rightPanel.setFenList(fens)
+                rightPanel.fenComboBox.selectedIndex = if (fens.isEmpty()) -1 else 0
             }
         }
 
-        layout = GridLayout(0, 2)
-        add(leftPanel)
-        add(rightPanel)
+        val mainPanel = JPanel(GridLayout(0, 2))
+        mainPanel.add(leftPanel)
+        mainPanel.add(rightPanel)
+
+        layout = BorderLayout()
+        add(BorderLayout.NORTH, descriptionPanel)
+        add(BorderLayout.CENTER, mainPanel)
 
         size = Dimension(950, 600)
 
@@ -72,7 +100,9 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         addWindowListener(object : WindowAdapter() {
             override fun windowClosing(windowEvent: WindowEvent?) {
-                exitProcess(0)
+                if (okayToProceedToNewTestGroup()) {
+                    exitProcess(0)
+                }
             }
         })
 
@@ -116,11 +146,15 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
 
         val saveItem = JMenuItem("Save")
         saveItem.addActionListener {
-            showSaveDialog()
+            doSave()
         }
 
         val quitItem = JMenuItem("Quit")
-        quitItem.addActionListener { exitProcess(0) }
+        quitItem.addActionListener {
+            if (okayToProceedToNewTestGroup()) {
+                exitProcess(0)
+            }
+        }
 
         val fileMenu = JMenu("File")
         fileMenu.add(newFileItem)
@@ -171,17 +205,24 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         return actionMenu
     }
 
-    private fun showSaveDialog() : Boolean {
-        val chooser = JFileChooser()
-        val result = chooser.showSaveDialog(this)
-        if (result == JFileChooser.APPROVE_OPTION) {
-            // TODO confirm if overwrite
-            val writer = FileWriter(chooser.selectedFile)
-            Gson().toJson(testCaseGroup, writer)
-            writer.close()
-            return true
+    private fun doSave() : Boolean {
+        if (file == null) {
+            val chooser = JFileChooser()
+            val result = chooser.showSaveDialog(this)
+            if (result == JFileChooser.CANCEL_OPTION) {
+                return false
+            }
+            file = chooser.selectedFile
         }
-        return false
+        val writer = FileWriter(file!!)
+        val gson = GsonBuilder()
+                .setPrettyPrinting()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create()
+        gson.toJson(testCaseGroup, writer)
+        writer.close()
+        testCaseGroup.modified = false
+        return true
     }
 
     private fun okayToProceedToNewTestGroup() : Boolean {
@@ -196,7 +237,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
                     options[0])
             when (choice) {
                 0 -> {
-                    return showSaveDialog()
+                    return doSave()
                 }
                 1 -> {
                     return true
@@ -213,7 +254,13 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         this.file = file
         testCaseGroup = TestCaseGroup.fromFile(file)
         testCaseGroupChanged()
-        leftPanel.selectFEN(0)
+        if (testCaseGroup.getSize() > 0) {
+            leftPanel.selectFEN(0)
+        }
+        title = file.toString()
+        if (testCaseGroup.description != null) {
+            descriptionPanel.text = testCaseGroup.description
+        }
     }
 
     private fun testCaseGroupChanged() {

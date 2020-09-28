@@ -1,17 +1,22 @@
 package org.computronium.chess.testcaseeditor
 
 import com.google.gson.Gson
+import com.google.gson.annotations.Expose
 import com.google.gson.reflect.TypeToken
 import java.io.File
 
 class TestCaseGroup(description: String?, testCases: List<TestCase> = listOf(), var modified: Boolean = false) {
 
+    @Expose
     var description: String? = description
         set(value) {
-            modified = true
-            field = value
+            if (value != field) {
+                modified = true
+                field = value
+            }
         }
 
+    @Expose
     var testCases: List<TestCase> = testCases
         set(value) {
             modified = true
