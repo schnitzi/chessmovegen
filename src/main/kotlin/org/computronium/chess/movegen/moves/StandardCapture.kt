@@ -31,6 +31,9 @@ open class StandardCapture(from : Int, to : Int) : StandardMove(from, to) {
         }
         sb.append("x")
         sb.append(BoardState.squareName(to))
+        if (resultsInCheck) {
+            sb.append("+")
+        }
         return sb.toString()
     }
 

@@ -30,6 +30,14 @@ class PawnEnPassantCapture(val from: Int) : Move() {
     }
 
     override fun toString(boardState: BoardState): String {
-        return "" + BoardState.fileChar(from) + "x" + BoardState.squareName(boardState.enPassantCapturePos!!) + " e.p."
+        val sb = StringBuilder()
+                .append(BoardState.fileChar(from))
+                .append( "x")
+                .append(BoardState.squareName(boardState.enPassantCapturePos!!))
+                .append(" e.p.")
+        if (resultsInCheck) {
+            sb.append("+")
+        }
+        return sb.toString()
     }
 }

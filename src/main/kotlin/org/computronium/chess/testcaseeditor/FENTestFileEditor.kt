@@ -37,39 +37,38 @@ import kotlin.system.exitProcess
  * TODO Fix move numbers
  * TODO clean up bottom text
  * TODO allow board construction
- * TODO fix unicode writing of = on save
- * TODO format JSON on save
- * TODO warn before overwriting file on save
  * TODO handle special cases in move names
  * TODO are checks, mates, and stalemates out of scope?
  * TODO save multiple move formats?
- * TODO save as (to other file)
+ * TODO save as (to other file), with warning if overwrite
+ * TODO cancel on save at close doesn't abort close
  * TODO regenerate file option?
  * TODO below TODOs
  */
 internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = TestCaseGroup(null)) : JFrame() {
 
-    private val descriptionPanel: JTextArea
+    private val description: JTextArea
     private val leftPanel: SidePanel
     private val rightPanel: SidePanel
     private var file: File? = null
+    private var directory: File? = null
 
     init {
 
         jMenuBar = createJMenuBar()
 
-        descriptionPanel = JTextArea()
-        descriptionPanel.document.addDocumentListener(object : DocumentListener {
+        description = JTextArea()
+        description.document.addDocumentListener(object : DocumentListener {
             override fun changedUpdate(e: DocumentEvent?) {
-                testCaseGroup.description = descriptionPanel.text
+                testCaseGroup.description = description.text
             }
 
             override fun insertUpdate(e: DocumentEvent?) {
-                testCaseGroup.description = descriptionPanel.text
+                testCaseGroup.description = description.text
             }
 
             override fun removeUpdate(e: DocumentEvent?) {
-                testCaseGroup.description = descriptionPanel.text
+                testCaseGroup.description = description.text
             }
         })
 
@@ -91,7 +90,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         mainPanel.add(rightPanel)
 
         layout = BorderLayout()
-        add(BorderLayout.NORTH, descriptionPanel)
+        add(BorderLayout.NORTH, description)
         add(BorderLayout.CENTER, mainPanel)
 
         size = Dimension(950, 600)
@@ -129,6 +128,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
                 testCaseGroup = TestCaseGroup(null)
                 testCaseGroupChanged()
                 leftPanel.selectFEN(-1)
+                description.text = ""
             }
         }
 
@@ -137,6 +137,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
 
             if (okayToProceedToNewTestGroup()) {
                 val chooser = JFileChooser()
+                chooser.currentDirectory = directory
                 val result = chooser.showOpenDialog(this)
                 if (result == JFileChooser.APPROVE_OPTION) {
                     loadFile(chooser.selectedFile)
@@ -147,6 +148,11 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         val saveItem = JMenuItem("Save")
         saveItem.addActionListener {
             doSave()
+        }
+
+        val saveAsItem = JMenuItem("Save as")
+        saveAsItem.addActionListener {
+            doSaveAs()
         }
 
         val quitItem = JMenuItem("Quit")
@@ -160,6 +166,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         fileMenu.add(newFileItem)
         fileMenu.add(openItem)
         fileMenu.add(saveItem)
+        fileMenu.add(saveAsItem)
         fileMenu.add(quitItem)
 
         return fileMenu
@@ -207,22 +214,43 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
 
     private fun doSave() : Boolean {
         if (file == null) {
-            val chooser = JFileChooser()
-            val result = chooser.showSaveDialog(this)
-            if (result == JFileChooser.CANCEL_OPTION) {
-                return false
-            }
-            file = chooser.selectedFile
+            if (!chooseSaveFile()) return false
         }
+        writeFile()
+        return true
+    }
+
+    private fun chooseSaveFile(): Boolean {
+        val chooser = JFileChooser()
+        chooser.currentDirectory = directory
+        val result = chooser.showSaveDialog(this)
+        if (result == JFileChooser.CANCEL_OPTION) {
+            return false
+        }
+        file = chooser.selectedFile
+        if (!file!!.name.endsWith(".json")) {
+            file = File(file!!.path + ".json")
+        }
+        return true
+    }
+
+    private fun doSaveAs() : Boolean {
+        if (!chooseSaveFile()) return false
+        writeFile()
+        return true
+    }
+
+    private fun writeFile() {
         val writer = FileWriter(file!!)
         val gson = GsonBuilder()
                 .setPrettyPrinting()
                 .excludeFieldsWithoutExposeAnnotation()
+                .disableHtmlEscaping()
                 .create()
         gson.toJson(testCaseGroup, writer)
         writer.close()
         testCaseGroup.modified = false
-        return true
+        title = file.toString()
     }
 
     private fun okayToProceedToNewTestGroup() : Boolean {
@@ -259,8 +287,9 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         }
         title = file.toString()
         if (testCaseGroup.description != null) {
-            descriptionPanel.text = testCaseGroup.description
+            description.text = testCaseGroup.description
         }
+        directory = file.parentFile
     }
 
     private fun testCaseGroupChanged() {

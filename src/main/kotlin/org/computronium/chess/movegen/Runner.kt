@@ -3,6 +3,9 @@ package org.computronium.chess.movegen
 import java.util.*
 import kotlin.system.exitProcess
 
+/**
+ * Plays a random game of chess, because why not?
+ */
 fun main(args : Array<String>) {
 
     val random = Random()

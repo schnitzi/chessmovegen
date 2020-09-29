@@ -33,7 +33,6 @@ internal class DescriptionPanel : JPanel() {
             val boardState = position.getBoardState()
 
             textArea.text =
-                "FEN: $position\n" +
                 "${boardState.halfMovesSinceCaptureOrPawnAdvance} half moves since capture or pawn move.\n" +
                 "${if (boardState.whoseTurn == BoardState.WHITE) "White" else "Black"}'s turn.\n" +
                 "White ${if (boardState.sideConfig[BoardState.WHITE].canKingSideCastle) "can still" else "can no longer"} castle kingside.\n" +

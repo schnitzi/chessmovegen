@@ -160,14 +160,14 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
     }
 
     private fun isAttackedByPawn(pos: Int, attackingColor: Int): Boolean {
-        val pawnIndex = pos - whoseTurnConfig().pawnMoveDirection
+        val pawnIndex = pos + whoseTurnConfig().pawnMoveDirection
         return isPieceOfType(PieceType.PAWN, pawnIndex-1, attackingColor) ||
                 isPieceOfType(PieceType.PAWN, pawnIndex+1, attackingColor)
     }
 
     private fun isAttackedByKnight(pos: Int, attackingColor: Int): Boolean {
         for (offset in KNIGHT_MOVE_OFFSETS) {
-            if (isPieceOfType(PieceType.PAWN, pos+offset, attackingColor)) {
+            if (isPieceOfType(PieceType.KNIGHT, pos+offset, attackingColor)) {
                 return true
             }
         }
@@ -236,6 +236,15 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
         val KNIGHT_MOVE_OFFSETS = arrayOf(-25, -23, -14, -10, 10, 14, 23, 25)
         val KING_MOVE_OFFSETS = arrayOf(-13, -12, -11, -1, 1, 11, 12, 13)
         val BISHOP_MOVE_OFFSETS = arrayOf(-13, -11, 11, 13)
+
+        // 109 110 111 112 113 114 115 116
+        //  97
+        //  85
+        //  73
+        //  61
+        //  49
+        //  37
+        //  25  26  27  28  29  30  31  32
 
         // The boardState is implemented as a single array that wraps around, with padding around
         // the outside so that we can easily check for a piece trying to move off the boardState.
