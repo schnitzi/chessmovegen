@@ -4,7 +4,7 @@ import org.computronium.chess.movegen.BoardState
 
 class CastleKingSide : Move() {
 
-    var canQueenSideCastle = false
+    private var canQueenSideCastle = false
 
     override fun apply(boardState: BoardState): BoardState {
 

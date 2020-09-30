@@ -4,8 +4,8 @@ import org.computronium.chess.movegen.BoardState
 
 class KingCapture(from : Int, to : Int) : StandardCapture(from, to) {
 
-    var canQueenSideCastle : Boolean? = null
-    var canKingSideCastle : Boolean? = null
+    private var canQueenSideCastle : Boolean? = null
+    private var canKingSideCastle : Boolean? = null
 
     override fun apply(boardState: BoardState): BoardState {
 

@@ -202,16 +202,6 @@ class SearchNode(val boardState: BoardState) {
 
         fun newGame() : SearchNode {
             return fromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
-//            return fromFEN(arrayOf(
-//                "rnbqkbnr",
-//                "pppppppp",
-//                "        ",
-//                "        ",
-//                "        ",
-//                "        ",
-//                "PPPPPPPP",
-//                "RNBQKBNR"
-//            ))
         }
     }
 }

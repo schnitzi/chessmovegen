@@ -9,7 +9,6 @@ import org.computronium.chess.movegen.PieceType
  */
 open class StandardCapture(from : Int, to : Int) : StandardMove(from, to) {
 
-
     private var capturedPiece: Piece? = null
 
     private var halfMovesSinceCaptureOrPawnAdvance: Int = 0
