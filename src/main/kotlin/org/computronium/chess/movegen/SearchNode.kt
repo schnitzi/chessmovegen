@@ -4,76 +4,99 @@ import org.computronium.chess.movegen.BoardState.Companion.QUEEN_MOVE_OFFSETS
 import org.computronium.chess.movegen.BoardState.Companion.ROOK_MOVE_OFFSETS
 import org.computronium.chess.movegen.BoardState.Companion.onBoard
 import org.computronium.chess.movegen.moves.*
+import org.computronium.chess.movegen.moves.aspects.CaptureAspect
+import java.util.Arrays
+import java.util.stream.Collector
+import java.util.stream.Collectors
+import java.util.stream.Stream
 
 class SearchNode(val boardState: BoardState) {
 
-    val moves = mutableListOf<Move>()
+    val moves : List<Move>
 
     init {
 
-        val piecePositions = boardState.piecePositions(boardState.whoseTurn)
-
-        for (piecePosition in piecePositions) {
-            findMoves(piecePosition)
-        }
+        moves = boardState.piecePositions(boardState.whoseTurn).stream()
+                .flatMap { position -> findMoves(position) }
+                .filter { move -> isntMovingIntoCheck(move) }
+                .collect(Collectors.toList())
     }
 
-    private fun maybeAddMove(move: Move) {
+    private fun isntMovingIntoCheck(move: Move) : Boolean {
 
         move.apply(boardState)
-        if (!boardState.isKingInCheck(1 - boardState.whoseTurn)) {
-            move.resultsInCheck = boardState.isKingInCheck(boardState.whoseTurn)
-            moves.add(move)
+
+        try {
+            // Don't add the move if we put ourselves in check.
+            if (!boardState.isKingInCheck(1 - boardState.whoseTurn)) {
+
+                // See if the opponent is now in check.
+                move.resultsInCheck = boardState.isKingInCheck(boardState.whoseTurn)
+
+                // TODO check for mate and stalemate.
+                return true
+            }
+        } finally {
+            move.rollback(boardState)
         }
-        move.rollback(boardState)
+        return false
     }
 
-    private fun findMoves(index: Int) {
+    private fun findMoves(index: Int) : Stream<Move> {
 
         when (boardState[index]?.type) {
-            PieceType.PAWN -> findPawnMoves(index)
-            PieceType.ROOK -> findRookMoves(index)
-            PieceType.BISHOP -> findBishopMoves(index)
-            PieceType.KNIGHT -> findKnightMoves(index)
-            PieceType.QUEEN -> findQueenMoves(index)
-            PieceType.KING -> findKingMoves(index)
+            PieceType.PAWN -> return findPawnMoves(index)
+            PieceType.ROOK -> return findRookMoves(index)
+            PieceType.BISHOP -> return findBishopMoves(index)
+            PieceType.KNIGHT -> return findKnightMoves(index)
+            PieceType.QUEEN -> return findQueenMoves(index)
+            PieceType.KING -> return findKingMoves(index)
         }
     }
 
-    private fun findKnightMoves(from: Int) {
-
-        for (offset in BoardState.KNIGHT_MOVE_OFFSETS) {
-            val newIndex = from + offset
-
-            if (onBoard(newIndex) && boardState.empty(newIndex)) {
-                maybeAddMove(StandardMove(from, newIndex))
-            }
-
-            // see if capture
-            if (onBoard(newIndex) && boardState[newIndex]?.color == 1 - boardState.whoseTurn) {
-                maybeAddMove(StandardCapture(from, newIndex))
-            }
+    private fun checkForCapture(builder: Move.Builder) {
+        if (boardState[builder.to]?.color == 1 - boardState.whoseTurn) {
+            builder.add(CaptureAspect(builder.to))
         }
     }
 
-    private fun findMovesViaOffsets(offsets: Array<Int>, from: Int) {
+    private fun findKnightMoves(from: Int) : Stream<Move> {
+
+        return Arrays.stream(BoardState.KNIGHT_MOVE_OFFSETS)
+                .map { it + from }
+                .filter { onBoard(it) }
+                .map { Move.Builder(from, it) }
+                .map { builder ->
+                    checkForCapture(builder)
+                    builder
+                }
+                .map { it.build() }
+    }
+
+    private fun findMovesViaOffsets(offsets: Array<Int>, from: Int) : Stream<Move> {
 
         for (offset in offsets) {
             var newIndex = from + offset
 
+            // Check as far in every direction, as far as there are blank squares.
             while (onBoard(newIndex) && boardState.empty(newIndex)) {
-                maybeAddMove(StandardMove(from, newIndex))
+                val builder = Move.Builder(from, newIndex)
+                maybeAddMove(builder.build())
                 newIndex += offset
             }
 
-            // see if capture
-            if (onBoard(newIndex) && boardState[newIndex]?.color == 1 - boardState.whoseTurn) {
-                maybeAddMove(StandardCapture(from, newIndex))
+            // See if there's a capture at the end.
+            if (onBoard(newIndex)) {
+                if (boardState[newIndex]?.color == 1 - boardState.whoseTurn) {
+                    val builder = Move.Builder(from, newIndex)
+                    builder.add(CaptureAspect(newIndex))
+                    maybeAddMove(builder.build())
+                }
             }
         }
     }
 
-    private fun findKingMoves(from: Int) {
+    private fun findKingMoves(from: Int) : Stream<Move>{
 
         for (offset in BoardState.KING_MOVE_OFFSETS) {
             var newIndex = from + offset
@@ -98,12 +121,12 @@ class SearchNode(val boardState: BoardState) {
         }
     }
 
-    private fun findBishopMoves(from: Int) {
+    private fun findBishopMoves(from: Int) : Stream<Move> {
 
         findMovesViaOffsets(BoardState.BISHOP_MOVE_OFFSETS, from)
     }
 
-    private fun findRookMoves(from: Int) {
+    private fun findRookMoves(from: Int) : Stream<Move> {
 
         for (offset in ROOK_MOVE_OFFSETS) {
             var newIndex = from + offset
@@ -120,13 +143,13 @@ class SearchNode(val boardState: BoardState) {
         }
     }
 
-    private fun findQueenMoves(from: Int) {
+    private fun findQueenMoves(from: Int) : Stream<Move> {
 
         findMovesViaOffsets(QUEEN_MOVE_OFFSETS, from)
     }
 
 
-    private fun findPawnMoves(from: Int) {
+    private fun findPawnMoves(from: Int) : Stream<Move> {
 
         val dir = boardState.whoseTurnConfig().pawnMoveDirection
 

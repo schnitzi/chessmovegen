@@ -1,21 +1,20 @@
-package org.computronium.chess.movegen.moves.aspects
+package org.computronium.chess.movegen.moves
 
 import org.computronium.chess.movegen.BoardState
 
 /**
- * That aspect that's just a piece moving from one place to another.
+ * Interface representing a move that can be applied and rolled back.
  */
-class MoveAspect(val from: Int, val to: Int) : Aspect {
+@Deprecated("Use an Aspect class")
+abstract class MoveBase {
+
+    var resultsInCheck = false
 
     private var enPassantCapturePos : Int? = null
 
     private var whoseTurnIsInCheck : Boolean = false
 
-    private var halfMovesSinceCaptureOrPawnAdvance = 0
-
-    override fun apply(boardState: BoardState) {
-
-        boardState.move(from, to)
+    open fun apply(boardState: BoardState): BoardState {
 
         enPassantCapturePos = boardState.enPassantCapturePos
 
@@ -28,9 +27,11 @@ class MoveAspect(val from: Int, val to: Int) : Aspect {
         }
 
         boardState.whoseTurn = 1 - boardState.whoseTurn
+
+        return boardState
     }
 
-    override fun rollback(boardState: BoardState) {
+    open fun rollback(boardState: BoardState) {
 
         boardState.whoseTurn = 1 - boardState.whoseTurn
 
@@ -41,7 +42,7 @@ class MoveAspect(val from: Int, val to: Int) : Aspect {
         boardState.whoseTurnConfig().isInCheck = whoseTurnIsInCheck
 
         boardState.enPassantCapturePos = enPassantCapturePos
-
-        boardState.move(to, from)
     }
+
+    abstract fun toString(boardState: BoardState): String
 }

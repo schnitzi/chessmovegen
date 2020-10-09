@@ -2,6 +2,7 @@ package org.computronium.chess.movegen.moves
 
 import org.computronium.chess.movegen.BoardState
 
+@Deprecated("Use an Aspect class")
 class RookCapture(from : Int, to : Int) : StandardCapture(from, to) {
 
     private var canQueenSideCastle = false

@@ -128,6 +128,8 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
     }
 
     fun piecePositions(color: Int): List<Int> {
+
+        // TODO shouldn't have to compute this each time.
         val positions = mutableListOf<Int>()
         for (index in BOARD_INDEXES) {
             if (board[index]?.color == color) {

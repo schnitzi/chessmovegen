@@ -3,7 +3,8 @@ package org.computronium.chess.movegen.moves
 import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.Piece
 
-class PawnEnPassantCapture(val from: Int) : Move() {
+@Deprecated("Use an Aspect class")
+class PawnEnPassantCapture(val from: Int) : MoveBase() {
 
     private var capturedPiece: Piece? = null
 

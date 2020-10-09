@@ -2,7 +2,8 @@ package org.computronium.chess.movegen.moves
 
 import org.computronium.chess.movegen.BoardState
 
-class CastleKingSide : Move() {
+@Deprecated("Use an Aspect class")
+class CastleKingSide : MoveBase() {
 
     private var canQueenSideCastle = false
 

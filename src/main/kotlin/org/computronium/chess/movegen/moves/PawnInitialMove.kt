@@ -2,6 +2,7 @@ package org.computronium.chess.movegen.moves
 
 import org.computronium.chess.movegen.BoardState
 
+@Deprecated("Use an Aspect class")
 class PawnInitialMove(from: Int, to: Int, private val over: Int) : PawnMove(from, to) {
 
     override fun apply(boardState: BoardState): BoardState {

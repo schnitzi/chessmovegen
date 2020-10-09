@@ -2,6 +2,7 @@ package org.computronium.chess.movegen.moves
 
 import org.computronium.chess.movegen.BoardState
 
+@Deprecated("Use an Aspect class")
 class KingMove(from : Int, to : Int) : StandardMove(from, to) {
 
     private var canQueenSideCastle : Boolean? = null

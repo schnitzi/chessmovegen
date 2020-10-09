@@ -3,10 +3,8 @@ package org.computronium.chess.movegen.moves
 import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.PieceType
 
-/**
- * Class representing a move.
- */
-open class StandardMove(var from : Int, var to : Int) : Move() {
+@Deprecated("Use an Aspect class")
+open class StandardMove(var from : Int, var to : Int) : MoveBase() {
 
     private var halfMovesSinceCaptureOrPawnAdvance = 0
 

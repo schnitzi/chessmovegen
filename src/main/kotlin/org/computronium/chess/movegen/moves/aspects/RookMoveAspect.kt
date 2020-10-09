@@ -1,14 +1,13 @@
-package org.computronium.chess.movegen.moves
+package org.computronium.chess.movegen.moves.aspects
 
 import org.computronium.chess.movegen.BoardState
 
-@Deprecated("Use an Aspect class")
-class RookMove(from : Int, to : Int) : StandardMove(from, to) {
+class RookMoveAspect(val from : Int) : Aspect {
 
     private var canQueenSideCastle = false
     private var canKingSideCastle = false
 
-    override fun apply(boardState: BoardState): BoardState {
+    override fun apply(boardState: BoardState) {
 
         val config = boardState.whoseTurnConfig()
         val homeRank = config.homeRankStart
@@ -19,14 +18,9 @@ class RookMove(from : Int, to : Int) : StandardMove(from, to) {
             canKingSideCastle = config.canKingSideCastle
             config.canKingSideCastle = false
         }
-
-        super.apply(boardState)
-        return boardState
     }
 
     override fun rollback(boardState: BoardState) {
-        super.rollback(boardState)
-
         val config = boardState.whoseTurnConfig()
         val homeRank = config.homeRankStart
         if (from == homeRank) {

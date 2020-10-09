@@ -4,9 +4,7 @@ import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.Piece
 import org.computronium.chess.movegen.PieceType
 
-/**
- * Class representing a move.
- */
+@Deprecated("Use an Aspect class")
 open class StandardCapture(from : Int, to : Int) : StandardMove(from, to) {
 
     private var capturedPiece: Piece? = null

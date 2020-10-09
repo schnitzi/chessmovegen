@@ -1,47 +1,43 @@
 package org.computronium.chess.movegen.moves
 
 import org.computronium.chess.movegen.BoardState
+import org.computronium.chess.movegen.moves.aspects.Aspect
+import org.computronium.chess.movegen.moves.aspects.MoveAspect
 
-/**
- * Interface representing a move that can be applied and rolled back.
- */
-abstract class Move {
+class Move(val aspects: List<Aspect>) {
 
-    var resultsInCheck = false
 
-    private var enPassantCapturePos : Int? = null
+    var resultsInCheck: Boolean = false
 
-    private var whoseTurnIsInCheck : Boolean = false
+    fun apply(boardState: BoardState) {
 
-    open fun apply(boardState: BoardState): BoardState {
-
-        enPassantCapturePos = boardState.enPassantCapturePos
-
-        boardState.enPassantCapturePos = null
-
-        whoseTurnIsInCheck = boardState.whoseTurnConfig().isInCheck
-
-        if (boardState.whoseTurn == BoardState.WHITE) {
-            boardState.moveNumber++
+        for (aspect in aspects) {
+            aspect.apply(boardState)
         }
-
-        boardState.whoseTurn = 1 - boardState.whoseTurn
-
-        return boardState
     }
 
-    open fun rollback(boardState: BoardState) {
+    fun rollback(boardState: BoardState) {
 
-        boardState.whoseTurn = 1 - boardState.whoseTurn
-
-        if (boardState.whoseTurn == BoardState.WHITE) {
-            boardState.moveNumber--
+        for (aspect in aspects) {
+            aspect.rollback(boardState)
         }
-
-        boardState.whoseTurnConfig().isInCheck = whoseTurnIsInCheck
-
-        boardState.enPassantCapturePos = enPassantCapturePos
     }
 
-    abstract fun toString(boardState: BoardState): String
+
+    class Builder(from: Int, val to: Int) {
+
+        val aspects = mutableListOf<Aspect>()
+
+        init {
+            aspects.add(MoveAspect(from, to))
+        }
+
+        fun add(aspect: Aspect) {
+            aspects += aspect
+        }
+
+        fun build() : Move {
+            return Move(aspects.toList())
+        }
+    }
 }

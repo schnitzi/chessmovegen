@@ -4,6 +4,7 @@ import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.Piece
 import org.computronium.chess.movegen.PieceType
 
+@Deprecated("Use an Aspect class")
 class PawnPromotion(from: Int, to: Int, private val promoteTo: PieceType) : PawnMove(from, to) {
 
     private var pawn: Piece? = null

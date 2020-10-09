@@ -2,10 +2,8 @@ package org.computronium.chess.movegen.moves
 
 import org.computronium.chess.movegen.BoardState
 
-/**
- * Class representing a move.
- */
-open class PawnMove(var from : Int, var to : Int) : Move() {
+@Deprecated("Use an Aspect class")
+open class PawnMove(var from : Int, var to : Int) : MoveBase() {
 
     private var halfMovesSinceCaptureOrPawnAdvance = 0
 
