@@ -182,7 +182,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
                 val newTestCase = TestCase(null,
                         TestCase.TestCasePosition(null, null, newFEN),
                         newRoot.moves.map {
-                            val move = it.toString(newRoot.boardState)
+                            val move = it.toString()
                             it.apply(newRoot.boardState)
                             val fen = newRoot.boardState.toFEN()
                             it.rollback(newRoot.boardState)

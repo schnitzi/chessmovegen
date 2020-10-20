@@ -11,8 +11,6 @@ class MoveAspect(val from: Int, val to: Int) : Aspect {
 
     private var whoseTurnIsInCheck : Boolean = false
 
-    private var halfMovesSinceCaptureOrPawnAdvance = 0
-
     override fun apply(boardState: BoardState) {
 
         boardState.move(from, to)

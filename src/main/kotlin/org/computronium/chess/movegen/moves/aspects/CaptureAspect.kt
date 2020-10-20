@@ -2,7 +2,6 @@ package org.computronium.chess.movegen.moves.aspects
 
 import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.Piece
-import org.computronium.chess.movegen.PieceType
 
 open class CaptureAspect(val captureIndex : Int) : Aspect {
 
@@ -13,6 +12,8 @@ open class CaptureAspect(val captureIndex : Int) : Aspect {
     override fun apply(boardState: BoardState) {
 
         capturedPiece = boardState[captureIndex]
+
+        boardState[captureIndex] = null
 
         halfMovesSinceCaptureOrPawnAdvance = boardState.halfMovesSinceCaptureOrPawnAdvance
 

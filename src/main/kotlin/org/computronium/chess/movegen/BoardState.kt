@@ -1,6 +1,17 @@
 package org.computronium.chess.movegen
 
+import org.computronium.chess.movegen.moves.Move
+import org.computronium.chess.movegen.moves.aspects.CaptureAspect
+import org.computronium.chess.movegen.moves.aspects.CastleKingSideAspect
+import org.computronium.chess.movegen.moves.aspects.CastleQueenSideAspect
+import org.computronium.chess.movegen.moves.aspects.KingMoveAspect
+import org.computronium.chess.movegen.moves.aspects.MoveAspect
+import org.computronium.chess.movegen.moves.aspects.PawnInitialMoveAspect
+import org.computronium.chess.movegen.moves.aspects.PawnMoveAspect
+import org.computronium.chess.movegen.moves.aspects.PawnPromotionAspect
+import org.computronium.chess.movegen.moves.aspects.RookMoveAspect
 import java.util.*
+import java.util.stream.Collectors
 
 /**
  * The main class representing a complete board state.
@@ -203,6 +214,7 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
         return isAttacked(sideConfig[color].kingPos, 1-color)
     }
 
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -218,6 +230,130 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
         return true
     }
 
+    fun standardMove(from: Int, to: Int) : Move {
+        return Move(
+                moveNames(from, to),
+                listOf(
+                        MoveAspect(from, to)))
+    }
+
+    private fun moveNames(from: Int, to: Int, capture: Boolean = false, promoteTo: PieceType? = null): List<String> {
+        val plain = StringBuffer()
+        val withFile = StringBuffer()
+        val withRank = StringBuffer()
+        val withBoth = StringBuffer()
+        val buffers = listOf(plain, withFile, withRank, withBoth)
+
+        val piece = get(from)
+
+        if (piece?.type != PieceType.PAWN) {
+            appendAll(buffers, "${piece?.type?.letter}")
+        } else if (capture) {
+            plain.append("${fileChar(from)}")
+        }
+
+        appendAll(listOf(withFile, withBoth), "${fileChar(from)}")
+        appendAll(listOf(withRank, withBoth), "${rankChar(from)}")
+
+        if (capture) {
+            appendAll(buffers, "x")
+        }
+
+        appendAll(buffers, "${fileChar(to)}")
+        appendAll(buffers, "${rankChar(to)}")
+        if (promoteTo != null) {
+            appendAll(buffers, "=${promoteTo.letter}")
+        }
+
+        return buffers.stream().map { sb -> sb.toString() }.collect(Collectors.toList())
+    }
+
+    private fun appendAll(buffers: List<StringBuffer>, s: String) {
+        for (buffer in buffers) {
+            buffer.append(s)
+        }
+    }
+
+    fun standardCapture(from: Int, to: Int) : Move {
+        return Move(
+                moveNames(from, to, true),
+                listOf(CaptureAspect(to),
+                        MoveAspect(from, to)))
+    }
+
+    fun kingMove(from: Int, to: Int) : Move {
+        return Move(
+                moveNames(from, to),
+                listOf(MoveAspect(from, to),
+                        KingMoveAspect()))
+    }
+
+    fun kingSideCastle() : Move {
+        return Move(
+                listOf("O-O"),
+                listOf(CastleKingSideAspect()))
+    }
+
+    fun queenSideCastle() : Move {
+        return Move(
+                listOf("O-O-O"),
+                listOf(CastleQueenSideAspect()))
+    }
+
+    fun kingCapture(from: Int, to: Int) : Move {
+        return Move(
+                moveNames(from, to),
+                listOf(CaptureAspect(to),
+                        MoveAspect(from, to),
+                        KingMoveAspect()))
+    }
+
+    fun rookMove(from: Int, to: Int) : Move {
+        return Move(
+                moveNames(from, to),
+                listOf(MoveAspect(from, to),
+                        RookMoveAspect(from)))
+    }
+
+    fun rookCapture(from: Int, to: Int) : Move {
+        return Move(
+                moveNames(from, to),
+                listOf(CaptureAspect(to),
+                        MoveAspect(from, to),
+                        RookMoveAspect(from)))
+    }
+
+    fun pawnInitialMove(from: Int, to: Int, over: Int) : Move {
+        return Move(
+                moveNames(from, to),
+                listOf(MoveAspect(from, to),
+                        PawnMoveAspect(),
+                        PawnInitialMoveAspect(over)))
+    }
+
+    fun pawnPromotion(from: Int, to: Int, promoteTo: PieceType) : Move {
+        return Move(
+                moveNames(from, to, false, promoteTo),
+                listOf(MoveAspect(from, to),
+                        PawnPromotionAspect(from, to, promoteTo),
+                        PawnMoveAspect()))
+    }
+
+    fun pawnCaptureWithPromotion(from: Int, to: Int, promoteTo: PieceType) : Move {
+        return Move(
+                moveNames(from, to, true, promoteTo),
+                listOf(CaptureAspect(to),
+                        MoveAspect(from, to),
+                            PawnPromotionAspect(from, to, promoteTo)))
+    }
+
+    fun pawnEnPassantCapture(from: Int, to: Int, enPassantCapturedPiecePos: Int) : Move {
+        return Move(
+                moveNames(from, to, true),
+                listOf(CaptureAspect(enPassantCapturedPiecePos),
+                        MoveAspect(from, to)))
+    }
+
     override fun hashCode(): Int {
         var result = board.contentHashCode()
         result = 31 * result + sideConfig.contentHashCode()
@@ -226,7 +362,6 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
         result = 31 * result + (enPassantCapturePos ?: 0)
         return result
     }
-
 
     companion object {
 

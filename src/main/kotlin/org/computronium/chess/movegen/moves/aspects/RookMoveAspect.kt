@@ -2,7 +2,7 @@ package org.computronium.chess.movegen.moves.aspects
 
 import org.computronium.chess.movegen.BoardState
 
-class RookMoveAspect(val from : Int) : Aspect {
+class RookMoveAspect(private val from : Int) : Aspect {
 
     private var canQueenSideCastle = false
     private var canKingSideCastle = false

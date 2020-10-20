@@ -2,7 +2,7 @@ package org.computronium.chess.movegen.moves.aspects
 
 import org.computronium.chess.movegen.BoardState
 
-class KingMoveAspect() : Aspect {
+class KingMoveAspect : Aspect {
 
     private var canQueenSideCastle : Boolean? = null
     private var canKingSideCastle : Boolean? = null

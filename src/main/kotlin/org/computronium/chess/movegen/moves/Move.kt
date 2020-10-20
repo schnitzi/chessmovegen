@@ -1,11 +1,18 @@
 package org.computronium.chess.movegen.moves
 
 import org.computronium.chess.movegen.BoardState
+import org.computronium.chess.movegen.PieceType
 import org.computronium.chess.movegen.moves.aspects.Aspect
+import org.computronium.chess.movegen.moves.aspects.CaptureAspect
+import org.computronium.chess.movegen.moves.aspects.CastleKingSideAspect
+import org.computronium.chess.movegen.moves.aspects.CastleQueenSideAspect
+import org.computronium.chess.movegen.moves.aspects.KingMoveAspect
 import org.computronium.chess.movegen.moves.aspects.MoveAspect
+import org.computronium.chess.movegen.moves.aspects.PawnInitialMoveAspect
+import org.computronium.chess.movegen.moves.aspects.PawnPromotionAspect
+import org.computronium.chess.movegen.moves.aspects.RookMoveAspect
 
-class Move(val aspects: List<Aspect>) {
-
+class Move(val moveNames: List<String>, val aspects: List<Aspect>) {
 
     var resultsInCheck: Boolean = false
 
@@ -18,26 +25,14 @@ class Move(val aspects: List<Aspect>) {
 
     fun rollback(boardState: BoardState) {
 
-        for (aspect in aspects) {
+        for (aspect in aspects.reversed()) {
             aspect.rollback(boardState)
         }
     }
 
-
-    class Builder(from: Int, val to: Int) {
-
-        val aspects = mutableListOf<Aspect>()
-
-        init {
-            aspects.add(MoveAspect(from, to))
-        }
-
-        fun add(aspect: Aspect) {
-            aspects += aspect
-        }
-
-        fun build() : Move {
-            return Move(aspects.toList())
-        }
+    override fun toString(): String {
+        return moveNames[0]
     }
+
+
 }
