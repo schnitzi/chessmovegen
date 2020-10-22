@@ -27,7 +27,7 @@ wishing for something more complete and battle-tested.  So I decided
 to write a tool.
 
 
-# The test data set
+# The test data sets
 
 You can use the data set contained in this project to test your own
 move generator, without ever bothering to compile and run the
@@ -41,7 +41,8 @@ etc., each containing multiple test cases.  Each test case consists
 of a starting board position, and the set of resulting board positions
 that your move generator should generate.  Board positions are
 specified in FEN (https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation)
-format.
+format, and all the test cases represent valid board positions that
+can be reached in a standard game of chess.
 
 So to use these data files, you will need the ability to parse JSON
 (there are a number of libraries that will help you do that, for
@@ -74,12 +75,18 @@ correct set of moves going forward from a position, your chess
 engine might also include an "undo" feature that rolls a move
 backwards.  If so, you can test this easily enough by performing
 the undo for each test case and seeing if you end up with a FEN
-that matches the starting position.  You will find that the sample
-tests also perform this rollback test.
+that matches the starting position.  You will find that the included
+sample tests also perform this rollback test.
 
 ## Algebraic move names
 
-TODO
+Your move generator may or may not generate the actual move names
+(such as "Qe4").  If it does, you can test your move name generation
+using these same test data files -- all of them include the move
+names (in algebraic format TODO) that your move generator should
+generate.  One of the included test files (movenames.json) actually
+contains nothing but test cases meant to test your move name generation.
 
 # The graphical tool
 
+TODO
