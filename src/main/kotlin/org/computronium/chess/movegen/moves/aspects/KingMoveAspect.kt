@@ -2,7 +2,7 @@ package org.computronium.chess.movegen.moves.aspects
 
 import org.computronium.chess.movegen.BoardState
 
-class KingMoveAspect : Aspect {
+class KingMoveAspect(val from: Int, val to: Int) : Aspect {
 
     private var canQueenSideCastle : Boolean? = null
     private var canKingSideCastle : Boolean? = null
@@ -14,12 +14,14 @@ class KingMoveAspect : Aspect {
         config.canQueenSideCastle = false
         canKingSideCastle = config.canKingSideCastle
         config.canKingSideCastle = false
+        config.kingPos = to
     }
 
     override fun rollback(boardState: BoardState) {
 
         val config = boardState.whoseTurnConfig()
-        config.canQueenSideCastle = canQueenSideCastle!!
+        config.kingPos = from
         config.canKingSideCastle = canKingSideCastle!!
+        config.canQueenSideCastle = canQueenSideCastle!!
     }
 }

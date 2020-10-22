@@ -9,14 +9,30 @@ import org.computronium.chess.movegen.moves.aspects.CastleQueenSideAspect
 
 class SearchNode(val boardState: BoardState) {
 
-    val moves = mutableListOf<Move>()
+    val moves : List<Move>
+    
+    private val moveGenerator = MoveGenerator(boardState)
 
     init {
 
         val piecePositions = boardState.piecePositions(boardState.whoseTurn)
 
+        val unfilteredMoves = mutableListOf<Move>()
+
         for (piecePosition in piecePositions) {
-            moves.addAll(findMoves(piecePosition))
+            unfilteredMoves.addAll(findMoves(piecePosition))
+        }
+
+        moves = unfilteredMoves.filter { !intoCheck(it) }
+
+        var done = false
+        while (!done) {
+            done = true
+            for (move in moves) {
+                while (moves.stream().filter {it.moveNames.contains(move.toString())}.count() > 1) {
+                    move.nameIndex += 1
+                }
+            }
         }
     }
 
@@ -32,6 +48,15 @@ class SearchNode(val boardState: BoardState) {
         }
     }
 
+    private fun intoCheck(move: Move): Boolean {
+        try {
+            move.apply(boardState)
+            return boardState.isKingInCheck(1-boardState.whoseTurn)
+        } finally {
+            move.rollback(boardState)
+        }
+    }
+
     private fun findKnightMoves(from: Int) : List<Move> {
 
         val moves = mutableListOf<Move>()
@@ -40,11 +65,11 @@ class SearchNode(val boardState: BoardState) {
 
             if (onBoard(newIndex)) {
                 if (boardState.empty(newIndex)) {
-                    moves.add(boardState.standardMove(from, newIndex))
+                    moves.add(moveGenerator.standardMove(from, newIndex))
                 }
                 // see if capture
                 if (boardState[newIndex]?.color == 1 - boardState.whoseTurn) {
-                    moves.add(boardState.standardCapture(from, newIndex))
+                    moves.add(moveGenerator.standardCapture(from, newIndex))
                 }
             }
         }
@@ -58,13 +83,13 @@ class SearchNode(val boardState: BoardState) {
             var newIndex = from + offset
 
             while (onBoard(newIndex) && boardState.empty(newIndex)) {
-                moves.add(boardState.standardMove(from, newIndex))
+                moves.add(moveGenerator.standardMove(from, newIndex))
                 newIndex += offset
             }
 
             // see if capture
             if (onBoard(newIndex) && boardState[newIndex]?.color == 1 - boardState.whoseTurn) {
-                moves.add(boardState.standardCapture(from, newIndex))
+                moves.add(moveGenerator.standardCapture(from, newIndex))
             }
         }
         return moves
@@ -78,21 +103,21 @@ class SearchNode(val boardState: BoardState) {
 
             if (onBoard(newIndex)) {
                 if (boardState.empty(newIndex)) {
-                    moves.add(boardState.kingMove(from, newIndex))
+                    moves.add(moveGenerator.kingMove(from, newIndex))
                     newIndex += offset
                 }
                 if (boardState[newIndex]?.color == 1 - boardState.whoseTurn) {
-                    moves.add(boardState.kingCapture(from, newIndex))
+                    moves.add(moveGenerator.kingCapture(from, newIndex))
                 }
             }
         }
 
         if (CastleQueenSideAspect.isPossible(boardState)) {
-            moves.add(boardState.queenSideCastle())
+            moves.add(moveGenerator.queenSideCastle())
         }
 
         if (CastleKingSideAspect.isPossible(boardState)) {
-            moves.add(boardState.kingSideCastle())
+            moves.add(moveGenerator.kingSideCastle())
         }
 
         return moves
@@ -110,13 +135,13 @@ class SearchNode(val boardState: BoardState) {
             var newIndex = from + offset
 
             while (onBoard(newIndex) && boardState.empty(newIndex)) {
-                moves.add(boardState.rookMove(from, newIndex))
+                moves.add(moveGenerator.rookMove(from, newIndex))
                 newIndex += offset
             }
 
             // see if capture
             if (onBoard(newIndex) && boardState[newIndex]?.color == 1 - boardState.whoseTurn) {
-                moves.add(boardState.rookCapture(from, newIndex))
+                moves.add(moveGenerator.rookCapture(from, newIndex))
             }
         }
         return moves
@@ -126,7 +151,6 @@ class SearchNode(val boardState: BoardState) {
 
         return findMovesViaOffsets(QUEEN_MOVE_OFFSETS, from)
     }
-
 
     private fun findPawnMoves(from: Int) : List<Move> {
 
@@ -139,12 +163,12 @@ class SearchNode(val boardState: BoardState) {
         if (boardState.empty(forwardOnePosition)) {
 
             if (boardState.whoseTurnConfig().isAboutToPromote(from)) {
-                moves.add(boardState.pawnPromotion(from, forwardOnePosition, PieceType.QUEEN))
-                moves.add(boardState.pawnPromotion(from, forwardOnePosition, PieceType.ROOK))
-                moves.add(boardState.pawnPromotion(from, forwardOnePosition, PieceType.KNIGHT))
-                moves.add(boardState.pawnPromotion(from, forwardOnePosition, PieceType.BISHOP))
+                moves.add(moveGenerator.pawnPromotion(from, forwardOnePosition, PieceType.QUEEN))
+                moves.add(moveGenerator.pawnPromotion(from, forwardOnePosition, PieceType.ROOK))
+                moves.add(moveGenerator.pawnPromotion(from, forwardOnePosition, PieceType.KNIGHT))
+                moves.add(moveGenerator.pawnPromotion(from, forwardOnePosition, PieceType.BISHOP))
             } else {
-                moves.add(boardState.standardMove(from, forwardOnePosition))
+                moves.add(moveGenerator.standardMove(from, forwardOnePosition))
             }
 
             // Can the pawn move forward two?
@@ -155,7 +179,7 @@ class SearchNode(val boardState: BoardState) {
                 if (boardState.empty(forwardTwoPosition)) {
 
                     // We want to also note the special coordinates for handling en passant.
-                    moves.add(boardState.pawnInitialMove(from, forwardTwoPosition, forwardOnePosition))
+                    moves.add(moveGenerator.pawnInitialMove(from, forwardTwoPosition, forwardOnePosition))
                 }
             }
         }
@@ -168,17 +192,17 @@ class SearchNode(val boardState: BoardState) {
 
                     if (boardState.whoseTurnConfig().isAboutToPromote(from)) {
                         // Capture with promotion.
-                        moves.add(boardState.pawnCaptureWithPromotion(from, to, PieceType.QUEEN))
-                        moves.add(boardState.pawnCaptureWithPromotion(from, to, PieceType.ROOK))
-                        moves.add(boardState.pawnCaptureWithPromotion(from, to, PieceType.KNIGHT))
-                        moves.add(boardState.pawnCaptureWithPromotion(from, to, PieceType.BISHOP))
+                        moves.add(moveGenerator.pawnCaptureWithPromotion(from, to, PieceType.QUEEN))
+                        moves.add(moveGenerator.pawnCaptureWithPromotion(from, to, PieceType.ROOK))
+                        moves.add(moveGenerator.pawnCaptureWithPromotion(from, to, PieceType.KNIGHT))
+                        moves.add(moveGenerator.pawnCaptureWithPromotion(from, to, PieceType.BISHOP))
                     } else {
                         // Ordinary capture.
-                        moves.add(boardState.standardCapture(from, to))
+                        moves.add(moveGenerator.standardCapture(from, to))
                     }
                 } else if (to == boardState.enPassantCapturePos) {
                     // En passant capture.
-                    moves.add(boardState.pawnEnPassantCapture(from, to, to - boardState.whoseTurnConfig().pawnMoveDirection))
+                    moves.add(moveGenerator.pawnEnPassantCapture(from, to, to - boardState.whoseTurnConfig().pawnMoveDirection))
                 }
             }
         }
