@@ -255,7 +255,7 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
         // excluding the padding:
         val BOARD_INDEXES = HashSet<Int>()
 
-        // An efficient array for testing if a particular index is on the boardState.
+        // An efficient array for testing if a particular index is on the board.
         private val ON_BOARD = BooleanArray(142) { false }
 
         // Holds the nice name for a given index on the board, e.g. "f3".

@@ -11,6 +11,6 @@ class PawnInitialMoveAspect(private val over: Int) : Aspect {
 
     override fun rollback(boardState: BoardState) {
         // Surprisingly, no need to override rollback here.  En passant capture position is
-        // entirely handled in MoveAspect.
+        // entirely handled in BaseMoveAspect.
     }
 }

@@ -22,6 +22,6 @@ class Move(val moveNames: List<String>, val aspects: List<Aspect>, var nameIndex
     }
 
     override fun toString(): String {
-        return moveNames[nameIndex]
+        return moveNames[nameIndex] + if (resultsInCheck) "+" else ""
     }
 }

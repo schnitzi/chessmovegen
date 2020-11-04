@@ -34,16 +34,12 @@ import kotlin.system.exitProcess
  * TODO allow comments on data sets, start FENs, and result FENs
  * TODO dropdowns sorted by whether there are comments
  * TODO show filename in title, with "*" if modified
- * TODO Fix move numbers
  * TODO clean up bottom text
  * TODO allow board construction
- * TODO handle special cases in move names
  * TODO are checks, mates, and stalemates out of scope?
  * TODO save multiple move formats?
  * TODO save as (to other file), with warning if overwrite
  * TODO cancel on save at close doesn't abort close
- * TODO regenerate file option?
- * TODO below TODOs
  */
 internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = TestCaseGroup(null)) : JFrame() {
 

@@ -3,17 +3,17 @@ package org.computronium.chess.movegen.moves.aspects
 import org.computronium.chess.movegen.BoardState
 
 /**
- * That aspect that's just a piece moving from one place to another.
+ * Aspect that does all the things that are common to every kind of move.
  */
-class MoveAspect(val from: Int, val to: Int) : Aspect {
+class SwapTurnsAspect : Aspect {
 
     override fun apply(boardState: BoardState) {
 
-        boardState.move(from, to)
+        boardState.whoseTurn = 1 - boardState.whoseTurn
     }
 
     override fun rollback(boardState: BoardState) {
 
-        boardState.move(to, from)
+        boardState.whoseTurn = 1 - boardState.whoseTurn
     }
 }
