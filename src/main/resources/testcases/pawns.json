@@ -1,0 +1,300 @@
+{
+  "description": "A bunch of random stuff.",
+  "testCases": [
+    {
+      "start": {
+        "description": "Captures with promotion at all files.",
+        "fen": "3k4/8/1K6/8/8/8/pppppppp/RRRRRRRR b - - 0 1"
+      },
+      "expected": [
+        {
+          "move": "axb1=Q",
+          "fen": "3k4/8/1K6/8/8/8/1ppppppp/RqRRRRRR w - - 0 1"
+        },
+        {
+          "move": "axb1=R",
+          "fen": "3k4/8/1K6/8/8/8/1ppppppp/RrRRRRRR w - - 0 1"
+        },
+        {
+          "move": "axb1=N",
+          "fen": "3k4/8/1K6/8/8/8/1ppppppp/RnRRRRRR w - - 0 1"
+        },
+        {
+          "move": "axb1=B",
+          "fen": "3k4/8/1K6/8/8/8/1ppppppp/RbRRRRRR w - - 0 1"
+        },
+        {
+          "move": "bxa1=Q",
+          "fen": "3k4/8/1K6/8/8/8/p1pppppp/qRRRRRRR w - - 0 1"
+        },
+        {
+          "move": "bxa1=R",
+          "fen": "3k4/8/1K6/8/8/8/p1pppppp/rRRRRRRR w - - 0 1"
+        },
+        {
+          "move": "bxa1=N",
+          "fen": "3k4/8/1K6/8/8/8/p1pppppp/nRRRRRRR w - - 0 1"
+        },
+        {
+          "move": "bxa1=B",
+          "fen": "3k4/8/1K6/8/8/8/p1pppppp/bRRRRRRR w - - 0 1"
+        },
+        {
+          "move": "bxc1=Q",
+          "fen": "3k4/8/1K6/8/8/8/p1pppppp/RRqRRRRR w - - 0 1"
+        },
+        {
+          "move": "bxc1=R",
+          "fen": "3k4/8/1K6/8/8/8/p1pppppp/RRrRRRRR w - - 0 1"
+        },
+        {
+          "move": "bxc1=N",
+          "fen": "3k4/8/1K6/8/8/8/p1pppppp/RRnRRRRR w - - 0 1"
+        },
+        {
+          "move": "bxc1=B",
+          "fen": "3k4/8/1K6/8/8/8/p1pppppp/RRbRRRRR w - - 0 1"
+        },
+        {
+          "move": "cxb1=Q",
+          "fen": "3k4/8/1K6/8/8/8/pp1ppppp/RqRRRRRR w - - 0 1"
+        },
+        {
+          "move": "cxb1=R",
+          "fen": "3k4/8/1K6/8/8/8/pp1ppppp/RrRRRRRR w - - 0 1"
+        },
+        {
+          "move": "cxb1=N",
+          "fen": "3k4/8/1K6/8/8/8/pp1ppppp/RnRRRRRR w - - 0 1"
+        },
+        {
+          "move": "cxb1=B",
+          "fen": "3k4/8/1K6/8/8/8/pp1ppppp/RbRRRRRR w - - 0 1"
+        },
+        {
+          "move": "cxd1=Q",
+          "fen": "3k4/8/1K6/8/8/8/pp1ppppp/RRRqRRRR w - - 0 1"
+        },
+        {
+          "move": "cxd1=R",
+          "fen": "3k4/8/1K6/8/8/8/pp1ppppp/RRRrRRRR w - - 0 1"
+        },
+        {
+          "move": "cxd1=N",
+          "fen": "3k4/8/1K6/8/8/8/pp1ppppp/RRRnRRRR w - - 0 1"
+        },
+        {
+          "move": "cxd1=B",
+          "fen": "3k4/8/1K6/8/8/8/pp1ppppp/RRRbRRRR w - - 0 1"
+        },
+        {
+          "move": "exd1=Q",
+          "fen": "3k4/8/1K6/8/8/8/pppp1ppp/RRRqRRRR w - - 0 1"
+        },
+        {
+          "move": "exd1=R",
+          "fen": "3k4/8/1K6/8/8/8/pppp1ppp/RRRrRRRR w - - 0 1"
+        },
+        {
+          "move": "exd1=N",
+          "fen": "3k4/8/1K6/8/8/8/pppp1ppp/RRRnRRRR w - - 0 1"
+        },
+        {
+          "move": "exd1=B",
+          "fen": "3k4/8/1K6/8/8/8/pppp1ppp/RRRbRRRR w - - 0 1"
+        },
+        {
+          "move": "exf1=Q",
+          "fen": "3k4/8/1K6/8/8/8/pppp1ppp/RRRRRqRR w - - 0 1"
+        },
+        {
+          "move": "exf1=R",
+          "fen": "3k4/8/1K6/8/8/8/pppp1ppp/RRRRRrRR w - - 0 1"
+        },
+        {
+          "move": "exf1=N",
+          "fen": "3k4/8/1K6/8/8/8/pppp1ppp/RRRRRnRR w - - 0 1"
+        },
+        {
+          "move": "exf1=B",
+          "fen": "3k4/8/1K6/8/8/8/pppp1ppp/RRRRRbRR w - - 0 1"
+        },
+        {
+          "move": "fxe1=Q",
+          "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRqRRR w - - 0 1"
+        },
+        {
+          "move": "fxe1=R",
+          "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRrRRR w - - 0 1"
+        },
+        {
+          "move": "fxe1=N",
+          "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRnRRR w - - 0 1"
+        },
+        {
+          "move": "fxe1=B",
+          "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRbRRR w - - 0 1"
+        },
+        {
+          "move": "fxg1=Q+",
+          "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRRRqR w - - 0 1"
+        },
+        {
+          "move": "fxg1=R",
+          "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRRRrR w - - 0 1"
+        },
+        {
+          "move": "fxg1=N",
+          "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRRRnR w - - 0 1"
+        },
+        {
+          "move": "fxg1=B+",
+          "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRRRbR w - - 0 1"
+        },
+        {
+          "move": "gxf1=Q",
+          "fen": "3k4/8/1K6/8/8/8/pppppp1p/RRRRRqRR w - - 0 1"
+        },
+        {
+          "move": "gxf1=R",
+          "fen": "3k4/8/1K6/8/8/8/pppppp1p/RRRRRrRR w - - 0 1"
+        },
+        {
+          "move": "gxf1=N",
+          "fen": "3k4/8/1K6/8/8/8/pppppp1p/RRRRRnRR w - - 0 1"
+        },
+        {
+          "move": "gxf1=B",
+          "fen": "3k4/8/1K6/8/8/8/pppppp1p/RRRRRbRR w - - 0 1"
+        },
+        {
+          "move": "gxh1=Q",
+          "fen": "3k4/8/1K6/8/8/8/pppppp1p/RRRRRRRq w - - 0 1"
+        },
+        {
+          "move": "gxh1=R",
+          "fen": "3k4/8/1K6/8/8/8/pppppp1p/RRRRRRRr w - - 0 1"
+        },
+        {
+          "move": "gxh1=N",
+          "fen": "3k4/8/1K6/8/8/8/pppppp1p/RRRRRRRn w - - 0 1"
+        },
+        {
+          "move": "gxh1=B",
+          "fen": "3k4/8/1K6/8/8/8/pppppp1p/RRRRRRRb w - - 0 1"
+        },
+        {
+          "move": "hxg1=Q",
+          "fen": "3k4/8/1K6/8/8/8/ppppppp1/RRRRRRqR w - - 0 1"
+        },
+        {
+          "move": "hxg1=R",
+          "fen": "3k4/8/1K6/8/8/8/ppppppp1/RRRRRRrR w - - 0 1"
+        },
+        {
+          "move": "hxg1=N",
+          "fen": "3k4/8/1K6/8/8/8/ppppppp1/RRRRRRnR w - - 0 1"
+        },
+        {
+          "move": "hxg1=B",
+          "fen": "3k4/8/1K6/8/8/8/ppppppp1/RRRRRRbR w - - 0 1"
+        },
+        {
+          "move": "Kd7",
+          "fen": "8/3k4/1K6/8/8/8/pppppppp/RRRRRRRR w - - 0 1"
+        },
+        {
+          "move": "Ke7",
+          "fen": "8/4k3/1K6/8/8/8/pppppppp/RRRRRRRR w - - 0 1"
+        },
+        {
+          "move": "Kc8",
+          "fen": "2k5/8/1K6/8/8/8/pppppppp/RRRRRRRR w - - 0 1"
+        },
+        {
+          "move": "Ke8",
+          "fen": "4k3/8/1K6/8/8/8/pppppppp/RRRRRRRR w - - 0 1"
+        }
+      ]
+    },
+    {
+      "start": {
+        "description": "Simple promotion.",
+        "fen": "1k6/5P2/8/8/8/8/8/4K3 w - - 20 1"
+      },
+      "expected": [
+        {
+          "move": "Kd1",
+          "fen": "1k6/5P2/8/8/8/8/8/3K4 b - - 20 2"
+        },
+        {
+          "move": "Kf1",
+          "fen": "1k6/5P2/8/8/8/8/8/5K2 b - - 20 2"
+        },
+        {
+          "move": "Kd2",
+          "fen": "1k6/5P2/8/8/8/8/3K4/8 b - - 20 2"
+        },
+        {
+          "move": "Ke2",
+          "fen": "1k6/5P2/8/8/8/8/4K3/8 b - - 20 2"
+        },
+        {
+          "move": "Kf2",
+          "fen": "1k6/5P2/8/8/8/8/5K2/8 b - - 20 2"
+        },
+        {
+          "move": "f8=Q+",
+          "fen": "1k3Q2/8/8/8/8/8/8/4K3 b - - 0 2"
+        },
+        {
+          "move": "f8=R+",
+          "fen": "1k3R2/8/8/8/8/8/8/4K3 b - - 0 2"
+        },
+        {
+          "move": "f8=N",
+          "fen": "1k3N2/8/8/8/8/8/8/4K3 b - - 0 2"
+        },
+        {
+          "move": "f8=B",
+          "fen": "1k3B2/8/8/8/8/8/8/4K3 b - - 0 2"
+        }
+      ]
+    },
+    {
+      "start": {
+        "fen": "7k/8/8/8/pPp5/8/8/7K b - b3 0 1"
+      },
+      "expected": [
+        {
+          "move": "a3",
+          "fen": "7k/8/8/8/1Pp5/p7/8/7K w - - 0 1"
+        },
+        {
+          "move": "axb3",
+          "fen": "7k/8/8/8/2p5/1p6/8/7K w - - 0 1"
+        },
+        {
+          "move": "c3",
+          "fen": "7k/8/8/8/pP6/2p5/8/7K w - - 0 1"
+        },
+        {
+          "move": "cxb3",
+          "fen": "7k/8/8/8/p7/1p6/8/7K w - - 0 1"
+        },
+        {
+          "move": "Kg7",
+          "fen": "8/6k1/8/8/pPp5/8/8/7K w - - 0 1"
+        },
+        {
+          "move": "Kh7",
+          "fen": "8/7k/8/8/pPp5/8/8/7K w - - 0 1"
+        },
+        {
+          "move": "Kg8",
+          "fen": "6k1/8/8/8/pPp5/8/8/7K w - - 0 1"
+        }
+      ]
+    }
+  ]
+}
