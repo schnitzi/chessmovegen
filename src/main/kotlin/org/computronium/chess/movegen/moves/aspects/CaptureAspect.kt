@@ -3,7 +3,7 @@ package org.computronium.chess.movegen.moves.aspects
 import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.Piece
 
-open class CaptureAspect(val captureIndex : Int) : Aspect {
+open class CaptureAspect(private val captureIndex : Int) : Aspect {
 
     private var capturedPiece: Piece? = null
 

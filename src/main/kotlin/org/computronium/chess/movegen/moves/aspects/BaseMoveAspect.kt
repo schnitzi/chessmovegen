@@ -16,7 +16,7 @@ class BaseMoveAspect : Aspect {
         enPassantCapturePos = boardState.enPassantCapturePos
         boardState.enPassantCapturePos = null
 
-        whoseTurnIsInCheck = boardState.whoseTurnConfig().isInCheck
+        whoseTurnIsInCheck = boardState.whoseTurnData().isInCheck
 
         if (boardState.whoseTurn == BoardState.WHITE) {
             boardState.moveNumber++
@@ -29,7 +29,7 @@ class BaseMoveAspect : Aspect {
             boardState.moveNumber--
         }
 
-        boardState.whoseTurnConfig().isInCheck = whoseTurnIsInCheck
+        boardState.whoseTurnData().isInCheck = whoseTurnIsInCheck
 
         boardState.enPassantCapturePos = enPassantCapturePos
     }

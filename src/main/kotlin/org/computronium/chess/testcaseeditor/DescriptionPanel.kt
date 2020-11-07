@@ -35,10 +35,10 @@ internal class DescriptionPanel : JPanel() {
             textArea.text =
                 "${boardState.halfMovesSinceCaptureOrPawnAdvance} half moves since capture or pawn move.\n" +
                 "${if (boardState.whoseTurn == BoardState.WHITE) "White" else "Black"}'s turn.\n" +
-                "White ${if (boardState.sideConfig[BoardState.WHITE].canKingSideCastle) "can still" else "can no longer"} castle kingside.\n" +
-                "White ${if (boardState.sideConfig[BoardState.WHITE].canQueenSideCastle) "can still" else "can no longer"} castle queenside.\n" +
-                "Black ${if (boardState.sideConfig[BoardState.BLACK].canKingSideCastle) "can still" else "can no longer"} castle kingside.\n" +
-                "Black ${if (boardState.sideConfig[BoardState.BLACK].canQueenSideCastle) "can still" else "can no longer"} castle queenside.\n" +
+                "White ${if (boardState.sideData[BoardState.WHITE].canKingSideCastle) "can still" else "can no longer"} castle kingside.\n" +
+                "White ${if (boardState.sideData[BoardState.WHITE].canQueenSideCastle) "can still" else "can no longer"} castle queenside.\n" +
+                "Black ${if (boardState.sideData[BoardState.BLACK].canKingSideCastle) "can still" else "can no longer"} castle kingside.\n" +
+                "Black ${if (boardState.sideData[BoardState.BLACK].canQueenSideCastle) "can still" else "can no longer"} castle queenside.\n" +
                 "${if (boardState.enPassantCapturePos == null) "No en passant capture possible" else "En passant capture possible at " + BoardState.squareName(boardState.enPassantCapturePos!!)}.\n"
         }
 

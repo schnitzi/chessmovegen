@@ -9,24 +9,24 @@ class RookMoveAspect(private val from : Int) : Aspect {
 
     override fun apply(boardState: BoardState) {
 
-        val config = boardState.whoseTurnConfig()
-        val homeRank = config.homeRankStart
+        val sideData = boardState.whoseTurnData()
+        val homeRank = sideData.homeRankStart
         if (from == homeRank) {     // queenside rook
-            canQueenSideCastle = config.canQueenSideCastle
-            config.canQueenSideCastle = false
+            canQueenSideCastle = sideData.canQueenSideCastle
+            sideData.canQueenSideCastle = false
         } else if (from == homeRank+7) {    // kingside rook
-            canKingSideCastle = config.canKingSideCastle
-            config.canKingSideCastle = false
+            canKingSideCastle = sideData.canKingSideCastle
+            sideData.canKingSideCastle = false
         }
     }
 
     override fun rollback(boardState: BoardState) {
-        val config = boardState.whoseTurnConfig()
-        val homeRank = config.homeRankStart
+        val sideData = boardState.whoseTurnData()
+        val homeRank = sideData.homeRankStart
         if (from == homeRank) {
-            config.canQueenSideCastle = canQueenSideCastle
+            sideData.canQueenSideCastle = canQueenSideCastle
         } else if (from == homeRank+7) {
-            config.canKingSideCastle = canKingSideCastle
+            sideData.canKingSideCastle = canKingSideCastle
         }
     }
 }

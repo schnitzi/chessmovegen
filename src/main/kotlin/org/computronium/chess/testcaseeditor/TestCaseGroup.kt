@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.annotations.Expose
 import com.google.gson.reflect.TypeToken
 import java.io.File
+import kotlin.streams.toList
 
 class TestCaseGroup(description: String?, testCases: List<TestCase> = listOf(), var modified: Boolean = false) {
 
@@ -30,7 +31,11 @@ class TestCaseGroup(description: String?, testCases: List<TestCase> = listOf(), 
     fun getSize() = testCases.size
 
     fun add(testCase: TestCase) {
-        testCases = testCases + testCase
+        testCases = if (contains(testCase.start.fen)) {
+            testCases.stream().map { if (it.start.fen == testCase.start.fen) testCase else it }.toList()
+        } else {
+            testCases + testCase
+        }
     }
 
     fun expectedFENsAt(index: Int) : List<TestCase.TestCasePosition> {
@@ -41,6 +46,10 @@ class TestCaseGroup(description: String?, testCases: List<TestCase> = listOf(), 
         val mutableTestCases = testCases.toMutableList()
         mutableTestCases.removeAt(index)
         testCases = mutableTestCases.toList()
+    }
+
+    fun contains(newFEN: String): Boolean {
+        return testCases.stream().anyMatch { it.start.fen == newFEN }
     }
 
     companion object {

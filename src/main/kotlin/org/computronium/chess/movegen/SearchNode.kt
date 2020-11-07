@@ -8,11 +8,11 @@ class SearchNode(val boardState: BoardState) {
 
 
     fun isCheckmate(): Boolean {
-        return boardState.whoseTurnConfig().isInCheck && moves.isEmpty()
+        return boardState.whoseTurnData().isInCheck && moves.isEmpty()
     }
 
     fun isStalemate(): Boolean {
-        return !boardState.whoseTurnConfig().isInCheck && moves.isEmpty()
+        return !boardState.whoseTurnData().isInCheck && moves.isEmpty()
     }
 
     override fun toString(): String {

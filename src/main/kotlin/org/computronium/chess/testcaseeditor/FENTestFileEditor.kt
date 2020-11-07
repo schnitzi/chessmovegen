@@ -5,6 +5,7 @@ import org.computronium.chess.movegen.SearchNode
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.GridLayout
+import java.awt.event.ActionEvent
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import java.io.File
@@ -40,6 +41,7 @@ import kotlin.system.exitProcess
  * TODO save multiple move formats?
  * TODO save as (to other file), with warning if overwrite
  * TODO cancel on save at close doesn't abort close
+ * TODO don't allow same FEN to be added to test set
  */
 internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = TestCaseGroup(null)) : JFrame() {
 
@@ -172,8 +174,15 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
 
         val addTestCase = JMenuItem("Add test case")
         addTestCase.addActionListener {
-            val newFEN = JOptionPane.showInputDialog("FEN of starting position:")
+            var newFEN = JOptionPane.showInputDialog("FEN of starting position:")
             if (newFEN != null) {
+                newFEN = newFEN.trim()
+                if (testCaseGroup.contains(newFEN)) {
+                    val regenerate = JOptionPane.showConfirmDialog(this, "FEN already in group.  Regenerate it?")
+                    if (regenerate != JOptionPane.YES_OPTION) {
+                        return@addActionListener
+                    }
+                }
                 val newRoot = SearchNode.fromFEN(newFEN)
                 val newTestCase = TestCase(null,
                         TestCase.TestCasePosition(null, null, newFEN),

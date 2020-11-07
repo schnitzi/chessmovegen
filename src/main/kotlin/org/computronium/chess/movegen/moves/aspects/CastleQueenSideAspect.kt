@@ -6,19 +6,19 @@ class CastleQueenSideAspect : Aspect {
 
     override fun apply(boardState: BoardState) {
 
-        val config = boardState.whoseTurnConfig()
-        val homeRankStart = config.homeRankStart
+        val sideData = boardState.whoseTurnData()
+        val homeRankStart = sideData.homeRankStart
         boardState.move(homeRankStart+4, homeRankStart+2)    // move the king
-        config.kingPos = homeRankStart+2
+        sideData.kingPos = homeRankStart+2
         boardState.move(homeRankStart, homeRankStart+3)    // move the rook
     }
 
     override fun rollback(boardState: BoardState) {
 
-        val config = boardState.whoseTurnConfig()
-        val homeRankStart = config.homeRankStart
+        val sideData = boardState.whoseTurnData()
+        val homeRankStart = sideData.homeRankStart
         boardState.move(homeRankStart+2, homeRankStart+4)    // move the king back
-        config.kingPos = homeRankStart+4
+        sideData.kingPos = homeRankStart+4
         boardState.move(homeRankStart+3, homeRankStart)    // move the rook back
     }
 
@@ -26,10 +26,10 @@ class CastleQueenSideAspect : Aspect {
 
         fun isPossible(boardState: BoardState) : Boolean {
 
-            val config = boardState.whoseTurnConfig()
-            val homeRankStart = config.homeRankStart
-            return !config.isInCheck &&
-                    config.canQueenSideCastle &&
+            val sideData = boardState.whoseTurnData()
+            val homeRankStart = sideData.homeRankStart
+            return !sideData.isInCheck &&
+                    sideData.canQueenSideCastle &&
                     boardState.empty(homeRankStart+5) &&
                     boardState.empty(homeRankStart+6) &&
                     !boardState.isAttacked(homeRankStart+5, 1 - boardState.whoseTurn)

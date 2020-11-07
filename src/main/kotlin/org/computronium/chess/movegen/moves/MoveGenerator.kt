@@ -123,7 +123,7 @@ class MoveGenerator(val boardState : BoardState) {
 
         val moves = mutableListOf<Move>()
         for (offset in BoardState.KING_MOVE_OFFSETS) {
-            var newIndex = from + offset
+            val newIndex = from + offset
 
             if (BoardState.onBoard(newIndex)) {
                 if (boardState.empty(newIndex)) {
@@ -178,14 +178,14 @@ class MoveGenerator(val boardState : BoardState) {
     private fun findPawnMoves(from: Int) : List<Move> {
 
         val moves = mutableListOf<Move>()
-        val dir = boardState.whoseTurnConfig().pawnMoveDirection
+        val dir = boardState.whoseTurnData().pawnMoveDirection
 
         // Can the pawn move forward one?
         val forwardOnePosition = from + dir
 
         if (boardState.empty(forwardOnePosition)) {
 
-            if (boardState.whoseTurnConfig().isAboutToPromote(from)) {
+            if (boardState.whoseTurnData().isAboutToPromote(from)) {
                 moves.add(pawnPromotion(from, forwardOnePosition, PieceType.QUEEN))
                 moves.add(pawnPromotion(from, forwardOnePosition, PieceType.ROOK))
                 moves.add(pawnPromotion(from, forwardOnePosition, PieceType.KNIGHT))
@@ -195,7 +195,7 @@ class MoveGenerator(val boardState : BoardState) {
             }
 
             // Can the pawn move forward two?
-            if (boardState.whoseTurnConfig().isPawnHomeRank(from)) {
+            if (boardState.whoseTurnData().isPawnHomeRank(from)) {
 
                 val forwardTwoPosition = from + dir + dir
 
@@ -209,11 +209,11 @@ class MoveGenerator(val boardState : BoardState) {
 
         // Pawn captures.
         for (dx in listOf(-1, 1)) {
-            val to = from + boardState.whoseTurnConfig().pawnMoveDirection + dx
+            val to = from + boardState.whoseTurnData().pawnMoveDirection + dx
             if (BoardState.onBoard(to)) {
                 if (boardState[to]?.color == 1 - boardState.whoseTurn) {
 
-                    if (boardState.whoseTurnConfig().isAboutToPromote(from)) {
+                    if (boardState.whoseTurnData().isAboutToPromote(from)) {
                         // Capture with promotion.
                         moves.add(pawnCaptureWithPromotion(from, to, PieceType.QUEEN))
                         moves.add(pawnCaptureWithPromotion(from, to, PieceType.ROOK))
@@ -225,7 +225,7 @@ class MoveGenerator(val boardState : BoardState) {
                     }
                 } else if (to == boardState.enPassantCapturePos) {
                     // En passant capture.
-                    moves.add(pawnEnPassantCapture(from, to, to - boardState.whoseTurnConfig().pawnMoveDirection))
+                    moves.add(pawnEnPassantCapture(from, to, to - boardState.whoseTurnData().pawnMoveDirection))
                 }
             }
         }
@@ -254,21 +254,21 @@ class MoveGenerator(val boardState : BoardState) {
 
     private fun kingMove(from: Int, to: Int) : Move {
         return MoveBuilder(from, to)
-                .add(KingMoveAspect(to))
+                .add(KingMoveAspect())
                 .add(MoveAspect(from, to))
                 .build()
     }
 
     private fun kingSideCastle() : Move {
         return MoveBuilder("O-O")
-                .add(KingMoveAspect(to))
+                .add(KingMoveAspect())
                 .add(CastleKingSideAspect())
                 .build()
     }
 
     private fun queenSideCastle() : Move {
         return MoveBuilder("O-O-O")
-                .add(KingMoveAspect(to))
+                .add(KingMoveAspect())
                 .add(CastleQueenSideAspect())
                 .build()
     }
@@ -276,7 +276,7 @@ class MoveGenerator(val boardState : BoardState) {
     private fun kingCapture(from: Int, to: Int) : Move {
         return MoveBuilder(from, to)
                 .add(CaptureAspect(to))
-                .add(KingMoveAspect(to))
+                .add(KingMoveAspect())
                 .add(MoveAspect(from, to))
                 .build()
     }
@@ -307,8 +307,8 @@ class MoveGenerator(val boardState : BoardState) {
     private fun pawnPromotion(from: Int, to: Int, promoteTo: PieceType) : Move {
         return MoveBuilder(from, to, false, promoteTo)
                 .add(PawnMoveAspect())
-                .add(PawnPromotionAspect(to, promoteTo))
                 .add(MoveAspect(from, to))
+                .add(PawnPromotionAspect(to, promoteTo))
                 .build()
     }
 

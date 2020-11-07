@@ -6,17 +6,17 @@ import java.util.StringTokenizer
 /**
  * The main class representing a complete board state.
  */
-class BoardState(private val board: Array<Piece?>) : IBoardState {
+class BoardState(private val board: Array<Piece?>) {
 
 
-    val sideConfig = arrayOf(
-            SideConfig(
+    val sideData = arrayOf(
+            SideData(
                     25,
                     37,
                     97,
                     12,
                     29),
-            SideConfig(
+            SideData(
                     109,
                     97,
                     37,
@@ -24,24 +24,24 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
                     113
             ))
 
-    override var whoseTurn = WHITE
+    var whoseTurn = WHITE
 
-    override var moveNumber = 0
+    var moveNumber = 0
 
-    override var enPassantCapturePos: Int? = null
+    var enPassantCapturePos: Int? = null
 
-    override var halfMovesSinceCaptureOrPawnAdvance = 0
+    var halfMovesSinceCaptureOrPawnAdvance = 0
     
 
     init {
         // Save the coordinate for each king, so we can figure out if the king is in check.
         for (index in BOARD_INDEXES) {
             if (board[index]?.type == PieceType.KING) {
-                sideConfig[board[index]?.color!!].kingPos = index
+                sideData[board[index]?.color!!].kingPos = index
             }
         }
 
-        // TODO set canCastle if (boardState[whoseTurnConfig().kingHomePos()] == )
+        // TODO set canCastle if (boardState[whoseTurnData().kingHomePos()] == )
     }
 
     override fun toString(): String {
@@ -59,7 +59,7 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
         return sb.toString()
     }
 
-    override fun pieceAt(file: Int, rank: Int) : Piece? {
+    fun pieceAt(file: Int, rank: Int) : Piece? {
         return board[indexOf(file, rank)]
     }
 
@@ -93,16 +93,16 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
             .append(if (whoseTurn == WHITE) "w" else "b")
             .append(" ")
 
-        if (!sideConfig[WHITE].canKingSideCastle &&
-            !sideConfig[WHITE].canQueenSideCastle &&
-            !sideConfig[BLACK].canKingSideCastle &&
-            !sideConfig[BLACK].canQueenSideCastle) {
+        if (!sideData[WHITE].canKingSideCastle &&
+            !sideData[WHITE].canQueenSideCastle &&
+            !sideData[BLACK].canKingSideCastle &&
+            !sideData[BLACK].canQueenSideCastle) {
             sb.append("-")
         } else {
-            if (sideConfig[WHITE].canKingSideCastle) sb.append("K")
-            if (sideConfig[WHITE].canQueenSideCastle) sb.append("Q")
-            if (sideConfig[BLACK].canKingSideCastle) sb.append("k")
-            if (sideConfig[BLACK].canQueenSideCastle) sb.append("q")
+            if (sideData[WHITE].canKingSideCastle) sb.append("K")
+            if (sideData[WHITE].canQueenSideCastle) sb.append("Q")
+            if (sideData[BLACK].canKingSideCastle) sb.append("k")
+            if (sideData[BLACK].canQueenSideCastle) sb.append("q")
         }
 
         sb.append(" ").append(if (enPassantCapturePos == null) "-" else squareName(enPassantCapturePos!!))
@@ -126,6 +126,10 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
     fun move(from: Int, to: Int) {
         board[to] = get(from)
         board[from] = null
+
+        if (board[to]!!.type == PieceType.KING) {
+            whoseTurnData().kingPos = to
+        }
     }
 
     fun piecePositions(color: Int): List<Int> {
@@ -163,7 +167,7 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
     }
 
     private fun isAttackedByPawn(pos: Int, attackingColor: Int): Boolean {
-        val pawnIndex = pos + whoseTurnConfig().pawnMoveDirection
+        val pawnIndex = pos + whoseTurnData().pawnMoveDirection
         return isPieceOfType(PieceType.PAWN, pawnIndex-1, attackingColor) ||
                 isPieceOfType(PieceType.PAWN, pawnIndex+1, attackingColor)
     }
@@ -196,12 +200,12 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
         return false
     }
 
-    fun whoseTurnConfig() : SideConfig {
-        return sideConfig[whoseTurn]
+    fun whoseTurnData() : SideData {
+        return sideData[whoseTurn]
     }
 
     fun isKingInCheck(color: Int): Boolean {
-        return isAttacked(sideConfig[color].kingPos, 1-color)
+        return isAttacked(sideData[color].kingPos, 1-color)
     }
 
 
@@ -212,7 +216,7 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
         other as BoardState
 
         if (!board.contentEquals(other.board)) return false
-        if (!sideConfig.contentEquals(other.sideConfig)) return false
+        if (!sideData.contentEquals(other.sideData)) return false
         if (whoseTurn != other.whoseTurn) return false
         if (moveNumber != other.moveNumber) return false
         if (enPassantCapturePos != other.enPassantCapturePos) return false
@@ -222,7 +226,7 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
 
     override fun hashCode(): Int {
         var result = board.contentHashCode()
-        result = 31 * result + sideConfig.contentHashCode()
+        result = 31 * result + sideData.contentHashCode()
         result = 31 * result + whoseTurn
         result = 31 * result + moveNumber
         result = 31 * result + (enPassantCapturePos ?: 0)
@@ -289,16 +293,16 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
             val whoCanCastle = tokenizer.nextToken()
 
             if (whoCanCastle == "-" || !whoCanCastle.contains("K")) {
-                boardState.sideConfig[WHITE].canKingSideCastle = false
+                boardState.sideData[WHITE].canKingSideCastle = false
             }
             if (whoCanCastle == "-" || !whoCanCastle.contains("Q")) {
-                boardState.sideConfig[WHITE].canQueenSideCastle = false
+                boardState.sideData[WHITE].canQueenSideCastle = false
             }
             if (whoCanCastle == "-" || !whoCanCastle.contains("k")) {
-                boardState.sideConfig[BLACK].canKingSideCastle = false
+                boardState.sideData[BLACK].canKingSideCastle = false
             }
             if (whoCanCastle == "-" || !whoCanCastle.contains("q")) {
-                boardState.sideConfig[BLACK].canQueenSideCastle = false
+                boardState.sideData[BLACK].canQueenSideCastle = false
             }
 
             val enPassantCaptureSquare = tokenizer.nextToken()
@@ -356,10 +360,10 @@ class BoardState(private val board: Array<Piece?>) : IBoardState {
         }
     }
 
-    data class SideConfig(val homeRankStart: Int, val pawnHomeRankStart: Int,
-                          val aboutToPromoteRankStart: Int, val pawnMoveDirection: Int,
-                          var kingPos: Int = homeRankStart+4, var isInCheck: Boolean = false,
-                          var canQueenSideCastle: Boolean = true, var canKingSideCastle: Boolean = true) {
+    data class SideData(val homeRankStart: Int, val pawnHomeRankStart: Int,
+                        val aboutToPromoteRankStart: Int, val pawnMoveDirection: Int,
+                        var kingPos: Int = homeRankStart+4, var isInCheck: Boolean = false,
+                        var canQueenSideCastle: Boolean = true, var canKingSideCastle: Boolean = true) {
 
         fun kingHomePos() : Int {
             return homeRankStart + 4

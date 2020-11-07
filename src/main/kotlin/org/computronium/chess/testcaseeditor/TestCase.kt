@@ -8,7 +8,7 @@ class TestCase(val description: String?,
                @Expose val expected: List<TestCasePosition>) {
 
 
-    class TestCasePosition(description: String? = null, @Expose val move: String?, @Expose val fen: String, var modified: Boolean = false) {
+    class TestCasePosition(description: String? = null, @Expose val move: String?, @Expose val fen: String, private var modified: Boolean = false) {
 
         @Expose
         var description: String? = description
