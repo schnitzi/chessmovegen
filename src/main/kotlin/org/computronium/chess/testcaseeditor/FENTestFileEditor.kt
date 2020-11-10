@@ -5,7 +5,6 @@ import org.computronium.chess.movegen.SearchNode
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.GridLayout
-import java.awt.event.ActionEvent
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import java.io.File
@@ -17,7 +16,6 @@ import javax.swing.JMenuBar
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 import javax.swing.JPanel
-import javax.swing.JTextArea
 import javax.swing.SwingUtilities
 import javax.swing.UIManager
 import javax.swing.WindowConstants
@@ -45,7 +43,7 @@ import kotlin.system.exitProcess
  */
 internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = TestCaseGroup(null)) : JFrame() {
 
-    private val description: JTextArea
+    private val descriptionPanel: DescriptionPanel
     private val leftPanel: SidePanel
     private val rightPanel: SidePanel
     private var file: File? = null
@@ -55,23 +53,23 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
 
         jMenuBar = createJMenuBar()
 
-        description = JTextArea()
-        description.document.addDocumentListener(object : DocumentListener {
+        descriptionPanel = DescriptionPanel()
+        descriptionPanel.description.document.addDocumentListener(object : DocumentListener {
             override fun changedUpdate(e: DocumentEvent?) {
-                testCaseGroup.description = description.text
+                testCaseGroup.description = descriptionPanel.description.text
             }
 
             override fun insertUpdate(e: DocumentEvent?) {
-                testCaseGroup.description = description.text
+                testCaseGroup.description = descriptionPanel.description.text
             }
 
             override fun removeUpdate(e: DocumentEvent?) {
-                testCaseGroup.description = description.text
+                testCaseGroup.description = descriptionPanel.description.text
             }
         })
 
-        leftPanel = SidePanel()
-        rightPanel = SidePanel()
+        leftPanel = SidePanel("Test case")
+        rightPanel = SidePanel("Moves")
         rightPanel.otherSidePanel = leftPanel
 
         leftPanel.fenComboBox.addActionListener {
@@ -88,7 +86,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         mainPanel.add(rightPanel)
 
         layout = BorderLayout()
-        add(BorderLayout.NORTH, description)
+        add(BorderLayout.NORTH, descriptionPanel)
         add(BorderLayout.CENTER, mainPanel)
 
         size = Dimension(950, 600)
@@ -126,7 +124,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
                 testCaseGroup = TestCaseGroup(null)
                 testCaseGroupChanged()
                 leftPanel.selectFEN(-1)
-                description.text = ""
+                descriptionPanel.description.text = ""
             }
         }
 
@@ -292,7 +290,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         }
         title = file.toString()
         if (testCaseGroup.description != null) {
-            description.text = testCaseGroup.description
+            descriptionPanel.description.text = testCaseGroup.description
         }
         directory = file.parentFile
     }
