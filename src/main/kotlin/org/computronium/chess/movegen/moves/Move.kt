@@ -1,23 +1,23 @@
 package org.computronium.chess.movegen.moves
 
 import org.computronium.chess.movegen.BoardState
-import org.computronium.chess.movegen.moves.aspects.Aspect
+import org.computronium.chess.movegen.moves.aspects.Transform
 
-class Move(val moveNames: List<String>, val aspects: List<Aspect>, var nameIndex: Int = 0) {
+class Move(val moveNames: List<String>, val transforms: List<Transform>, var nameIndex: Int = 0) {
 
     var resultsInCheck: Boolean = false
 
     fun apply(boardState: BoardState) {
 
-        for (aspect in aspects) {
-            aspect.apply(boardState)
+        for (transform in transforms) {
+            transform.apply(boardState)
         }
     }
 
     fun rollback(boardState: BoardState) {
 
-        for (aspect in aspects.reversed()) {
-            aspect.rollback(boardState)
+        for (transform in transforms.reversed()) {
+            transform.rollback(boardState)
         }
     }
 

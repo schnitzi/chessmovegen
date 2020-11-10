@@ -2,7 +2,7 @@ package org.computronium.chess.movegen.moves.aspects
 
 import org.computronium.chess.movegen.BoardState
 
-open class PawnMoveAspect : Aspect {
+open class PawnMoveTransform : Transform {
 
     private var halfMovesSinceCaptureOrPawnAdvance = 0
 

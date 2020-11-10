@@ -2,7 +2,7 @@ package org.computronium.chess.movegen.moves.aspects
 
 import org.computronium.chess.movegen.BoardState
 
-interface Aspect {
+interface Transform {
 
     fun apply(boardState: BoardState)
 

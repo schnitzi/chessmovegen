@@ -3,9 +3,9 @@ package org.computronium.chess.movegen.moves.aspects
 import org.computronium.chess.movegen.BoardState
 
 /**
- * Aspect that does all the things that are common to every kind of move.
+ * Transform that does all the things that are common to every kind of move.
  */
-class BaseMoveAspect : Aspect {
+class BaseMoveTransform : Transform {
 
     private var enPassantCapturePos : Int? = null
 

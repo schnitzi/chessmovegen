@@ -3,9 +3,9 @@ package org.computronium.chess.movegen.moves.aspects
 import org.computronium.chess.movegen.BoardState
 
 /**
- * Aspect that does all the things that are common to every kind of move.
+ * Transform for swapping turns.
  */
-class SwapTurnsAspect : Aspect {
+class SwapTurnsTransform : Transform {
 
     override fun apply(boardState: BoardState) {
 

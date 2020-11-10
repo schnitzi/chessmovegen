@@ -4,7 +4,7 @@ import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.Piece
 import org.computronium.chess.movegen.PieceType
 
-class PawnPromotionAspect(private val to: Int, private val promoteTo: PieceType) : Aspect {
+class PawnPromotionTransform(private val to: Int, private val promoteTo: PieceType) : Transform {
 
     private var pawn: Piece? = null
 

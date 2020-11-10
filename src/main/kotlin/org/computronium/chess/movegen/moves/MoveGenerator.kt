@@ -2,18 +2,18 @@ package org.computronium.chess.movegen.moves
 
 import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.PieceType
-import org.computronium.chess.movegen.moves.aspects.Aspect
-import org.computronium.chess.movegen.moves.aspects.BaseMoveAspect
-import org.computronium.chess.movegen.moves.aspects.CaptureAspect
-import org.computronium.chess.movegen.moves.aspects.CastleKingSideAspect
-import org.computronium.chess.movegen.moves.aspects.CastleQueenSideAspect
-import org.computronium.chess.movegen.moves.aspects.KingMoveAspect
-import org.computronium.chess.movegen.moves.aspects.MoveAspect
-import org.computronium.chess.movegen.moves.aspects.PawnInitialMoveAspect
-import org.computronium.chess.movegen.moves.aspects.PawnMoveAspect
-import org.computronium.chess.movegen.moves.aspects.PawnPromotionAspect
-import org.computronium.chess.movegen.moves.aspects.RookMoveAspect
-import org.computronium.chess.movegen.moves.aspects.SwapTurnsAspect
+import org.computronium.chess.movegen.moves.aspects.Transform
+import org.computronium.chess.movegen.moves.aspects.BaseMoveTransform
+import org.computronium.chess.movegen.moves.aspects.CaptureTransform
+import org.computronium.chess.movegen.moves.aspects.CastleKingSideTransform
+import org.computronium.chess.movegen.moves.aspects.CastleQueenSideTransform
+import org.computronium.chess.movegen.moves.aspects.KingMoveTransform
+import org.computronium.chess.movegen.moves.aspects.MoveTransform
+import org.computronium.chess.movegen.moves.aspects.PawnInitialMoveTransform
+import org.computronium.chess.movegen.moves.aspects.PawnMoveTransform
+import org.computronium.chess.movegen.moves.aspects.PawnPromotionTransform
+import org.computronium.chess.movegen.moves.aspects.RookMoveTransform
+import org.computronium.chess.movegen.moves.aspects.SwapTurnsTransform
 import java.util.stream.Collectors
 
 /**
@@ -135,11 +135,11 @@ class MoveGenerator(val boardState : BoardState) {
             }
         }
 
-        if (CastleQueenSideAspect.isPossible(boardState)) {
+        if (CastleQueenSideTransform.isPossible(boardState)) {
             moves.add(queenSideCastle())
         }
 
-        if (CastleKingSideAspect.isPossible(boardState)) {
+        if (CastleKingSideTransform.isPossible(boardState)) {
             moves.add(kingSideCastle())
         }
 
@@ -241,97 +241,97 @@ class MoveGenerator(val boardState : BoardState) {
 
     private fun standardMove(from: Int, to: Int) : Move {
         return MoveBuilder(from, to)
-                .add(MoveAspect(from, to))
+                .add(MoveTransform(from, to))
                 .build()
     }
 
     private fun standardCapture(from: Int, to: Int) : Move {
         return MoveBuilder(from, to, true)
-                .add(CaptureAspect(to))
-                .add(MoveAspect(from, to))
+                .add(CaptureTransform(to))
+                .add(MoveTransform(from, to))
                 .build()
     }
 
     private fun kingMove(from: Int, to: Int) : Move {
         return MoveBuilder(from, to)
-                .add(KingMoveAspect())
-                .add(MoveAspect(from, to))
+                .add(KingMoveTransform())
+                .add(MoveTransform(from, to))
                 .build()
     }
 
     private fun kingSideCastle() : Move {
         return MoveBuilder("O-O")
-                .add(KingMoveAspect())
-                .add(CastleKingSideAspect())
+                .add(KingMoveTransform())
+                .add(CastleKingSideTransform())
                 .build()
     }
 
     private fun queenSideCastle() : Move {
         return MoveBuilder("O-O-O")
-                .add(KingMoveAspect())
-                .add(CastleQueenSideAspect())
+                .add(KingMoveTransform())
+                .add(CastleQueenSideTransform())
                 .build()
     }
 
     private fun kingCapture(from: Int, to: Int) : Move {
         return MoveBuilder(from, to)
-                .add(CaptureAspect(to))
-                .add(KingMoveAspect())
-                .add(MoveAspect(from, to))
+                .add(CaptureTransform(to))
+                .add(KingMoveTransform())
+                .add(MoveTransform(from, to))
                 .build()
     }
 
     private fun rookMove(from: Int, to: Int) : Move {
         return MoveBuilder(from, to)
-                .add(RookMoveAspect(from))
-                .add(MoveAspect(from, to))
+                .add(RookMoveTransform(from))
+                .add(MoveTransform(from, to))
                 .build()
     }
 
     private fun rookCapture(from: Int, to: Int) : Move {
         return MoveBuilder(from, to)
-                .add(RookMoveAspect(from))
-                .add(CaptureAspect(to))
-                .add(MoveAspect(from, to))
+                .add(RookMoveTransform(from))
+                .add(CaptureTransform(to))
+                .add(MoveTransform(from, to))
                 .build()
     }
 
     private fun pawnInitialMove(from: Int, to: Int, over: Int) : Move {
         return MoveBuilder(from, to)
-                .add(PawnMoveAspect())
-                .add(PawnInitialMoveAspect(over))
-                .add(MoveAspect(from, to))
+                .add(PawnMoveTransform())
+                .add(PawnInitialMoveTransform(over))
+                .add(MoveTransform(from, to))
                 .build()
     }
 
     private fun pawnPromotion(from: Int, to: Int, promoteTo: PieceType) : Move {
         return MoveBuilder(from, to, false, promoteTo)
-                .add(PawnMoveAspect())
-                .add(MoveAspect(from, to))
-                .add(PawnPromotionAspect(to, promoteTo))
+                .add(PawnMoveTransform())
+                .add(MoveTransform(from, to))
+                .add(PawnPromotionTransform(to, promoteTo))
                 .build()
     }
 
     private fun pawnCaptureWithPromotion(from: Int, to: Int, promoteTo: PieceType) : Move {
         return MoveBuilder(from, to, true, promoteTo)
-                .add(CaptureAspect(to))
-                .add(MoveAspect(from, to))
-                .add(PawnPromotionAspect(to, promoteTo))
+                .add(CaptureTransform(to))
+                .add(MoveTransform(from, to))
+                .add(PawnPromotionTransform(to, promoteTo))
                 .build()
     }
 
     private fun pawnEnPassantCapture(from: Int, to: Int, enPassantCapturedPiecePos: Int) : Move {
 
         return MoveBuilder(from, to, true)
-                .add(CaptureAspect(enPassantCapturedPiecePos))
-                .add(MoveAspect(from, to))
+                .add(CaptureTransform(enPassantCapturedPiecePos))
+                .add(MoveTransform(from, to))
                 .build()
     }
 
     inner class MoveBuilder {
 
         private val moveNames: List<String>
-        val aspects = mutableListOf<Aspect>(BaseMoveAspect())
+        val aspects = mutableListOf<Transform>(BaseMoveTransform())
 
         constructor(from: Int, to: Int, capture: Boolean = false, promoteTo: PieceType? = null) {
             this.moveNames = generateMoveNames(from, to, capture, promoteTo)
@@ -342,8 +342,8 @@ class MoveGenerator(val boardState : BoardState) {
         }
 
 
-        fun add(aspect: Aspect) : MoveBuilder {
-            aspects.add(aspect)
+        fun add(transform: Transform) : MoveBuilder {
+            aspects.add(transform)
             return this
         }
 
@@ -380,7 +380,7 @@ class MoveGenerator(val boardState : BoardState) {
 
 
         fun build() : Move {
-            aspects.add(SwapTurnsAspect())
+            aspects.add(SwapTurnsTransform())
             return Move(moveNames, aspects)
         }
     }

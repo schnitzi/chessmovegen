@@ -3,9 +3,9 @@ package org.computronium.chess.movegen.moves.aspects
 import org.computronium.chess.movegen.BoardState
 
 /**
- * That aspect that's just a piece moving from one place to another.
+ * That transform that's just a piece moving from one place to another.
  */
-class MoveAspect(val from: Int, val to: Int) : Aspect {
+class MoveTransform(val from: Int, val to: Int) : Transform {
 
     override fun apply(boardState: BoardState) {
 
