@@ -3,8 +3,9 @@ package org.computronium.chess.movegen.moves
 import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.moves.aspects.Transform
 
-class Move(val moveNames: List<String>, val transforms: List<Transform>, var nameIndex: Int = 0) {
+class Move(val moveNames: List<String>, private val transforms: List<Transform>, val capture: Boolean) {
 
+    var nameIndex: Int = 0
     var resultsInCheck: Boolean = false
 
     fun apply(boardState: BoardState) {
@@ -21,7 +22,11 @@ class Move(val moveNames: List<String>, val transforms: List<Transform>, var nam
         }
     }
 
+    fun getBaseMoveName() : String {
+        return moveNames[nameIndex]
+    }
+
     override fun toString(): String {
-        return moveNames[nameIndex] + if (resultsInCheck) "+" else ""
+        return getBaseMoveName() + if (resultsInCheck) "+" else ""
     }
 }

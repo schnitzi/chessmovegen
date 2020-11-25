@@ -30,16 +30,16 @@ import kotlin.system.exitProcess
  * files contain a set of starting positions (as FENs), and for each, the set of resulting FENs
  * that a correct move generator should generate.
  *
- * TODO allow comments on data sets, start FENs, and result FENs
- * TODO dropdowns sorted by whether there are comments
  * TODO show filename in title, with "*" if modified
- * TODO clean up bottom text
  * TODO allow board construction
  * TODO are checks, mates, and stalemates out of scope?
  * TODO save multiple move formats?
- * TODO save as (to other file), with warning if overwrite
  * TODO cancel on save at close doesn't abort close
- * TODO don't allow same FEN to be added to test set
+ * TODO confirm en passant move names
+ * TODO verify move generator against perft
+ * TODO show count of possible moves
+ * TODO ctrl-s to save
+ * TODO reorder test cases
  */
 internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = TestCaseGroup(null)) : JFrame() {
 

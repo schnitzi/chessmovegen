@@ -49,8 +49,10 @@ internal class SidePanel(title : String, private var fens : Array<TestCase.TestC
             }
 
             fun saveDescription() {
-                val position: TestCase.TestCasePosition = fenComboBox.selectedItem as TestCase.TestCasePosition
-                position.description = descriptionPanel.description.text
+                if (fenComboBox.selectedItem != null) {
+                    val position: TestCase.TestCasePosition = fenComboBox.selectedItem as TestCase.TestCasePosition
+                    position.description = descriptionPanel.description.text
+                }
             }
         })
 
@@ -72,6 +74,7 @@ internal class SidePanel(title : String, private var fens : Array<TestCase.TestC
             chessboardPanel.setPosition(position, otherSidePanel?.fenComboBox?.selectedItem as TestCase.TestCasePosition?)
             metadataPanel.setPosition(position)
             moveLabel.text = if (fenComboBox.selectedItem == null) "" else (fenComboBox.selectedItem as TestCase.TestCasePosition).moveLabel()
+            descriptionPanel.description.text = position?.description ?: ""
             prevButton.isEnabled = fenComboBox.selectedIndex > 0
             nextButton.isEnabled = fenComboBox.selectedIndex < fenComboBox.itemCount - 1
         }

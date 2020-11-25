@@ -2,6 +2,7 @@ package org.computronium.chess.movegen
 
 import java.util.HashSet
 import java.util.StringTokenizer
+import kotlin.system.exitProcess
 
 /**
  * The main class representing a complete board state.
@@ -127,6 +128,10 @@ class BoardState(private val board: Array<Piece?>) {
         board[to] = get(from)
         board[from] = null
 
+        if (board[to] == null) {
+            exitProcess(-1)
+        }
+
         if (board[to]!!.type == PieceType.KING) {
             whoseTurnData().kingPos = to
         }
@@ -167,7 +172,7 @@ class BoardState(private val board: Array<Piece?>) {
     }
 
     private fun isAttackedByPawn(pos: Int, attackingColor: Int): Boolean {
-        val pawnIndex = pos + whoseTurnData().pawnMoveDirection
+        val pawnIndex = pos - whoseTurnData().pawnMoveDirection
         return isPieceOfType(PieceType.PAWN, pawnIndex-1, attackingColor) ||
                 isPieceOfType(PieceType.PAWN, pawnIndex+1, attackingColor)
     }

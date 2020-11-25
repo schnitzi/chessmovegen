@@ -34,16 +34,19 @@ class MoveGenerator(val boardState : BoardState) {
         // Get rid of moves into check.
         val moves = unfilteredMoves.filter { !intoCheck(it) }
 
+        // Set whether the move results in checking the opposing king, so we can put a "+" after the move name.
         for (move in moves) {
             setResultsInCheck(move)
         }
 
+        // Remove any ambiguities involving the move names.
         var done = false
         while (!done) {
             done = true
             for (move in moves) {
-                while (moves.stream().filter {it.moveNames.contains(move.moveNames[move.nameIndex])}.count() > 1) {
+                while (moves.stream().filter {it.moveNames.contains(move.getBaseMoveName())}.count() > 1) {
                     move.nameIndex += 1
+                    done = false
                 }
             }
         }
@@ -331,7 +334,8 @@ class MoveGenerator(val boardState : BoardState) {
     inner class MoveBuilder {
 
         private val moveNames: List<String>
-        val aspects = mutableListOf<Transform>(BaseMoveTransform())
+        private val transforms = mutableListOf<Transform>(BaseMoveTransform())
+        private var capture = false
 
         constructor(from: Int, to: Int, capture: Boolean = false, promoteTo: PieceType? = null) {
             this.moveNames = generateMoveNames(from, to, capture, promoteTo)
@@ -343,7 +347,10 @@ class MoveGenerator(val boardState : BoardState) {
 
 
         fun add(transform: Transform) : MoveBuilder {
-            aspects.add(transform)
+            transforms.add(transform)
+            if (transform is CaptureTransform) {
+                capture = true
+            }
             return this
         }
 
@@ -380,8 +387,8 @@ class MoveGenerator(val boardState : BoardState) {
 
 
         fun build() : Move {
-            aspects.add(SwapTurnsTransform())
-            return Move(moveNames, aspects)
+            transforms.add(SwapTurnsTransform())
+            return Move(moveNames, transforms, capture)
         }
     }
 

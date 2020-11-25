@@ -5,7 +5,7 @@ import org.computronium.chess.movegen.BoardState
 /**
  * That transform that's just a piece moving from one place to another.
  */
-class MoveTransform(val from: Int, val to: Int) : Transform {
+class MoveTransform(private val from: Int, val to: Int) : Transform {
 
     override fun apply(boardState: BoardState) {
 

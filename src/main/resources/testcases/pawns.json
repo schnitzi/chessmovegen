@@ -136,10 +136,12 @@
           "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRbRRR w - - 0 1"
         },
         {
+          "description": "Note this results in check.",
           "move": "fxg1=Q+",
           "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRRRqR w - - 0 1"
         },
         {
+          "description": "",
           "move": "fxg1=R",
           "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRRRrR w - - 0 1"
         },
@@ -148,10 +150,12 @@
           "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRRRnR w - - 0 1"
         },
         {
+          "description": "Note this results in check.",
           "move": "fxg1=B+",
           "fen": "3k4/8/1K6/8/8/8/ppppp1pp/RRRRRRbR w - - 0 1"
         },
         {
+          "description": "",
           "move": "gxf1=Q",
           "fen": "3k4/8/1K6/8/8/8/pppppp1p/RRRRRqRR w - - 0 1"
         },
@@ -263,6 +267,7 @@
     },
     {
       "start": {
+        "description": "Two choices for en passant capture.",
         "fen": "7k/8/8/8/pPp5/8/8/7K b - b3 0 1"
       },
       "expected": [
@@ -293,6 +298,73 @@
         {
           "move": "Kg8",
           "fen": "6k1/8/8/8/pPp5/8/8/7K w - - 0 1"
+        }
+      ]
+    },
+    {
+      "start": {
+        "description": "Same position as en passant test, only no en passant capture possible.",
+        "fen": "7k/8/8/8/pPp5/8/8/7K b - - 0 1"
+      },
+      "expected": [
+        {
+          "move": "a3",
+          "fen": "7k/8/8/8/1Pp5/p7/8/7K w - - 0 1"
+        },
+        {
+          "move": "c3",
+          "fen": "7k/8/8/8/pP6/2p5/8/7K w - - 0 1"
+        },
+        {
+          "move": "Kg7",
+          "fen": "8/6k1/8/8/pPp5/8/8/7K w - - 0 1"
+        },
+        {
+          "move": "Kh7",
+          "fen": "8/7k/8/8/pPp5/8/8/7K w - - 0 1"
+        },
+        {
+          "move": "Kg8",
+          "fen": "6k1/8/8/8/pPp5/8/8/7K w - - 0 1"
+        }
+      ]
+    },
+    {
+      "start": {
+        "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/5K2/8 w - - 0 1"
+      },
+      "expected": [
+        {
+          "move": "Ke1",
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/8/4K3 b - - 0 2"
+        },
+        {
+          "move": "Kf1",
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/8/5K2 b - - 0 2"
+        },
+        {
+          "move": "Kg1",
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/8/6K1 b - - 0 2"
+        },
+        {
+          "move": "Ke2",
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/4K3/8 b - - 0 2"
+        },
+        {
+          "move": "Kg2",
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/6K1/8 b - - 0 2"
+        },
+        {
+          "move": "Ke3",
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/4K3/8/8 b - - 0 2"
+        },
+        {
+          "move": "Kf3",
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/5K2/8/8 b - - 0 2"
+        },
+        {
+          "move": "Kg3",
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/6K1/8/8 b - - 0 2"
         }
       ]
     }

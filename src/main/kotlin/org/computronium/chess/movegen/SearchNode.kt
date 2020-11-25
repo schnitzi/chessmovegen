@@ -1,18 +1,31 @@
 package org.computronium.chess.movegen
 
+import org.computronium.chess.movegen.moves.Move
 import org.computronium.chess.movegen.moves.MoveGenerator
 
 class SearchNode(val boardState: BoardState) {
 
-    val moves = MoveGenerator(boardState).getMoves()
+    var moves: List<Move> = listOf()
+
+    init {
+        generateMoves()
+    }
 
 
     fun isCheckmate(): Boolean {
-        return boardState.whoseTurnData().isInCheck && moves.isEmpty()
+        val inCheck = boardState.whoseTurnData().isInCheck
+        if (inCheck) {
+            println("moves = ${moves}")
+        }
+        return inCheck && moves.isEmpty()
     }
 
     fun isStalemate(): Boolean {
         return !boardState.whoseTurnData().isInCheck && moves.isEmpty()
+    }
+
+    fun generateMoves() {
+        moves = MoveGenerator(boardState).getMoves()
     }
 
     override fun toString(): String {
