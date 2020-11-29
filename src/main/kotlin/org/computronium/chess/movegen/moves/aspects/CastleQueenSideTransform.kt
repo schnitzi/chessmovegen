@@ -9,7 +9,6 @@ class CastleQueenSideTransform : Transform {
         val sideData = boardState.whoseTurnData()
         val homeRankStart = sideData.homeRankStart
         boardState.move(homeRankStart+4, homeRankStart+2)    // move the king
-        sideData.kingPos = homeRankStart+2
         boardState.move(homeRankStart, homeRankStart+3)    // move the rook
     }
 
@@ -18,7 +17,6 @@ class CastleQueenSideTransform : Transform {
         val sideData = boardState.whoseTurnData()
         val homeRankStart = sideData.homeRankStart
         boardState.move(homeRankStart+2, homeRankStart+4)    // move the king back
-        sideData.kingPos = homeRankStart+4
         boardState.move(homeRankStart+3, homeRankStart)    // move the rook back
     }
 
@@ -30,9 +28,10 @@ class CastleQueenSideTransform : Transform {
             val homeRankStart = sideData.homeRankStart
             return !sideData.isInCheck &&
                     sideData.canQueenSideCastle &&
-                    boardState.empty(homeRankStart+5) &&
-                    boardState.empty(homeRankStart+6) &&
-                    !boardState.isAttacked(homeRankStart+5, 1 - boardState.whoseTurn)
+                    boardState.empty(homeRankStart + 1) &&
+                    boardState.empty(homeRankStart + 2) &&
+                    boardState.empty(homeRankStart + 3) &&
+                    !boardState.isAttacked(homeRankStart + 3, 1 - boardState.whoseTurn)
         }
     }
 }

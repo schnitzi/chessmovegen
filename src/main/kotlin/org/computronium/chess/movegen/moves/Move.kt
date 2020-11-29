@@ -3,7 +3,7 @@ package org.computronium.chess.movegen.moves
 import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.moves.aspects.Transform
 
-class Move(val moveNames: List<String>, private val transforms: List<Transform>, val capture: Boolean) {
+class Move(val moveNames: List<String>, private val transforms: List<Transform>, val metadata: MoveGenerator.MoveMetadata) {
 
     var nameIndex: Int = 0
     var resultsInCheck: Boolean = false

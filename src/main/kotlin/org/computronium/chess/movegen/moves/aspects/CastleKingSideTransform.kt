@@ -7,15 +7,17 @@ class CastleKingSideTransform : Transform {
     override fun apply(boardState: BoardState) {
 
         val sideData = boardState.whoseTurnData()
-        boardState.move(sideData.kingPos+3, sideData.kingPos+1)    // move the rook
-        boardState.move(sideData.kingPos, sideData.kingPos+2)    // move the king
+        val homeRankStart = sideData.homeRankStart
+        boardState.move(homeRankStart+4, homeRankStart+6)    // move the king
+        boardState.move(homeRankStart+7, homeRankStart+5)    // move the rook
     }
 
     override fun rollback(boardState: BoardState) {
 
         val sideData = boardState.whoseTurnData()
-        boardState.move(sideData.kingPos-1, sideData.kingPos+1)    // move the rook back
-        boardState.move(sideData.kingPos, sideData.kingPos-2)    // move the king back
+        val homeRankStart = sideData.homeRankStart
+        boardState.move(homeRankStart+6, homeRankStart+4)    // move the king back
+        boardState.move(homeRankStart+5, homeRankStart+7)    // move the rook back
     }
 
     companion object {
