@@ -24,7 +24,8 @@ This project grew out of my failure to find a good set of test data
 for a chess move generator I was writing.  I created some test data
 by hand, but it was a laborious process and I found myself repeatedly
 wishing for something more complete and battle-tested.  So I decided
-to write a tool.
+to make my own full data set, and the easiest way to do that was to
+write a tool.
 
 
 # The test data sets
@@ -66,17 +67,19 @@ Your move generator should generate the exact same set of resulting
 boards in all cases -- no more, and no less.  If there is any
 discrepancy, you probably have a bug in your move generator.  (Or,
 maybe there's a bug in the test data -- please let me know so I can
-fix it.)
+fix it!)
 
 ## Move rollback
 
 In addition to testing that your move generator produces the
 correct set of moves going forward from a position, your chess
 engine might also include an "undo" feature that rolls a move
-backwards.  If so, you can test this easily enough by performing
-the undo for each test case and seeing if you end up with a FEN
-that matches the starting position.  You will find that the included
-sample tests also perform this rollback test.
+backwards.  Very often, chess engines have bugs in their undo
+features, where pieces get put back wrong, 'already castled' flags
+don't get unset, etc.  You can test your undo feature easily enough
+by performing the undo for each test case and seeing if you end up with
+a FEN that matches the starting position.  You will find that the
+included sample tests also perform this rollback test.
 
 ## Algebraic move names
 
