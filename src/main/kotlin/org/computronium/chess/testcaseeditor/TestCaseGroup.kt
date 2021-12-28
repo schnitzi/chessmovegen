@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.google.gson.annotations.Expose
 import com.google.gson.reflect.TypeToken
 import java.io.File
-import kotlin.streams.toList
 
 class TestCaseGroup(description: String?, testCases: List<TestCase> = listOf(), var modified: Boolean = false) {
 

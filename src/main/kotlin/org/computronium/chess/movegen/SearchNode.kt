@@ -15,7 +15,7 @@ class SearchNode(val boardState: BoardState) {
     fun isCheckmate(): Boolean {
         val inCheck = boardState.whoseTurnData().isInCheck
         if (inCheck) {
-            println("moves = ${moves}")
+            println("moves = $moves")
         }
         return inCheck && moves.isEmpty()
     }

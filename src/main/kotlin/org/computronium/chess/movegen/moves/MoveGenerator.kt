@@ -335,7 +335,13 @@ class MoveGenerator(val boardState : BoardState) {
 
         private val moveNames: List<String>
         private val transforms = mutableListOf<Transform>(BaseMoveTransform())
-        private var metadata = MoveMetadata(false, false, false, false, false)
+        private var metadata = MoveMetadata(
+            capture = false,
+            enPassant = false,
+            castle = false,
+            promotion = false,
+            check = false
+        )
 
         constructor(from: Int, to: Int, capture: Boolean = false, promoteTo: PieceType? = null) {
             this.moveNames = generateMoveNames(from, to, capture, promoteTo)
@@ -348,12 +354,16 @@ class MoveGenerator(val boardState : BoardState) {
 
         fun add(transform: Transform) : MoveBuilder {
             transforms.add(transform)
-            if (transform is CaptureTransform) {
-                metadata.capture = true
-            } else if (transform is CastleQueenSideTransform || transform is CastleKingSideTransform) {
-                metadata.castle = true
-            } else if (transform is PawnPromotionTransform) {
-                metadata.promotion = true
+            when (transform) {
+                is CaptureTransform -> {
+                    metadata.capture = true
+                }
+                is CastleQueenSideTransform, is CastleKingSideTransform -> {
+                    metadata.castle = true
+                }
+                is PawnPromotionTransform -> {
+                    metadata.promotion = true
+                }
             }
             return this
         }

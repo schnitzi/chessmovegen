@@ -25,7 +25,7 @@ internal class SidePanel(title : String, private var fens : Array<TestCase.TestC
     private var titleLabel = JLabel(title, SwingConstants.CENTER)
     private var moveLabel = JLabel("")
     private val descriptionPanel : DescriptionPanel = DescriptionPanel()
-    internal val fenComboBox = JComboBox<TestCase.TestCasePosition>(fens)
+    internal val fenComboBox = JComboBox(fens)
     private val chessboardPanel = ChessboardPanel()
     private val metadataPanel = MetadataPanel()
     private val prevButton = JButton("<")

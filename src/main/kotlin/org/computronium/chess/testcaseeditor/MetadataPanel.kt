@@ -4,7 +4,6 @@ import org.computronium.chess.movegen.BoardState
 import java.awt.Font
 import javax.swing.JEditorPane
 import javax.swing.JPanel
-import javax.swing.JTextArea
 
 /**
  * Panel which has the textual description of the board.
