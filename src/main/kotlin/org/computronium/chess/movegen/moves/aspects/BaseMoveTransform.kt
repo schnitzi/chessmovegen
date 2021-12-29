@@ -18,14 +18,14 @@ class BaseMoveTransform : Transform {
 
         whoseTurnIsInCheck = boardState.whoseTurnData().isInCheck
 
-        if (boardState.whoseTurn == BoardState.WHITE) {
+        if (boardState.whoseTurn == BoardState.BLACK) {
             boardState.moveNumber++
         }
     }
 
     override fun rollback(boardState: BoardState) {
 
-        if (boardState.whoseTurn == BoardState.WHITE) {
+        if (boardState.whoseTurn == BoardState.BLACK) {
             boardState.moveNumber--
         }
 
