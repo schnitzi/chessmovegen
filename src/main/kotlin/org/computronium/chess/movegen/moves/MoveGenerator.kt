@@ -194,7 +194,7 @@ class MoveGenerator(val boardState : BoardState) {
                 moves.add(pawnPromotion(from, forwardOnePosition, PieceType.KNIGHT))
                 moves.add(pawnPromotion(from, forwardOnePosition, PieceType.BISHOP))
             } else {
-                moves.add(standardMove(from, forwardOnePosition))
+                moves.add(pawnMove(from, forwardOnePosition))
             }
 
             // Can the pawn move forward two?
@@ -307,6 +307,13 @@ class MoveGenerator(val boardState : BoardState) {
                 .build()
     }
 
+    private fun pawnMove(from: Int, to: Int) : Move {
+        return MoveBuilder(from, to)
+                .add(PawnMoveTransform())
+                .add(MoveTransform(from, to))
+                .build()
+    }
+
     private fun pawnPromotion(from: Int, to: Int, promoteTo: PieceType) : Move {
         return MoveBuilder(from, to, false, promoteTo)
                 .add(PawnMoveTransform())
@@ -317,6 +324,7 @@ class MoveGenerator(val boardState : BoardState) {
 
     private fun pawnCaptureWithPromotion(from: Int, to: Int, promoteTo: PieceType) : Move {
         return MoveBuilder(from, to, true, promoteTo)
+                .add(PawnMoveTransform())
                 .add(CaptureTransform(to))
                 .add(MoveTransform(from, to))
                 .add(PawnPromotionTransform(to, promoteTo))
@@ -326,6 +334,7 @@ class MoveGenerator(val boardState : BoardState) {
     private fun pawnEnPassantCapture(from: Int, to: Int, enPassantCapturedPiecePos: Int) : Move {
 
         return MoveBuilder(from, to, true)
+                .add(PawnMoveTransform())
                 .add(CaptureTransform(enPassantCapturedPiecePos))
                 .add(MoveTransform(from, to))
                 .build()

@@ -21,9 +21,13 @@ class BaseMoveTransform : Transform {
         if (boardState.whoseTurn == BoardState.BLACK) {
             boardState.moveNumber++
         }
+
+        boardState.halfMovesSinceCaptureOrPawnAdvance += 1
     }
 
     override fun rollback(boardState: BoardState) {
+
+        boardState.halfMovesSinceCaptureOrPawnAdvance -= 1
 
         if (boardState.whoseTurn == BoardState.BLACK) {
             boardState.moveNumber--

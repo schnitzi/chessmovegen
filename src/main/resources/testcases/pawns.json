@@ -200,19 +200,19 @@
         },
         {
           "move": "Kd7",
-          "fen": "8/3k4/1K6/8/8/8/pppppppp/RRRRRRRR w - - 0 2"
+          "fen": "8/3k4/1K6/8/8/8/pppppppp/RRRRRRRR w - - 1 2"
         },
         {
           "move": "Ke7",
-          "fen": "8/4k3/1K6/8/8/8/pppppppp/RRRRRRRR w - - 0 2"
+          "fen": "8/4k3/1K6/8/8/8/pppppppp/RRRRRRRR w - - 1 2"
         },
         {
           "move": "Kc8",
-          "fen": "2k5/8/1K6/8/8/8/pppppppp/RRRRRRRR w - - 0 2"
+          "fen": "2k5/8/1K6/8/8/8/pppppppp/RRRRRRRR w - - 1 2"
         },
         {
           "move": "Ke8",
-          "fen": "4k3/8/1K6/8/8/8/pppppppp/RRRRRRRR w - - 0 2"
+          "fen": "4k3/8/1K6/8/8/8/pppppppp/RRRRRRRR w - - 1 2"
         }
       ]
     },
@@ -223,23 +223,23 @@
       "expected": [
         {
           "move": "Kd1",
-          "fen": "1k6/5P2/8/8/8/8/8/3K4 b - - 20 1"
+          "fen": "1k6/5P2/8/8/8/8/8/3K4 b - - 21 1"
         },
         {
           "move": "Kf1",
-          "fen": "1k6/5P2/8/8/8/8/8/5K2 b - - 20 1"
+          "fen": "1k6/5P2/8/8/8/8/8/5K2 b - - 21 1"
         },
         {
           "move": "Kd2",
-          "fen": "1k6/5P2/8/8/8/8/3K4/8 b - - 20 1"
+          "fen": "1k6/5P2/8/8/8/8/3K4/8 b - - 21 1"
         },
         {
           "move": "Ke2",
-          "fen": "1k6/5P2/8/8/8/8/4K3/8 b - - 20 1"
+          "fen": "1k6/5P2/8/8/8/8/4K3/8 b - - 21 1"
         },
         {
           "move": "Kf2",
-          "fen": "1k6/5P2/8/8/8/8/5K2/8 b - - 20 1"
+          "fen": "1k6/5P2/8/8/8/8/5K2/8 b - - 21 1"
         },
         {
           "move": "f8=Q+",
@@ -282,15 +282,15 @@
         },
         {
           "move": "Kg7",
-          "fen": "8/6k1/8/8/pPp5/8/8/7K w - - 0 2"
+          "fen": "8/6k1/8/8/pPp5/8/8/7K w - - 1 2"
         },
         {
           "move": "Kh7",
-          "fen": "8/7k/8/8/pPp5/8/8/7K w - - 0 2"
+          "fen": "8/7k/8/8/pPp5/8/8/7K w - - 1 2"
         },
         {
           "move": "Kg8",
-          "fen": "6k1/8/8/8/pPp5/8/8/7K w - - 0 2"
+          "fen": "6k1/8/8/8/pPp5/8/8/7K w - - 1 2"
         }
       ]
     },
@@ -309,15 +309,15 @@
         },
         {
           "move": "Kg7",
-          "fen": "8/6k1/8/8/pPp5/8/8/7K w - - 0 2"
+          "fen": "8/6k1/8/8/pPp5/8/8/7K w - - 1 2"
         },
         {
           "move": "Kh7",
-          "fen": "8/7k/8/8/pPp5/8/8/7K w - - 0 2"
+          "fen": "8/7k/8/8/pPp5/8/8/7K w - - 1 2"
         },
         {
           "move": "Kg8",
-          "fen": "6k1/8/8/8/pPp5/8/8/7K w - - 0 2"
+          "fen": "6k1/8/8/8/pPp5/8/8/7K w - - 1 2"
         }
       ]
     },
@@ -328,35 +328,35 @@
       "expected": [
         {
           "move": "Ke1",
-          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/8/4K3 b - - 0 1"
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/8/4K3 b - - 1 1"
         },
         {
           "move": "Kf1",
-          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/8/5K2 b - - 0 1"
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/8/5K2 b - - 1 1"
         },
         {
           "move": "Kg1",
-          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/8/6K1 b - - 0 1"
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/8/6K1 b - - 1 1"
         },
         {
           "move": "Ke2",
-          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/4K3/8 b - - 0 1"
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/4K3/8 b - - 1 1"
         },
         {
           "move": "Kg2",
-          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/6K1/8 b - - 0 1"
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/6K1/8 b - - 1 1"
         },
         {
           "move": "Ke3",
-          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/4K3/8/8 b - - 0 1"
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/4K3/8/8 b - - 1 1"
         },
         {
           "move": "Kf3",
-          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/5K2/8/8 b - - 0 1"
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/5K2/8/8 b - - 1 1"
         },
         {
           "move": "Kg3",
-          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/6K1/8/8 b - - 0 1"
+          "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/6K1/8/8 b - - 1 1"
         }
       ]
     }
