@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="chessmovegen" target="1.5" />
+      <module name="chessmovegen" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

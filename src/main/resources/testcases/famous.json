@@ -2,6 +2,7 @@
   "description": "A bunch of random stuff.",
   "testCases": [
     {
+      "description": "From 'The Game of the Century' (Bobby Fischer v. Donald Byrne).",
       "start": {
         "fen": "r3r1k1/pp3pbp/1qp1b1p1/2B5/2BP4/Q1n2N2/P4PPP/3R1K1R w - - 4 18"
       },

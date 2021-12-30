@@ -1,3 +1,7 @@
+**Note:** A perft test is still indicating that there is a subtle bug in the move generator used to generate the test
+data files.  I don't believe the bug affects any of the test cases, but I will still get this
+fixed shortly (and include a test case for it of course).
+
 # What This Project Is:
 
 1.  An extensive test data set for stress testing your chess move generator.
@@ -22,7 +26,7 @@ are sometimes poorly understood.
 
 This project grew out of my failure to find a good set of test data
 for a chess move generator I was writing.  I created some test data
-by hand, but it was a laborious process and I found myself repeatedly
+by hand, but it was a laborious process, and I found myself repeatedly
 wishing for something more complete and battle-tested.  So I decided
 to make my own full data set, and the easiest way to do that was to
 write a tool.
@@ -36,7 +40,7 @@ test data editing tool.  The test data files contain a number of
 scenarios, including extreme ones, that your move generator should
 be able to handle.
 
-The test data files are located in src/main/resources/testcases.
+The test data files are located in [src/main/resources/testcases](src/main/resources/testcases).
 The files are split by category -- castling, end game, en passant,
 etc., each containing multiple test cases.  Each test case consists
 of a starting board position, and the set of resulting board positions
@@ -66,7 +70,7 @@ file) against the set of moves that your board generator generates.
 Your move generator should generate the exact same set of resulting
 boards in all cases -- no more, and no less.  If there is any
 discrepancy, you probably have a bug in your move generator.  (Or,
-maybe there's a bug in the test data -- please let me know so I can
+maybe there's a bug in the test data -- please let me know, so I can
 fix it!)
 
 ## Move rollback
@@ -86,9 +90,16 @@ included sample tests also perform this rollback test.
 Your move generator may or may not generate the actual move names
 (such as "Qe4").  If it does, you can test your move name generation
 using these same test data files -- all of them include the move
-names (in algebraic format TODO) that your move generator should
-generate.  One of the included test files (movenames.json) actually
-contains nothing but test cases meant to test your move name generation.
+names (in algebraic format) that your move generator should
+generate.
+
+The JSON files represent the resulting moves as a map, where each key
+is an algebraic move name and each value is the FEN that results from
+applying that move.  So to check that you are generating move names
+correctly, you will want to look at the actual keys, not just the values.
+This is what happens in the TestMoveGenerator tests (in
+[Java](src/test/java/org/computronium/chess/TestMoveGeneratorJava.java)
+and [Kotlin](src/test/kotlin/org/computronium/chess/TestMoveGeneratorKotlin.kt)).
 
 # The graphical tool
 

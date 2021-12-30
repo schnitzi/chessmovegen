@@ -7,7 +7,7 @@ import org.junit.Test
 import java.io.File
 
 
-class TestMoveGenerator {
+class TestMoveGeneratorKotlin {
 
     @Test
     fun runTest() {

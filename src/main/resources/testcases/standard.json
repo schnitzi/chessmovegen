@@ -1,7 +1,8 @@
 {
-  "description": "",
+  "description": "Some common positions.",
   "testCases": [
     {
+      "description": "Standard starting position.",
       "start": {
         "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
       },
