@@ -34,10 +34,19 @@ class TestMoveGeneratorKotlin {
             val expectedMoves = testCase.expected.associateBy({ it.move.toString() }, { it.fen })
 
             val startPos = SearchNode.fromFEN(testCase.start.fen)
+            val boardState = startPos.boardState
             val actualMoves = startPos.moves.associateBy({ it.toString() }, {
-                it.apply(startPos.boardState)
-                val fen = startPos.boardState.toFEN()
-                it.rollback(startPos.boardState)
+
+                // Do the move and save the resulting FEN.
+                it.apply(boardState)
+                val fen = boardState.toFEN()
+
+                // Rollback the move we just applied.
+                it.rollback(boardState)
+
+                // Confirm that the rollback works by checking the FEN hasn't changed.
+                Assert.assertEquals("Rollback failed", testCase.start.fen, boardState.toFEN())
+
                 fen
             })
 
