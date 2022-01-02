@@ -2,8 +2,8 @@
   "description": "Some common positions.",
   "testCases": [
     {
-      "description": "Standard starting position.",
       "start": {
+        "description": "Standard starting position.",
         "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
       },
       "expected": [

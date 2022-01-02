@@ -2,8 +2,8 @@
   "description": "Test cases involving pawns.",
   "testCases": [
     {
-      "description": "Eight pawns all promoting via capture.",
       "start": {
+        "description": "Eight pawns all promoting via capture.",
         "fen": "3k4/8/1K6/8/8/8/pppppppp/RRRRRRRR b - - 0 1"
       },
       "expected": [
@@ -218,8 +218,8 @@
       ]
     },
     {
-      "description": "A simple promotion, with some chances to check opposing king.",
       "start": {
+        "description": "A simple promotion, with some chances to check opposing king.",
         "fen": "1k6/5P2/8/8/8/8/8/4K3 w - - 20 1"
       },
       "expected": [
@@ -262,8 +262,8 @@
       ]
     },
     {
-      "description": "Two possible en passant capture possibilities.",
       "start": {
+        "description": "Two possible en passant capture possibilities.",
         "fen": "7k/8/8/8/pPp5/8/8/7K b - b3 0 1"
       },
       "expected": [
@@ -298,8 +298,8 @@
       ]
     },
     {
-      "description": "Same position but without the en passant capture possibilities.",
       "start": {
+        "description": "Same position but without the en passant capture possibilities.",
         "fen": "7k/8/8/8/pPp5/8/8/7K b - - 0 1"
       },
       "expected": [
@@ -326,8 +326,8 @@
       ]
     },
     {
-      "description": "Full set of pawns but no moves.",
       "start": {
+        "description": "Full set of pawns but no moves.",
         "fen": "8/4k3/1p1p1p1p/pPpPpPpP/P1P1P1P1/8/5K2/8 w - - 0 1"
       },
       "expected": [

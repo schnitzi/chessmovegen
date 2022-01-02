@@ -6,7 +6,9 @@ import org.junit.Assert
 import org.junit.Test
 import java.io.File
 
-
+/**
+ * An example test class tests the built-in move generator against the full set of test files.
+ */
 class TestMoveGeneratorKotlin {
 
     @Test
@@ -44,7 +46,7 @@ class TestMoveGeneratorKotlin {
                 // Rollback the move we just applied.
                 it.rollback(boardState)
 
-                // Confirm that the rollback works by checking the FEN hasn't changed.
+                // Confirm that the rollback works by checking we still match the original FEN.
                 Assert.assertEquals("Rollback failed", testCase.start.fen, boardState.toFEN())
 
                 fen
@@ -64,5 +66,4 @@ class TestMoveGeneratorKotlin {
             Assert.assertEquals("Did not match expected board states", expectedMoves, actualMoves)
         }
     }
-
 }

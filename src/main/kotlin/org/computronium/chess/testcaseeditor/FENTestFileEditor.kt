@@ -47,7 +47,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
     private val leftPanel: SidePanel
     private val rightPanel: SidePanel
     private var file: File? = null
-    private var directory: File? = null
+    private var directory: File = File(System.getProperty("user.dir"),"src/main/resources/testcases")
 
     init {
 

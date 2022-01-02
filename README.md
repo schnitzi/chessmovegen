@@ -103,4 +103,10 @@ and [Kotlin](src/test/kotlin/org/computronium/chess/TestMoveGeneratorKotlin.kt))
 
 # The graphical tool
 
-TODO
+The included test files are usable on their own for testing your move
+generator.  These were generated using a small graphical editor, the
+code for which is included in the project but entirely unnecessary for
+your testing.  It can be used to build up your own test cases, either
+by editing the existing test case files or creating new ones.
+
+![FEN test file editor](doc/editor.png)
