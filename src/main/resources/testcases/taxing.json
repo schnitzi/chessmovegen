@@ -1292,6 +1292,674 @@
           "fen": "BB6/BBB5/BBB4k/B1K5/8/7B/8/8 b - - 1 1"
         }
       ]
+    },
+    {
+      "start": {
+        "description": "White can't en passant capture because that would put them into check.",
+        "fen": "4k3/8/8/p1K1Pp1r/Pp5p/6pP/6P1/8 w - f6 0 1"
+      },
+      "expected": [
+        {
+          "move": "Kc4",
+          "fen": "4k3/8/8/p3Pp1r/PpK4p/6pP/6P1/8 b - - 1 1"
+        },
+        {
+          "move": "Kd4",
+          "fen": "4k3/8/8/p3Pp1r/Pp1K3p/6pP/6P1/8 b - - 1 1"
+        },
+        {
+          "move": "Kb5",
+          "fen": "4k3/8/8/pK2Pp1r/Pp5p/6pP/6P1/8 b - - 1 1"
+        },
+        {
+          "move": "Kd5",
+          "fen": "4k3/8/8/p2KPp1r/Pp5p/6pP/6P1/8 b - - 1 1"
+        },
+        {
+          "move": "Kb6",
+          "fen": "4k3/8/1K6/p3Pp1r/Pp5p/6pP/6P1/8 b - - 1 1"
+        },
+        {
+          "move": "Kc6",
+          "fen": "4k3/8/2K5/p3Pp1r/Pp5p/6pP/6P1/8 b - - 1 1"
+        },
+        {
+          "move": "Kd6",
+          "fen": "4k3/8/3K4/p3Pp1r/Pp5p/6pP/6P1/8 b - - 1 1"
+        },
+        {
+          "move": "e6",
+          "fen": "4k3/8/4P3/p1K2p1r/Pp5p/6pP/6P1/8 b - - 0 1"
+        }
+      ]
+    },
+    {
+      "start": {
+        "description": "Black can't en passant capture because that would put them into check.",
+        "fen": "8/8/8/p7/PR1Ppk1p/6pP/6P1/2K5 b - d3 0 1"
+      },
+      "expected": [
+        {
+          "move": "e3",
+          "fen": "8/8/8/p7/PR1P1k1p/4p1pP/6P1/2K5 w - - 0 2"
+        },
+        {
+          "move": "Ke3",
+          "fen": "8/8/8/p7/PR1Pp2p/4k1pP/6P1/2K5 w - - 1 2"
+        },
+        {
+          "move": "Kf5",
+          "fen": "8/8/8/p4k2/PR1Pp2p/6pP/6P1/2K5 w - - 1 2"
+        },
+        {
+          "move": "Kg5",
+          "fen": "8/8/8/p5k1/PR1Pp2p/6pP/6P1/2K5 w - - 1 2"
+        },
+        {
+          "move": "axb4",
+          "fen": "8/8/8/8/Pp1Ppk1p/6pP/6P1/2K5 w - - 0 2"
+        }
+      ]
+    },
+    {
+      "start": {
+        "description": "Black with maximal knights, attacking many off-the-board squares.",
+        "fen": "nnnnnnnn/8/8/8/P2P1k2/8/6P1/n1K4n b - - 0 1"
+      },
+      "expected": [
+        {
+          "move": "Nc2",
+          "fen": "nnnnnnnn/8/8/8/P2P1k2/8/2n3P1/2K4n w - - 1 2"
+        },
+        {
+          "move": "Nb3+",
+          "fen": "nnnnnnnn/8/8/8/P2P1k2/1n6/6P1/2K4n w - - 1 2"
+        },
+        {
+          "move": "Nf2",
+          "fen": "nnnnnnnn/8/8/8/P2P1k2/8/5nP1/n1K5 w - - 1 2"
+        },
+        {
+          "move": "Ng3",
+          "fen": "nnnnnnnn/8/8/8/P2P1k2/6n1/6P1/n1K5 w - - 1 2"
+        },
+        {
+          "move": "Ke3",
+          "fen": "nnnnnnnn/8/8/8/P2P4/4k3/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Kg3",
+          "fen": "nnnnnnnn/8/8/8/P2P4/6k1/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Ke4",
+          "fen": "nnnnnnnn/8/8/8/P2Pk3/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Kg4",
+          "fen": "nnnnnnnn/8/8/8/P2P2k1/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Kf5",
+          "fen": "nnnnnnnn/8/8/5k2/P2P4/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Kg5",
+          "fen": "nnnnnnnn/8/8/6k1/P2P4/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nab6",
+          "fen": "1nnnnnnn/8/1n6/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nac7",
+          "fen": "1nnnnnnn/2n5/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Na6",
+          "fen": "n1nnnnnn/8/n7/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nbc6",
+          "fen": "n1nnnnnn/8/2n5/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nbd7",
+          "fen": "n1nnnnnn/3n4/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Ncb6",
+          "fen": "nn1nnnnn/8/1n6/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Ncd6",
+          "fen": "nn1nnnnn/8/3n4/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Na7",
+          "fen": "nn1nnnnn/n7/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nce7",
+          "fen": "nn1nnnnn/4n3/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Ndc6",
+          "fen": "nnn1nnnn/8/2n5/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nde6",
+          "fen": "nnn1nnnn/8/4n3/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nb7",
+          "fen": "nnn1nnnn/1n6/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Ndf7",
+          "fen": "nnn1nnnn/5n2/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Ned6",
+          "fen": "nnnn1nnn/8/3n4/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nef6",
+          "fen": "nnnn1nnn/8/5n2/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nec7",
+          "fen": "nnnn1nnn/2n5/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Ng7",
+          "fen": "nnnn1nnn/6n1/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nfe6",
+          "fen": "nnnnn1nn/8/4n3/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nfg6",
+          "fen": "nnnnn1nn/8/6n1/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nfd7",
+          "fen": "nnnnn1nn/3n4/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nh7",
+          "fen": "nnnnn1nn/7n/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Ngf6",
+          "fen": "nnnnnn1n/8/5n2/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nh6",
+          "fen": "nnnnnn1n/8/7n/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nge7",
+          "fen": "nnnnnn1n/4n3/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nhg6",
+          "fen": "nnnnnnn1/8/6n1/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        },
+        {
+          "move": "Nhf7",
+          "fen": "nnnnnnn1/5n2/8/8/P2P1k2/8/6P1/n1K4n w - - 1 2"
+        }
+      ]
+    },
+    {
+      "start": {
+        "description": "Another position with maximum knights.",
+        "fen": "n6n/8/8/8/P1KP1k2/8/6P1/nnnnnnnn b - - 0 1"
+      },
+      "expected": [
+        {
+          "move": "Nac2",
+          "fen": "n6n/8/8/8/P1KP1k2/8/2n3P1/1nnnnnnn w - - 1 2"
+        },
+        {
+          "move": "Nab3",
+          "fen": "n6n/8/8/8/P1KP1k2/1n6/6P1/1nnnnnnn w - - 1 2"
+        },
+        {
+          "move": "Nbd2+",
+          "fen": "n6n/8/8/8/P1KP1k2/8/3n2P1/n1nnnnnn w - - 1 2"
+        },
+        {
+          "move": "Na3+",
+          "fen": "n6n/8/8/8/P1KP1k2/n7/6P1/n1nnnnnn w - - 1 2"
+        },
+        {
+          "move": "Nbc3",
+          "fen": "n6n/8/8/8/P1KP1k2/2n5/6P1/n1nnnnnn w - - 1 2"
+        },
+        {
+          "move": "Na2",
+          "fen": "n6n/8/8/8/P1KP1k2/8/n5P1/nn1nnnnn w - - 1 2"
+        },
+        {
+          "move": "Nce2",
+          "fen": "n6n/8/8/8/P1KP1k2/8/4n1P1/nn1nnnnn w - - 1 2"
+        },
+        {
+          "move": "Ncb3",
+          "fen": "n6n/8/8/8/P1KP1k2/1n6/6P1/nn1nnnnn w - - 1 2"
+        },
+        {
+          "move": "Ncd3",
+          "fen": "n6n/8/8/8/P1KP1k2/3n4/6P1/nn1nnnnn w - - 1 2"
+        },
+        {
+          "move": "Nb2+",
+          "fen": "n6n/8/8/8/P1KP1k2/8/1n4P1/nnn1nnnn w - - 1 2"
+        },
+        {
+          "move": "Ndf2",
+          "fen": "n6n/8/8/8/P1KP1k2/8/5nP1/nnn1nnnn w - - 1 2"
+        },
+        {
+          "move": "Ndc3",
+          "fen": "n6n/8/8/8/P1KP1k2/2n5/6P1/nnn1nnnn w - - 1 2"
+        },
+        {
+          "move": "Nde3+",
+          "fen": "n6n/8/8/8/P1KP1k2/4n3/6P1/nnn1nnnn w - - 1 2"
+        },
+        {
+          "move": "Nec2",
+          "fen": "n6n/8/8/8/P1KP1k2/8/2n3P1/nnnn1nnn w - - 1 2"
+        },
+        {
+          "move": "Nxg2",
+          "fen": "n6n/8/8/8/P1KP1k2/8/6n1/nnnn1nnn w - - 0 2"
+        },
+        {
+          "move": "Ned3",
+          "fen": "n6n/8/8/8/P1KP1k2/3n4/6P1/nnnn1nnn w - - 1 2"
+        },
+        {
+          "move": "Nef3",
+          "fen": "n6n/8/8/8/P1KP1k2/5n2/6P1/nnnn1nnn w - - 1 2"
+        },
+        {
+          "move": "Nfd2+",
+          "fen": "n6n/8/8/8/P1KP1k2/8/3n2P1/nnnnn1nn w - - 1 2"
+        },
+        {
+          "move": "Nh2",
+          "fen": "n6n/8/8/8/P1KP1k2/8/6Pn/nnnnn1nn w - - 1 2"
+        },
+        {
+          "move": "Nfe3+",
+          "fen": "n6n/8/8/8/P1KP1k2/4n3/6P1/nnnnn1nn w - - 1 2"
+        },
+        {
+          "move": "Nfg3",
+          "fen": "n6n/8/8/8/P1KP1k2/6n1/6P1/nnnnn1nn w - - 1 2"
+        },
+        {
+          "move": "Nge2",
+          "fen": "n6n/8/8/8/P1KP1k2/8/4n1P1/nnnnnn1n w - - 1 2"
+        },
+        {
+          "move": "Ngf3",
+          "fen": "n6n/8/8/8/P1KP1k2/5n2/6P1/nnnnnn1n w - - 1 2"
+        },
+        {
+          "move": "Nh3",
+          "fen": "n6n/8/8/8/P1KP1k2/7n/6P1/nnnnnn1n w - - 1 2"
+        },
+        {
+          "move": "Nhf2",
+          "fen": "n6n/8/8/8/P1KP1k2/8/5nP1/nnnnnnn1 w - - 1 2"
+        },
+        {
+          "move": "Nhg3",
+          "fen": "n6n/8/8/8/P1KP1k2/6n1/6P1/nnnnnnn1 w - - 1 2"
+        },
+        {
+          "move": "Ke3",
+          "fen": "n6n/8/8/8/P1KP4/4k3/6P1/nnnnnnnn w - - 1 2"
+        },
+        {
+          "move": "Kg3",
+          "fen": "n6n/8/8/8/P1KP4/6k1/6P1/nnnnnnnn w - - 1 2"
+        },
+        {
+          "move": "Ke4",
+          "fen": "n6n/8/8/8/P1KPk3/8/6P1/nnnnnnnn w - - 1 2"
+        },
+        {
+          "move": "Kg4",
+          "fen": "n6n/8/8/8/P1KP2k1/8/6P1/nnnnnnnn w - - 1 2"
+        },
+        {
+          "move": "Kf5",
+          "fen": "n6n/8/8/5k2/P1KP4/8/6P1/nnnnnnnn w - - 1 2"
+        },
+        {
+          "move": "Kg5",
+          "fen": "n6n/8/8/6k1/P1KP4/8/6P1/nnnnnnnn w - - 1 2"
+        },
+        {
+          "move": "Nb6+",
+          "fen": "7n/8/1n6/8/P1KP1k2/8/6P1/nnnnnnnn w - - 1 2"
+        },
+        {
+          "move": "Nc7",
+          "fen": "7n/2n5/8/8/P1KP1k2/8/6P1/nnnnnnnn w - - 1 2"
+        },
+        {
+          "move": "Ng6",
+          "fen": "n7/8/6n1/8/P1KP1k2/8/6P1/nnnnnnnn w - - 1 2"
+        },
+        {
+          "move": "Nf7",
+          "fen": "n7/5n2/8/8/P1KP1k2/8/6P1/nnnnnnnn w - - 1 2"
+        }
+      ]
+    },
+    {
+      "start": {
+        "description": "White with maximal knights.",
+        "fen": "NNNNNNNN/8/8/4k3/8/3K4/8/N6N w - - 0 1"
+      },
+      "expected": [
+        {
+          "move": "Nc2",
+          "fen": "NNNNNNNN/8/8/4k3/8/3K4/2N5/7N b - - 1 1"
+        },
+        {
+          "move": "Nb3",
+          "fen": "NNNNNNNN/8/8/4k3/8/1N1K4/8/7N b - - 1 1"
+        },
+        {
+          "move": "Nf2",
+          "fen": "NNNNNNNN/8/8/4k3/8/3K4/5N2/N7 b - - 1 1"
+        },
+        {
+          "move": "Ng3",
+          "fen": "NNNNNNNN/8/8/4k3/8/3K2N1/8/N7 b - - 1 1"
+        },
+        {
+          "move": "Kc2",
+          "fen": "NNNNNNNN/8/8/4k3/8/8/2K5/N6N b - - 1 1"
+        },
+        {
+          "move": "Kd2",
+          "fen": "NNNNNNNN/8/8/4k3/8/8/3K4/N6N b - - 1 1"
+        },
+        {
+          "move": "Ke2",
+          "fen": "NNNNNNNN/8/8/4k3/8/8/4K3/N6N b - - 1 1"
+        },
+        {
+          "move": "Kc3",
+          "fen": "NNNNNNNN/8/8/4k3/8/2K5/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Ke3",
+          "fen": "NNNNNNNN/8/8/4k3/8/4K3/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Kc4",
+          "fen": "NNNNNNNN/8/8/4k3/2K5/8/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nab6",
+          "fen": "1NNNNNNN/8/1N6/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nac7",
+          "fen": "1NNNNNNN/2N5/8/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Na6",
+          "fen": "N1NNNNNN/8/N7/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nbc6+",
+          "fen": "N1NNNNNN/8/2N5/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nbd7+",
+          "fen": "N1NNNNNN/3N4/8/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Ncb6",
+          "fen": "NN1NNNNN/8/1N6/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Ncd6",
+          "fen": "NN1NNNNN/8/3N4/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Na7",
+          "fen": "NN1NNNNN/N7/8/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nce7",
+          "fen": "NN1NNNNN/4N3/8/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Ndc6+",
+          "fen": "NNN1NNNN/8/2N5/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nde6",
+          "fen": "NNN1NNNN/8/4N3/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nb7",
+          "fen": "NNN1NNNN/1N6/8/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Ndf7+",
+          "fen": "NNN1NNNN/5N2/8/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Ned6",
+          "fen": "NNNN1NNN/8/3N4/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nef6",
+          "fen": "NNNN1NNN/8/5N2/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nec7",
+          "fen": "NNNN1NNN/2N5/8/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Ng7",
+          "fen": "NNNN1NNN/6N1/8/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nfe6",
+          "fen": "NNNNN1NN/8/4N3/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nfg6+",
+          "fen": "NNNNN1NN/8/6N1/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nfd7+",
+          "fen": "NNNNN1NN/3N4/8/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nh7",
+          "fen": "NNNNN1NN/7N/8/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Ngf6",
+          "fen": "NNNNNN1N/8/5N2/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nh6",
+          "fen": "NNNNNN1N/8/7N/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nge7",
+          "fen": "NNNNNN1N/4N3/8/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nhg6+",
+          "fen": "NNNNNNN1/8/6N1/4k3/8/3K4/8/N6N b - - 1 1"
+        },
+        {
+          "move": "Nhf7+",
+          "fen": "NNNNNNN1/5N2/8/4k3/8/3K4/8/N6N b - - 1 1"
+        }
+      ]
+    },
+    {
+      "start": {
+        "description": "Another position with the max number of white knights.",
+        "fen": "N6N/8/8/4k3/8/3K4/8/NNNNNNNN w - - 0 1"
+      },
+      "expected": [
+        {
+          "move": "Nac2",
+          "fen": "N6N/8/8/4k3/8/3K4/2N5/1NNNNNNN b - - 1 1"
+        },
+        {
+          "move": "Nab3",
+          "fen": "N6N/8/8/4k3/8/1N1K4/8/1NNNNNNN b - - 1 1"
+        },
+        {
+          "move": "Nbd2",
+          "fen": "N6N/8/8/4k3/8/3K4/3N4/N1NNNNNN b - - 1 1"
+        },
+        {
+          "move": "Na3",
+          "fen": "N6N/8/8/4k3/8/N2K4/8/N1NNNNNN b - - 1 1"
+        },
+        {
+          "move": "Nbc3",
+          "fen": "N6N/8/8/4k3/8/2NK4/8/N1NNNNNN b - - 1 1"
+        },
+        {
+          "move": "Na2",
+          "fen": "N6N/8/8/4k3/8/3K4/N7/NN1NNNNN b - - 1 1"
+        },
+        {
+          "move": "Nce2",
+          "fen": "N6N/8/8/4k3/8/3K4/4N3/NN1NNNNN b - - 1 1"
+        },
+        {
+          "move": "Ncb3",
+          "fen": "N6N/8/8/4k3/8/1N1K4/8/NN1NNNNN b - - 1 1"
+        },
+        {
+          "move": "Nb2",
+          "fen": "N6N/8/8/4k3/8/3K4/1N6/NNN1NNNN b - - 1 1"
+        },
+        {
+          "move": "Ndf2",
+          "fen": "N6N/8/8/4k3/8/3K4/5N2/NNN1NNNN b - - 1 1"
+        },
+        {
+          "move": "Ndc3",
+          "fen": "N6N/8/8/4k3/8/2NK4/8/NNN1NNNN b - - 1 1"
+        },
+        {
+          "move": "Nde3",
+          "fen": "N6N/8/8/4k3/8/3KN3/8/NNN1NNNN b - - 1 1"
+        },
+        {
+          "move": "Nec2",
+          "fen": "N6N/8/8/4k3/8/3K4/2N5/NNNN1NNN b - - 1 1"
+        },
+        {
+          "move": "Ng2",
+          "fen": "N6N/8/8/4k3/8/3K4/6N1/NNNN1NNN b - - 1 1"
+        },
+        {
+          "move": "Nef3+",
+          "fen": "N6N/8/8/4k3/8/3K1N2/8/NNNN1NNN b - - 1 1"
+        },
+        {
+          "move": "Nfd2",
+          "fen": "N6N/8/8/4k3/8/3K4/3N4/NNNNN1NN b - - 1 1"
+        },
+        {
+          "move": "Nh2",
+          "fen": "N6N/8/8/4k3/8/3K4/7N/NNNNN1NN b - - 1 1"
+        },
+        {
+          "move": "Nfe3",
+          "fen": "N6N/8/8/4k3/8/3KN3/8/NNNNN1NN b - - 1 1"
+        },
+        {
+          "move": "Nfg3",
+          "fen": "N6N/8/8/4k3/8/3K2N1/8/NNNNN1NN b - - 1 1"
+        },
+        {
+          "move": "Nge2",
+          "fen": "N6N/8/8/4k3/8/3K4/4N3/NNNNNN1N b - - 1 1"
+        },
+        {
+          "move": "Ngf3+",
+          "fen": "N6N/8/8/4k3/8/3K1N2/8/NNNNNN1N b - - 1 1"
+        },
+        {
+          "move": "Nh3",
+          "fen": "N6N/8/8/4k3/8/3K3N/8/NNNNNN1N b - - 1 1"
+        },
+        {
+          "move": "Nhf2",
+          "fen": "N6N/8/8/4k3/8/3K4/5N2/NNNNNNN1 b - - 1 1"
+        },
+        {
+          "move": "Nhg3",
+          "fen": "N6N/8/8/4k3/8/3K2N1/8/NNNNNNN1 b - - 1 1"
+        },
+        {
+          "move": "Kc2",
+          "fen": "N6N/8/8/4k3/8/8/2K5/NNNNNNNN b - - 1 1"
+        },
+        {
+          "move": "Kd2",
+          "fen": "N6N/8/8/4k3/8/8/3K4/NNNNNNNN b - - 1 1"
+        },
+        {
+          "move": "Ke2",
+          "fen": "N6N/8/8/4k3/8/8/4K3/NNNNNNNN b - - 1 1"
+        },
+        {
+          "move": "Kc3",
+          "fen": "N6N/8/8/4k3/8/2K5/8/NNNNNNNN b - - 1 1"
+        },
+        {
+          "move": "Ke3",
+          "fen": "N6N/8/8/4k3/8/4K3/8/NNNNNNNN b - - 1 1"
+        },
+        {
+          "move": "Kc4",
+          "fen": "N6N/8/8/4k3/2K5/8/8/NNNNNNNN b - - 1 1"
+        },
+        {
+          "move": "Nb6",
+          "fen": "7N/8/1N6/4k3/8/3K4/8/NNNNNNNN b - - 1 1"
+        },
+        {
+          "move": "Nc7",
+          "fen": "7N/2N5/8/4k3/8/3K4/8/NNNNNNNN b - - 1 1"
+        },
+        {
+          "move": "Ng6+",
+          "fen": "N7/8/6N1/4k3/8/3K4/8/NNNNNNNN b - - 1 1"
+        },
+        {
+          "move": "Nf7+",
+          "fen": "N7/5N2/8/4k3/8/3K4/8/NNNNNNNN b - - 1 1"
+        }
+      ]
     }
   ]
 }
