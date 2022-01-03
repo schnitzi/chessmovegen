@@ -172,7 +172,7 @@ class BoardState(private val board: Array<Piece?>) {
     }
 
     private fun isAttackedByPawn(pos: Int, attackingColor: Int): Boolean {
-        val pawnIndex = pos - whoseTurnData().pawnMoveDirection
+        val pawnIndex = pos - sideData[attackingColor].pawnMoveDirection
         return isPieceOfType(PieceType.PAWN, pawnIndex-1, attackingColor) ||
                 isPieceOfType(PieceType.PAWN, pawnIndex+1, attackingColor)
     }
@@ -309,6 +309,8 @@ class BoardState(private val board: Array<Piece?>) {
             if (whoCanCastle == "-" || !whoCanCastle.contains("q")) {
                 boardState.sideData[BLACK].canQueenSideCastle = false
             }
+
+            boardState.sideData[boardState.whoseTurn].isInCheck = boardState.isKingInCheck(boardState.whoseTurn)
 
             val enPassantCaptureSquare = tokenizer.nextToken()
             if (enPassantCaptureSquare != "-") {

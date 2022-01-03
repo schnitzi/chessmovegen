@@ -2,6 +2,7 @@
   "testCases": [
     {
       "start": {
+        "description": "White can castle normally in either direction.",
         "fen": "8/4k3/8/8/8/8/r6r/R3K2R w KQ - 0 1"
       },
       "expected": [
@@ -448,6 +449,126 @@
         {
           "move": "Kf2",
           "fen": "8/8/8/8/3k4/8/rp3K2/R7 b - - 1 1"
+        }
+      ]
+    },
+    {
+      "start": {
+        "description": "White can't castle either direction because they are in check from a rook.",
+        "fen": "8/8/8/4r3/3k4/8/8/R3K2R w Q - 0 1"
+      },
+      "expected": [
+        {
+          "move": "Kd1",
+          "fen": "8/8/8/4r3/3k4/8/8/R2K3R b - - 1 1"
+        },
+        {
+          "move": "Kf1",
+          "fen": "8/8/8/4r3/3k4/8/8/R4K1R b - - 1 1"
+        },
+        {
+          "move": "Kd2",
+          "fen": "8/8/8/4r3/3k4/8/3K4/R6R b - - 1 1"
+        },
+        {
+          "move": "Kf2",
+          "fen": "8/8/8/4r3/3k4/8/5K2/R6R b - - 1 1"
+        }
+      ]
+    },
+    {
+      "start": {
+        "description": "White can't castle because it would be through squares attacked by a pawn.",
+        "fen": "8/8/4k3/8/8/8/4p3/R3K2R w KQ - 0 1"
+      },
+      "expected": [
+        {
+          "move": "Rb1",
+          "fen": "8/8/4k3/8/8/8/4p3/1R2K2R b K - 1 1"
+        },
+        {
+          "move": "Rc1",
+          "fen": "8/8/4k3/8/8/8/4p3/2R1K2R b K - 1 1"
+        },
+        {
+          "move": "Rd1",
+          "fen": "8/8/4k3/8/8/8/4p3/3RK2R b K - 1 1"
+        },
+        {
+          "move": "Ra2",
+          "fen": "8/8/4k3/8/8/8/R3p3/4K2R b K - 1 1"
+        },
+        {
+          "move": "Ra3",
+          "fen": "8/8/4k3/8/8/R7/4p3/4K2R b K - 1 1"
+        },
+        {
+          "move": "Ra4",
+          "fen": "8/8/4k3/8/R7/8/4p3/4K2R b K - 1 1"
+        },
+        {
+          "move": "Ra5",
+          "fen": "8/8/4k3/R7/8/8/4p3/4K2R b K - 1 1"
+        },
+        {
+          "move": "Ra6+",
+          "fen": "8/8/R3k3/8/8/8/4p3/4K2R b K - 1 1"
+        },
+        {
+          "move": "Ra7",
+          "fen": "8/R7/4k3/8/8/8/4p3/4K2R b K - 1 1"
+        },
+        {
+          "move": "Ra8",
+          "fen": "R7/8/4k3/8/8/8/4p3/4K2R b K - 1 1"
+        },
+        {
+          "move": "Kd2",
+          "fen": "8/8/4k3/8/8/8/3Kp3/R6R b - - 1 1"
+        },
+        {
+          "move": "Ke2",
+          "fen": "8/8/4k3/8/8/8/4K3/R6R b - - 0 1"
+        },
+        {
+          "move": "Kf2",
+          "fen": "8/8/4k3/8/8/8/4pK2/R6R b - - 1 1"
+        },
+        {
+          "move": "Rg1",
+          "fen": "8/8/4k3/8/8/8/4p3/R3K1R1 b Q - 1 1"
+        },
+        {
+          "move": "Rf1",
+          "fen": "8/8/4k3/8/8/8/4p3/R3KR2 b Q - 1 1"
+        },
+        {
+          "move": "Rh2",
+          "fen": "8/8/4k3/8/8/8/4p2R/R3K3 b Q - 1 1"
+        },
+        {
+          "move": "Rh3",
+          "fen": "8/8/4k3/8/8/7R/4p3/R3K3 b Q - 1 1"
+        },
+        {
+          "move": "Rh4",
+          "fen": "8/8/4k3/8/7R/8/4p3/R3K3 b Q - 1 1"
+        },
+        {
+          "move": "Rh5",
+          "fen": "8/8/4k3/7R/8/8/4p3/R3K3 b Q - 1 1"
+        },
+        {
+          "move": "Rh6+",
+          "fen": "8/8/4k2R/8/8/8/4p3/R3K3 b Q - 1 1"
+        },
+        {
+          "move": "Rh7",
+          "fen": "8/7R/4k3/8/8/8/4p3/R3K3 b Q - 1 1"
+        },
+        {
+          "move": "Rh8",
+          "fen": "7R/8/4k3/8/8/8/4p3/R3K3 b Q - 1 1"
         }
       ]
     }
