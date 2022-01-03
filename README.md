@@ -91,13 +91,7 @@ Your move generator may or may not generate the actual move names
 (such as "Qe4").  If it does, you can test your move name generation
 using these same test data files -- all of them include the move
 names (in algebraic format) that your move generator should
-generate.
-
-The JSON files represent the resulting moves as a map, where each key
-is an algebraic move name and each value is the FEN that results from
-applying that move.  So to check that you are generating move names
-correctly, you will want to look at the actual keys, not just the values.
-This is what happens in the TestMoveGenerator tests (in
+generate.  This is what happens in the TestMoveGenerator tests (in
 [Java](src/test/java/org/computronium/chess/TestMoveGeneratorJava.java)
 and [Kotlin](src/test/kotlin/org/computronium/chess/TestMoveGeneratorKotlin.kt)).
 
