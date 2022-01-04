@@ -1,5 +1,6 @@
 package org.computronium.chess;
 
+import org.computronium.chess.movegen.BoardState;
 import org.computronium.chess.movegen.SearchNode;
 import org.computronium.chess.movegen.moves.Move;
 import org.computronium.chess.testcaseeditor.TestCase;
@@ -46,9 +47,17 @@ public final class TestMoveGeneratorJava {
             SearchNode startPos = SearchNode.Companion.fromFEN(testCase.getStart().getFen());
             final Map<String, String> actualMoves = new HashMap<>();
             for (Move move : startPos.getMoves()) {
-                move.apply(startPos.getBoardState());
-                actualMoves.put(move.toString(), startPos.getBoardState().toFEN());
-                move.rollback(startPos.getBoardState());
+
+                // Do the move and save the resulting FEN.
+                BoardState boardState = startPos.getBoardState();
+                move.apply(boardState);
+                actualMoves.put(move.toString(), boardState.toFEN());
+
+                // Rollback the move we just applied.
+                move.rollback(boardState);
+
+                // Confirm that the rollback works by checking we still match the original FEN.
+                Assert.assertEquals("Rollback failed", testCase.getStart().getFen(), boardState.toFEN());
             }
 
             if (!expectedMoves.equals(actualMoves)) {
