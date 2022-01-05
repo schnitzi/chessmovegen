@@ -3,7 +3,7 @@ package org.computronium.chess.testcaseeditor
 import com.google.gson.annotations.Expose
 import org.computronium.chess.movegen.BoardState
 
-class TestCase(val description: String?,
+class TestCase(@Expose val description: String?,
                @Expose val start: TestCasePosition,
                @Expose val expected: List<TestCasePosition>) {
 
@@ -13,9 +13,9 @@ class TestCase(val description: String?,
         @Expose
         var description: String? = description
             set(value) {
-            modified = true
-            field = value
-        }
+                modified = true
+                field = value
+            }
 
         @Transient
         private var state: BoardState? = null

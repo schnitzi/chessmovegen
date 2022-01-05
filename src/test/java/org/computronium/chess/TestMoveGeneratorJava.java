@@ -33,11 +33,13 @@ public final class TestMoveGeneratorJava {
     private void doTest(File testFile) {
         TestCaseGroup testCaseGroup = TestCaseGroup.Companion.fromFile(testFile);
 
+        System.out.println("Testing " + testFile + " (" + (testCaseGroup.getDescription() == null ? "no description" : testCaseGroup.getDescription()) + ")");
+
         for (TestCase testCase : testCaseGroup.getTestCases()) {
 
-            System.out.println("Testing " + testFile + " (" +
-                    (testCase.getDescription() == null ? "no description" : testCase.getDescription())
-                    + ") - '" + testCase.getStart() + "'");
+            System.out.println("  Testing '" + testCase.getStart() + "' (" +
+                    (testCase.getStart().getDescription() == null ? "no description" : testCase.getStart().getDescription())
+                    + ")");
 
             final Map<String, String> expectedMoves = new HashMap<>();
             for (TestCasePosition position : testCase.getExpected()) {

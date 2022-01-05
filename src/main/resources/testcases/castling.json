@@ -1,4 +1,5 @@
 {
+  "description": "Test cases involving castling",
   "testCases": [
     {
       "start": {
@@ -777,6 +778,58 @@
         {
           "move": "Rh8",
           "fen": "7R/8/4k3/8/8/8/2p3p1/R3K3 b Q - 1 1"
+        }
+      ]
+    },
+    {
+      "start": {
+        "description": "An attack on b1 shouldn't prevent queenside castle.",
+        "fen": "8/8/4k3/8/8/pr6/8/R3K3 w Q - 0 1"
+      },
+      "expected": [
+        {
+          "move": "Rb1",
+          "fen": "8/8/4k3/8/8/pr6/8/1R2K3 b - - 1 1"
+        },
+        {
+          "move": "Rc1",
+          "fen": "8/8/4k3/8/8/pr6/8/2R1K3 b - - 1 1"
+        },
+        {
+          "move": "Rd1",
+          "fen": "8/8/4k3/8/8/pr6/8/3RK3 b - - 1 1"
+        },
+        {
+          "move": "Ra2",
+          "fen": "8/8/4k3/8/8/pr6/R7/4K3 b - - 1 1"
+        },
+        {
+          "move": "Ra3",
+          "fen": "8/8/4k3/8/8/Rr6/8/4K3 b - - 0 1"
+        },
+        {
+          "move": "Kd1",
+          "fen": "8/8/4k3/8/8/pr6/8/R2K4 b - - 1 1"
+        },
+        {
+          "move": "Kf1",
+          "fen": "8/8/4k3/8/8/pr6/8/R4K2 b - - 1 1"
+        },
+        {
+          "move": "Kd2",
+          "fen": "8/8/4k3/8/8/pr6/3K4/R7 b - - 1 1"
+        },
+        {
+          "move": "Ke2",
+          "fen": "8/8/4k3/8/8/pr6/4K3/R7 b - - 1 1"
+        },
+        {
+          "move": "Kf2",
+          "fen": "8/8/4k3/8/8/pr6/5K2/R7 b - - 1 1"
+        },
+        {
+          "move": "O-O-O",
+          "fen": "8/8/4k3/8/8/pr6/8/2KR4 b - - 1 1"
         }
       ]
     }

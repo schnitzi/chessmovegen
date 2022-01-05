@@ -1,8 +1,15 @@
-**Note:** A perft test is still indicating that there is a subtle bug in the move generator used to generate the test
-data files.  I don't believe the bug affects any of the test cases, but I will still get this
-fixed shortly (and include a test case for it of course).
+# Dive right in!
 
-# What This Project Is:
+You're probably here looking for the nasty data files to test your chess move generator with --
+they can be found [here](src/main/resources/testcases).
+
+There are example unit tests which test the included move generator using these files
+are included for [Java](src/test/java/org/computronium/chess/TestMoveGeneratorJava.java)
+and [Kotlin](src/test/kotlin/org/computronium/chess/TestMoveGeneratorKotlin.kt).
+
+# Go deeper
+
+This project contains:
 
 1.  An extensive test data set for stress testing your chess move generator.
 
@@ -10,12 +17,12 @@ fixed shortly (and include a test case for it of course).
 
 3.  A graphical tool for creating and editing these test data files.
 
-# What This Project Is NOT:
+This project does NOT contain:
 
-1.  A chess engine that you can play against.
+1.  A chess program that you can play against.
 
 
-# Introduction
+## Overview
 
 An important component of any chess engine is the move generator,
 the algorithm that is capable of generating all the legal chess
@@ -32,16 +39,16 @@ to make my own full data set, and the easiest way to do that was to
 write a tool.
 
 
-# The test data sets
+## The test data sets
 
 You can use the data set contained in this project to test your own
 move generator, without ever bothering to compile and run the
-test data editing tool.  The test data files contain a number of
-scenarios, including extreme ones, that your move generator should
-be able to handle.
+test data editing tool or the included tests.  The test data files
+contain a number of scenarios, including extreme ones, that your move
+generator should be able to handle.
 
 The test data files are located in [src/main/resources/testcases](src/main/resources/testcases).
-The files are split by category -- castling, end game, en passant,
+The files are split by category -- castling, pawn moves, high piece numbers,
 etc., each containing multiple test cases.  Each test case consists
 of a starting board position, and the set of resulting board positions
 that your move generator should generate.  Board positions are
@@ -62,7 +69,7 @@ engine, the tests will of course pass!  But the tests demonstrate
 how you can set up similar tests for your chess engine, to test
 the following:
 
-## Finding all moves
+### Finding all moves
 
 Your tests can run through the included data files, and for each
 test case, compare the expected set of moves (contained in the data
@@ -73,7 +80,7 @@ discrepancy, you probably have a bug in your move generator.  (Or,
 maybe there's a bug in the test data -- please let me know, so I can
 fix it!)
 
-## Move rollback
+### Move rollback
 
 In addition to testing that your move generator produces the
 correct set of moves going forward from a position, your chess
@@ -85,7 +92,7 @@ by performing the undo for each test case and seeing if you end up with
 a FEN that matches the starting position.  You will find that the
 included sample tests also perform this rollback test.
 
-## Algebraic move names
+### Algebraic move names
 
 Your move generator may or may not generate the actual move names
 (such as "Qe4").  If it does, you can test your move name generation
@@ -95,7 +102,7 @@ generate.  This is what happens in the TestMoveGenerator tests (in
 [Java](src/test/java/org/computronium/chess/TestMoveGeneratorJava.java)
 and [Kotlin](src/test/kotlin/org/computronium/chess/TestMoveGeneratorKotlin.kt)).
 
-# The graphical tool
+## The graphical tool
 
 The included test files are usable on their own for testing your move
 generator.  These were generated using a small graphical editor, the
