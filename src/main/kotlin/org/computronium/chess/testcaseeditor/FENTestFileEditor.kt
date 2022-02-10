@@ -30,16 +30,19 @@ import kotlin.system.exitProcess
  * files contain a set of starting positions (as FENs), and for each, the set of resulting FENs
  * that a correct move generator should generate.
  *
- * TODO show filename in title, with "*" if modified
- * TODO allow board construction
- * TODO are checks, mates, and stalemates out of scope?
- * TODO save multiple move formats?
- * TODO cancel on save at close doesn't abort close
+ * Pre-release:
+ * TODO decide: are checks, mates, and stalemates out of scope?
+ * TODO decide: save multiple move formats?
+ * TODO add move as test case
  * TODO confirm en passant move names
  * TODO verify move generator against perft
+ * TODO reorder test cases
+ * Post-release:
+ * TODO show filename in title, with "*" if modified
+ * TODO cancel on save at close doesn't abort close
  * TODO show count of possible moves
  * TODO ctrl-s to save
- * TODO reorder test cases
+ * TODO allow board construction
  */
 internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = TestCaseGroup(null)) : JFrame() {
 
@@ -174,27 +177,15 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         addTestCase.addActionListener {
             var newFEN = JOptionPane.showInputDialog("FEN of starting position:")
             if (newFEN != null) {
-                newFEN = newFEN.trim()
-                if (testCaseGroup.contains(newFEN)) {
-                    val regenerate = JOptionPane.showConfirmDialog(this, "FEN already in group.  Regenerate it?")
-                    if (regenerate != JOptionPane.YES_OPTION) {
-                        return@addActionListener
-                    }
-                }
-                val newRoot = SearchNode.fromFEN(newFEN)
-                val newTestCase = TestCase(null,
-                        TestCase.TestCasePosition(null, null, newFEN),
-                        newRoot.moves.map {
-                            val move = it.toString()
-                            it.apply(newRoot.boardState)
-                            val fen = newRoot.boardState.toFEN()
-                            it.rollback(newRoot.boardState)
-                            TestCase.TestCasePosition(null, move, fen)
-                        })
+                addFen(newFEN)
+            }
+        }
 
-                testCaseGroup.add(newTestCase)
-                testCaseGroupChanged()
-                leftPanel.selectFEN(testCaseGroup.getSize() - 1)
+        val addMoveAsTestCase = JMenuItem("Add move result as test case")
+        addMoveAsTestCase.addActionListener {
+            val newFEN = rightPanel.selectedFEN()?.fen
+            if (newFEN != null) {
+                addFen(newFEN)
             }
         }
 
@@ -211,8 +202,34 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
 
         val actionMenu = JMenu("Action")
         actionMenu.add(addTestCase)
+        actionMenu.add(addMoveAsTestCase)
         actionMenu.add(removeTestCase)
         return actionMenu
+    }
+
+    private fun addFen(newFEN: String) {
+        var newFEN1 = newFEN
+        newFEN1 = newFEN1.trim()
+        if (testCaseGroup.contains(newFEN1)) {
+            val regenerate = JOptionPane.showConfirmDialog(this, "FEN already in group.  Regenerate it?")
+            if (regenerate != JOptionPane.YES_OPTION) {
+                return
+            }
+        }
+        val newRoot = SearchNode.fromFEN(newFEN1)
+        val newTestCase = TestCase(null,
+            TestCase.TestCasePosition(null, null, newFEN1),
+            newRoot.moves.map {
+                val move = it.toString()
+                it.apply(newRoot.boardState)
+                val fen = newRoot.boardState.toFEN()
+                it.rollback(newRoot.boardState)
+                TestCase.TestCasePosition(null, move, fen)
+            })
+
+        testCaseGroup.add(newTestCase)
+        testCaseGroupChanged()
+        leftPanel.selectFEN(testCaseGroup.getSize() - 1)
     }
 
     private fun doSave() : Boolean {

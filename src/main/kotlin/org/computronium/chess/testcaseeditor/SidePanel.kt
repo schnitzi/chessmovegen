@@ -70,7 +70,7 @@ internal class SidePanel(title : String, private var fens : Array<TestCase.TestC
         nextPanel.add(nextButton)
 
         fenComboBox.addActionListener {
-            val position = if (fenComboBox.selectedIndex == -1) null else fens[fenComboBox.selectedIndex]
+            val position = selectedFEN()
             chessboardPanel.setPosition(position, otherSidePanel?.fenComboBox?.selectedItem as TestCase.TestCasePosition?)
             metadataPanel.setPosition(position)
             moveLabel.text = if (fenComboBox.selectedItem == null) "" else (fenComboBox.selectedItem as TestCase.TestCasePosition).moveLabel()
@@ -103,6 +103,8 @@ internal class SidePanel(title : String, private var fens : Array<TestCase.TestC
 
         border = BevelBorder(BevelBorder.LOWERED, Color.GRAY.brighter(), Color.GRAY, Color.GRAY.darker(), Color.GRAY)
     }
+
+    internal fun selectedFEN() = if (fenComboBox.selectedIndex == -1) null else fens[fenComboBox.selectedIndex]
 
     fun setFenList(fens: List<TestCase.TestCasePosition>) {
         this.fens = fens.toTypedArray()

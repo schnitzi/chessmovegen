@@ -832,6 +832,42 @@
           "fen": "8/8/4k3/8/8/pr6/8/2KR4 b - - 1 1"
         }
       ]
+    },
+    {
+      "start": {
+        "description": "Black can't castle either direction because of attack from pawn.",
+        "fen": "r3k2r/R3P2R/8/8/8/8/8/4K3 b kq - 0 1"
+      },
+      "expected": [
+        {
+          "move": "Ra7",
+          "fen": "4k2r/r3P2R/8/8/8/8/8/4K3 w k - 0 2"
+        },
+        {
+          "move": "Rb8",
+          "fen": "1r2k2r/R3P2R/8/8/8/8/8/4K3 w k - 1 2"
+        },
+        {
+          "move": "Rc8",
+          "fen": "2r1k2r/R3P2R/8/8/8/8/8/4K3 w k - 1 2"
+        },
+        {
+          "move": "Rd8",
+          "fen": "3rk2r/R3P2R/8/8/8/8/8/4K3 w k - 1 2"
+        },
+        {
+          "move": "Rh7",
+          "fen": "r3k3/R3P2r/8/8/8/8/8/4K3 w q - 0 2"
+        },
+        {
+          "move": "Rg8",
+          "fen": "r3k1r1/R3P2R/8/8/8/8/8/4K3 w q - 1 2"
+        },
+        {
+          "move": "Rf8",
+          "fen": "r3kr2/R3P2R/8/8/8/8/8/4K3 w q - 1 2"
+        }
+      ]
     }
   ]
 }

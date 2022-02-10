@@ -20,7 +20,8 @@ internal class PerftTest {
         fun perfData(): Array<Array<Any>> = `$$`(
 
 //                `$`("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 6, 119_060_324, 2_812_008),
-                `$`("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1", 3, 97862, 17102),
+//                `$`("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1", 3, 97862, 17102),
+                `$`("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1", 4, 4_085_603, 757_163),
 //                `$`("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1", 5, 193_690_690, 35_043_416),
         )
     }
@@ -29,6 +30,8 @@ internal class PerftTest {
     @Test
     @UseDataProvider(value = "perfData")
     fun findMoves(startFEN: String, maxDepth: Int, expectedNodes: Int, expectedCaptures: Int) {
+
+        println("Testing $startFEN");
         val startBoard = SearchNode.fromFEN(startFEN)
         val perfData : Array<PerfData> = Array(maxDepth) { PerfData(0, 0, 0, 0, 0) }
 

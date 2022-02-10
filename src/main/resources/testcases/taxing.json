@@ -1960,6 +1960,41 @@
           "fen": "N7/5N2/8/4k3/8/3K4/8/NNNNNNNN b - - 1 1"
         }
       ]
+    },
+    {
+      "start": {
+        "fen": "8/6kR/8/8/8/bq6/1rqqqqqq/K1nqnbrq b - - 0 1"
+      },
+      "expected": [
+        {
+          "move": "Qcxh7",
+          "fen": "8/6kq/8/8/8/bq6/1r1qqqqq/K1nqnbrq w - - 0 2"
+        },
+        {
+          "move": "Qhxh7",
+          "fen": "8/6kq/8/8/8/bq6/1rqqqqq1/K1nqnbrq w - - 0 2"
+        },
+        {
+          "move": "Kf6",
+          "fen": "8/7R/5k2/8/8/bq6/1rqqqqqq/K1nqnbrq w - - 1 2"
+        },
+        {
+          "move": "Kg6",
+          "fen": "8/7R/6k1/8/8/bq6/1rqqqqqq/K1nqnbrq w - - 1 2"
+        },
+        {
+          "move": "Kh7",
+          "fen": "8/7k/8/8/8/bq6/1rqqqqqq/K1nqnbrq w - - 0 2"
+        },
+        {
+          "move": "Kf8",
+          "fen": "5k2/7R/8/8/8/bq6/1rqqqqqq/K1nqnbrq w - - 1 2"
+        },
+        {
+          "move": "Kg8",
+          "fen": "6k1/7R/8/8/8/bq6/1rqqqqqq/K1nqnbrq w - - 1 2"
+        }
+      ]
     }
   ]
 }
