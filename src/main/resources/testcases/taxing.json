@@ -1963,6 +1963,7 @@
     },
     {
       "start": {
+        "description": "",
         "fen": "8/6kR/8/8/8/bq6/1rqqqqqq/K1nqnbrq b - - 0 1"
       },
       "expected": [
