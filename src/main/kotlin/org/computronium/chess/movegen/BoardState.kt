@@ -238,6 +238,10 @@ class BoardState(private val board: Array<Piece?>) {
         return result
     }
 
+    fun transpose(): BoardState {
+        return this // TODO
+    }
+
     companion object {
 
         const val WHITE = 0

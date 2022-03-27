@@ -1,6 +1,7 @@
 package org.computronium.chess.testcaseeditor
 
 import com.google.gson.GsonBuilder
+import org.computronium.chess.movegen.BoardState
 import org.computronium.chess.movegen.SearchNode
 import java.awt.BorderLayout
 import java.awt.Dimension
@@ -175,7 +176,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
 
         val addTestCase = JMenuItem("Add test case")
         addTestCase.addActionListener {
-            var newFEN = JOptionPane.showInputDialog("FEN of starting position:")
+            val newFEN = JOptionPane.showInputDialog("FEN of starting position:")
             if (newFEN != null) {
                 addFen(newFEN)
             }
@@ -200,10 +201,17 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
             }
         }
 
+        val addTranspositions = JMenuItem("Add missing white/black transpositions")
+        addTranspositions.addActionListener {
+            val transpositionsAdded = addTranspositions()
+            JOptionPane.showMessageDialog(this, "Added $transpositionsAdded new test cases.")
+        }
+
         val actionMenu = JMenu("Action")
         actionMenu.add(addTestCase)
         actionMenu.add(addMoveAsTestCase)
         actionMenu.add(removeTestCase)
+        actionMenu.add(addTranspositions)
         return actionMenu
     }
 
@@ -230,6 +238,35 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         testCaseGroup.add(newTestCase)
         testCaseGroupChanged()
         leftPanel.selectFEN(testCaseGroup.getSize() - 1)
+    }
+
+    private fun addTranspositions() {
+        val newTestCaseGroup = TestCaseGroup(testCaseGroup.description)
+        for (testCase in testCaseGroup.testCases) {
+
+            val transposedBoardState = BoardState.fromFEN(testCase.start.fen).transpose()
+
+            val newFEN = transposedBoardState.toFEN()
+            if (!testCaseGroup.contains(newFEN)) {
+                val newRoot = SearchNode.fromFEN(newFEN)
+                val newTestCase = TestCase("Transpose of ${testCase.start.fen}",
+                    TestCase.TestCasePosition(null, null, newFEN),
+                    newRoot.moves.map {
+                        val move = it.toString()
+                        it.apply(newRoot.boardState)
+                        val fen = newRoot.boardState.toFEN()
+                        it.rollback(newRoot.boardState)
+                        TestCase.TestCasePosition(null, move, fen)
+                    })
+                newTestCaseGroup.add(newTestCase)
+            }
+        }
+
+        testCaseGroup = newTestCaseGroup
+        testCaseGroupChanged()
+        if (testCaseGroup.getSize() > 0) {
+            leftPanel.selectFEN(0)
+        }
     }
 
     private fun doSave() : Boolean {
