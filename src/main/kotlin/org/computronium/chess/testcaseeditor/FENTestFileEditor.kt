@@ -93,7 +93,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         add(BorderLayout.NORTH, descriptionPanel)
         add(BorderLayout.CENTER, mainPanel)
 
-        size = Dimension(950, 600)
+        size = Dimension(950, 650)
 
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
@@ -178,7 +178,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         addTestCase.addActionListener {
             val newFEN = JOptionPane.showInputDialog("FEN of starting position:")
             if (newFEN != null) {
-                addFen(newFEN)
+                addFen(newFEN.trim())
             }
         }
 
@@ -186,7 +186,7 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
         addMoveAsTestCase.addActionListener {
             val newFEN = rightPanel.selectedFEN()?.fen
             if (newFEN != null) {
-                addFen(newFEN)
+                addFen(newFEN.trim())
             }
         }
 
@@ -216,17 +216,22 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
     }
 
     private fun addFen(newFEN: String) {
-        var newFEN1 = newFEN
-        newFEN1 = newFEN1.trim()
-        if (testCaseGroup.contains(newFEN1)) {
+        if (testCaseGroup.contains(newFEN)) {
             val regenerate = JOptionPane.showConfirmDialog(this, "FEN already in group.  Regenerate it?")
             if (regenerate != JOptionPane.YES_OPTION) {
                 return
             }
         }
-        val newRoot = SearchNode.fromFEN(newFEN1)
-        val newTestCase = TestCase(null,
-            TestCase.TestCasePosition(null, null, newFEN1),
+        val newTestCase = createTestCase(newFEN, null)
+        testCaseGroup.add(newTestCase)
+        testCaseGroupChanged()
+        leftPanel.selectFEN(testCaseGroup.getSize() - 1)
+    }
+
+    private fun createTestCase(newFEN: String, description: String?): TestCase {
+        val newRoot = SearchNode.fromFEN(newFEN)
+        val newTestCase = TestCase(description,
+            TestCase.TestCasePosition(null, null, newFEN),
             newRoot.moves.map {
                 val move = it.toString()
                 it.apply(newRoot.boardState)
@@ -234,39 +239,32 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
                 it.rollback(newRoot.boardState)
                 TestCase.TestCasePosition(null, move, fen)
             })
-
-        testCaseGroup.add(newTestCase)
-        testCaseGroupChanged()
-        leftPanel.selectFEN(testCaseGroup.getSize() - 1)
+        return newTestCase
     }
 
-    private fun addTranspositions() {
-        val newTestCaseGroup = TestCaseGroup(testCaseGroup.description)
+    private fun addTranspositions(): Int {
+        val newTestCases = mutableListOf<TestCase>()
+        var count = 0
         for (testCase in testCaseGroup.testCases) {
 
-            val transposedBoardState = BoardState.fromFEN(testCase.start.fen).transpose()
+            newTestCases.add(testCase)
 
+            val transposedBoardState = BoardState.fromFEN(testCase.start.fen).transpose()
             val newFEN = transposedBoardState.toFEN()
             if (!testCaseGroup.contains(newFEN)) {
-                val newRoot = SearchNode.fromFEN(newFEN)
-                val newTestCase = TestCase("Transpose of ${testCase.start.fen}",
-                    TestCase.TestCasePosition(null, null, newFEN),
-                    newRoot.moves.map {
-                        val move = it.toString()
-                        it.apply(newRoot.boardState)
-                        val fen = newRoot.boardState.toFEN()
-                        it.rollback(newRoot.boardState)
-                        TestCase.TestCasePosition(null, move, fen)
-                    })
-                newTestCaseGroup.add(newTestCase)
+                val newTestCase = createTestCase(newFEN, "Transpose of ${testCase.start.fen}")
+                newTestCases.add(newTestCase)
+                count += 1
             }
         }
 
-        testCaseGroup = newTestCaseGroup
+        testCaseGroup.testCases = newTestCases
         testCaseGroupChanged()
         if (testCaseGroup.getSize() > 0) {
             leftPanel.selectFEN(0)
         }
+
+        return count
     }
 
     private fun doSave() : Boolean {

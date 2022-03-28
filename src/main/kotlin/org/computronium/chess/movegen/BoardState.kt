@@ -239,7 +239,37 @@ class BoardState(private val board: Array<Piece?>) {
     }
 
     fun transpose(): BoardState {
-        return this // TODO
+        val transposedBoard = Array<Piece?>(ON_BOARD.size) { null }
+
+        var transposedEnPassantCapturePos : Int? = null
+
+        for (rank in 7 downTo 0) {
+            for (file in 0..7) {
+                val pos = indexOf(file, rank)
+                val piece = board[pos]
+                if (piece != null) {
+                    transposedBoard[indexOf(file, 7-rank)] = Piece.forTypeAndColor(piece.type, 1-piece.color)
+                }
+                if (pos == enPassantCapturePos) {
+                    transposedEnPassantCapturePos = indexOf(file, 7-rank)
+                }
+            }
+        }
+
+        val transposedBoardState = BoardState(transposedBoard)
+        transposedBoardState.whoseTurn = 1-whoseTurn
+        transposedBoardState.moveNumber = moveNumber
+        transposedBoardState.enPassantCapturePos = transposedEnPassantCapturePos
+        transposedBoardState.halfMovesSinceCaptureOrPawnAdvance = halfMovesSinceCaptureOrPawnAdvance
+        transposedBoardState.sideData[WHITE].canQueenSideCastle = sideData[BLACK].canQueenSideCastle
+        transposedBoardState.sideData[WHITE].canKingSideCastle = sideData[BLACK].canKingSideCastle
+        transposedBoardState.sideData[BLACK].canQueenSideCastle = sideData[WHITE].canQueenSideCastle
+        transposedBoardState.sideData[BLACK].canKingSideCastle = sideData[WHITE].canKingSideCastle
+        transposedBoardState.sideData[BLACK].kingPos = sideData[WHITE].kingPos
+        transposedBoardState.sideData[WHITE].kingPos = sideData[BLACK].kingPos
+        transposedBoardState.sideData[WHITE].isInCheck = sideData[BLACK].isInCheck
+        transposedBoardState.sideData[BLACK].isInCheck = sideData[WHITE].isInCheck
+        return transposedBoardState
     }
 
     companion object {
