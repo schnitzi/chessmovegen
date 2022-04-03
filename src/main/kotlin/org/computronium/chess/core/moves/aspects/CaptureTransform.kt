@@ -1,8 +1,8 @@
-package org.computronium.chess.movegen.moves.aspects
+package org.computronium.chess.core.moves.aspects
 
-import org.computronium.chess.movegen.BoardState
-import org.computronium.chess.movegen.Piece
-import org.computronium.chess.movegen.PieceType
+import org.computronium.chess.core.BoardState
+import org.computronium.chess.core.Piece
+import org.computronium.chess.core.PieceType
 import kotlin.system.exitProcess
 
 open class CaptureTransform(private val captureIndex : Int) : Transform {

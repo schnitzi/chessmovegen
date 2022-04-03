@@ -1,7 +1,7 @@
-package org.computronium.chess.movegen.moves
+package org.computronium.chess.core.moves
 
-import org.computronium.chess.movegen.BoardState
-import org.computronium.chess.movegen.moves.aspects.Transform
+import org.computronium.chess.core.BoardState
+import org.computronium.chess.core.moves.aspects.Transform
 
 class Move(val moveNames: List<String>, private val transforms: List<Transform>, val metadata: MoveGenerator.MoveMetadata) {
 

@@ -1,6 +1,6 @@
 package org.computronium.chess.testcaseeditor
 
-import org.computronium.chess.movegen.BoardState
+import org.computronium.chess.core.BoardState
 import java.awt.Font
 import javax.swing.JEditorPane
 import javax.swing.JPanel

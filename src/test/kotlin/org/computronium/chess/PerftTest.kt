@@ -5,7 +5,8 @@ import com.tngtech.java.junit.dataprovider.DataProviderRunner
 import com.tngtech.java.junit.dataprovider.DataProviders.`$$`
 import com.tngtech.java.junit.dataprovider.DataProviders.`$`
 import com.tngtech.java.junit.dataprovider.UseDataProvider
-import org.computronium.chess.movegen.SearchNode
+import org.computronium.chess.core.GameRunner
+import org.computronium.chess.core.SearchNode
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
@@ -31,11 +32,12 @@ internal class PerftTest {
     @UseDataProvider(value = "perfData")
     fun findMoves(startFEN: String, maxDepth: Int, expectedNodes: Int, expectedCaptures: Int) {
 
-        println("Testing $startFEN");
-        val startBoard = SearchNode.fromFEN(startFEN)
+        println("Testing $startFEN")
+        val runner = GameRunner.fromFEN(startFEN)
+        val startBoard = runner.generateSearchNode()
         val perfData : Array<PerfData> = Array(maxDepth) { PerfData(0, 0, 0, 0, 0) }
 
-        calculate(startBoard, maxDepth, 0, perfData)
+        calculate(runner, startBoard, maxDepth, 0, perfData)
 
         for ((index, perfDatum) in perfData.withIndex()) {
             println("${index + 1} -- $perfDatum")
@@ -48,7 +50,13 @@ internal class PerftTest {
     }
 
 
-    private fun calculate(node: SearchNode, maxDepth: Int, currentDepth: Int, perfData: Array<PerfData>) {
+    private fun calculate(
+        runner: GameRunner,
+        node: SearchNode,
+        maxDepth: Int,
+        currentDepth: Int,
+        perfData: Array<PerfData>
+    ) {
 
         val perfDatum = perfData[currentDepth]
         perfDatum.moves += node.moves.size
@@ -68,12 +76,12 @@ internal class PerftTest {
             }
 
             if (currentDepth < maxDepth - 1) {
-                move.apply(node.boardState)
-                node.generateMoves()
-                if (!node.isCheckmate() && !node.isStalemate()) {
-                    calculate(node, maxDepth, currentDepth + 1, perfData)
+                move.apply(runner.boardState)
+                val newNode = runner.generateSearchNode()
+                if (!newNode.isCheckmate() && !newNode.isStalemate()) {
+                    calculate(runner, newNode, maxDepth, currentDepth + 1, perfData)
                 }
-                move.rollback(node.boardState)
+                move.rollback(runner.boardState)
             }
         }
     }

@@ -1,25 +1,13 @@
-package org.computronium.chess.movegen.moves
+package org.computronium.chess.core.moves
 
-import org.computronium.chess.movegen.BoardState
-import org.computronium.chess.movegen.PieceType
-import org.computronium.chess.movegen.moves.aspects.Transform
-import org.computronium.chess.movegen.moves.aspects.BaseMoveTransform
-import org.computronium.chess.movegen.moves.aspects.CaptureTransform
-import org.computronium.chess.movegen.moves.aspects.CastleKingSideTransform
-import org.computronium.chess.movegen.moves.aspects.CastleQueenSideTransform
-import org.computronium.chess.movegen.moves.aspects.KingMoveTransform
-import org.computronium.chess.movegen.moves.aspects.MoveTransform
-import org.computronium.chess.movegen.moves.aspects.PawnInitialMoveTransform
-import org.computronium.chess.movegen.moves.aspects.PawnMoveTransform
-import org.computronium.chess.movegen.moves.aspects.PawnPromotionTransform
-import org.computronium.chess.movegen.moves.aspects.RookMoveTransform
-import org.computronium.chess.movegen.moves.aspects.SwapTurnsTransform
-import java.util.stream.Collectors
+import org.computronium.chess.core.BoardState
+import org.computronium.chess.core.PieceType
+import org.computronium.chess.core.moves.aspects.*
 
 /**
  * The move generator.
  */
-class MoveGenerator(val boardState : BoardState) {
+class MoveGenerator(val boardState : BoardState, val moveNameGenerator: MoveNameGenerator) {
 
     fun getMoves() : List<Move> {
 
@@ -236,12 +224,6 @@ class MoveGenerator(val boardState : BoardState) {
         return moves
     }
 
-    private fun appendAll(buffers: List<StringBuffer>, s: String) {
-        for (buffer in buffers) {
-            buffer.append(s)
-        }
-    }
-
     private fun standardMove(from: Int, to: Int) : Move {
         return MoveBuilder(from, to)
                 .add(MoveTransform(from, to))
@@ -339,7 +321,7 @@ class MoveGenerator(val boardState : BoardState) {
                 .add(MoveTransform(from, to))
                 .build()
     }
-
+    
     inner class MoveBuilder {
 
         private val moveNames: List<String>
@@ -353,13 +335,12 @@ class MoveGenerator(val boardState : BoardState) {
         )
 
         constructor(from: Int, to: Int, capture: Boolean = false, promoteTo: PieceType? = null) {
-            this.moveNames = generateMoveNames(from, to, capture, promoteTo)
+            this.moveNames = moveNameGenerator.generateMoveNames(from, to, capture, promoteTo, boardState)
         }
 
         constructor(moveName: String) {
             this.moveNames = listOf(moveName)
         }
-
 
         fun add(transform: Transform) : MoveBuilder {
             transforms.add(transform)
@@ -377,38 +358,6 @@ class MoveGenerator(val boardState : BoardState) {
             return this
         }
 
-        private fun generateMoveNames(from: Int, to: Int, capture: Boolean = false, promoteTo: PieceType? = null): List<String> {
-            val plain = StringBuffer()
-            val withFile = StringBuffer()
-            val withRank = StringBuffer()
-            val withBoth = StringBuffer()
-            val buffers = listOf(plain, withFile, withRank, withBoth)
-
-            val piece = boardState[from]
-
-            if (piece?.type != PieceType.PAWN) {
-                appendAll(buffers, "${piece?.type?.letter}")
-            } else if (capture) {
-                plain.append("${BoardState.fileChar(from)}")
-            }
-
-            appendAll(listOf(withFile, withBoth), "${BoardState.fileChar(from)}")
-            appendAll(listOf(withRank, withBoth), "${BoardState.rankChar(from)}")
-
-            if (capture) {
-                appendAll(buffers, "x")
-            }
-
-            appendAll(buffers, "${BoardState.fileChar(to)}")
-            appendAll(buffers, "${BoardState.rankChar(to)}")
-            if (promoteTo != null) {
-                appendAll(buffers, "=${promoteTo.letter}")
-            }
-
-            return buffers.stream().map { sb -> sb.toString() }.collect(Collectors.toList())
-        }
-
-
         fun build() : Move {
             transforms.add(SwapTurnsTransform())
             return Move(moveNames, transforms, metadata)
@@ -416,5 +365,4 @@ class MoveGenerator(val boardState : BoardState) {
     }
 
     data class MoveMetadata(var capture: Boolean, var enPassant: Boolean, var castle: Boolean, var promotion: Boolean, var check: Boolean)
-
 }

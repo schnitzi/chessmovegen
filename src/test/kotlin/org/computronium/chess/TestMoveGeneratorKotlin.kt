@@ -1,6 +1,6 @@
 package org.computronium.chess
 
-import org.computronium.chess.movegen.SearchNode
+import org.computronium.chess.core.GameRunner
 import org.computronium.chess.testcaseeditor.TestCaseGroup
 import org.junit.Assert
 import org.junit.Test
@@ -37,7 +37,8 @@ class TestMoveGeneratorKotlin {
 
             val expectedMoves = testCase.expected.associateBy({ it.move.toString() }, { it.fen })
 
-            val startPos = SearchNode.fromFEN(testCase.start.fen)
+            val runner = GameRunner.fromFEN(testCase.start.fen)
+            val startPos = runner.generateSearchNode()
             val boardState = startPos.boardState
             val actualMoves = startPos.moves.associateBy({ it.toString() }, {
 

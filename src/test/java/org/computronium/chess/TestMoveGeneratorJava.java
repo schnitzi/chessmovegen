@@ -1,8 +1,9 @@
 package org.computronium.chess;
 
-import org.computronium.chess.movegen.BoardState;
-import org.computronium.chess.movegen.SearchNode;
-import org.computronium.chess.movegen.moves.Move;
+import org.computronium.chess.core.BoardState;
+import org.computronium.chess.core.GameRunner;
+import org.computronium.chess.core.SearchNode;
+import org.computronium.chess.core.moves.Move;
 import org.computronium.chess.testcaseeditor.TestCase;
 import org.computronium.chess.testcaseeditor.TestCase.TestCasePosition;
 import org.computronium.chess.testcaseeditor.TestCaseGroup;
@@ -46,7 +47,8 @@ public final class TestMoveGeneratorJava {
                 expectedMoves.put(position.getMove(), position.getFen());
             }
 
-            SearchNode startPos = SearchNode.Companion.fromFEN(testCase.getStart().getFen());
+            GameRunner runner = GameRunner.Companion.fromFEN(testCase.getStart().getFen());
+            SearchNode startPos = runner.generateSearchNode();
             final Map<String, String> actualMoves = new HashMap<>();
             for (Move move : startPos.getMoves()) {
 

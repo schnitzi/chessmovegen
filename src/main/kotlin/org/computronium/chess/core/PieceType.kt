@@ -1,4 +1,4 @@
-package org.computronium.chess.movegen
+package org.computronium.chess.core
 
 enum class PieceType(val letter: Char) {
 

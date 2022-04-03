@@ -1,4 +1,4 @@
-package org.computronium.chess.movegen
+package org.computronium.chess.core
 
 import java.util.HashSet
 import java.util.StringTokenizer
@@ -129,6 +129,7 @@ class BoardState(private val board: Array<Piece?>) {
         board[from] = null
 
         if (board[to] == null) {
+            System.err.println("Expected piece to be at pos $from")
             exitProcess(-1)
         }
 

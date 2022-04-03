@@ -1,6 +1,6 @@
-package org.computronium.chess.movegen.moves.aspects
+package org.computronium.chess.core.moves.aspects
 
-import org.computronium.chess.movegen.BoardState
+import org.computronium.chess.core.BoardState
 
 /**
  * That transform that's just a piece moving from one place to another.

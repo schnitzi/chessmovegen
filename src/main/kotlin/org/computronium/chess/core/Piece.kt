@@ -1,4 +1,4 @@
-package org.computronium.chess.movegen
+package org.computronium.chess.core
 
 enum class Piece(val color: Int, val type: PieceType, val char: Char) {
 

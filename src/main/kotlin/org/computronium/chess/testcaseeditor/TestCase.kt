@@ -1,7 +1,7 @@
 package org.computronium.chess.testcaseeditor
 
 import com.google.gson.annotations.Expose
-import org.computronium.chess.movegen.BoardState
+import org.computronium.chess.core.BoardState
 
 class TestCase(@Expose val description: String?,
                @Expose val start: TestCasePosition,

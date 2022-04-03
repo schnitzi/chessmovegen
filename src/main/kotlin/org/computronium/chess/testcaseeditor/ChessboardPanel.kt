@@ -1,8 +1,8 @@
 package org.computronium.chess.testcaseeditor
 
-import org.computronium.chess.movegen.BoardState
-import org.computronium.chess.movegen.Piece
-import org.computronium.chess.movegen.PieceType
+import org.computronium.chess.core.BoardState
+import org.computronium.chess.core.Piece
+import org.computronium.chess.core.PieceType
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Container
