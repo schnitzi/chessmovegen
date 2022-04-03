@@ -3,6 +3,7 @@ package org.computronium.chess;
 import org.computronium.chess.core.BoardState;
 import org.computronium.chess.core.GameRunner;
 import org.computronium.chess.core.SearchNode;
+import org.computronium.chess.core.moves.AlgebraicMoveNameGenerator;
 import org.computronium.chess.core.moves.Move;
 import org.computronium.chess.testcaseeditor.TestCase;
 import org.computronium.chess.testcaseeditor.TestCase.TestCasePosition;
@@ -47,7 +48,7 @@ public final class TestMoveGeneratorJava {
                 expectedMoves.put(position.getMove(), position.getFen());
             }
 
-            GameRunner runner = GameRunner.Companion.fromFEN(testCase.getStart().getFen());
+            GameRunner runner = GameRunner.Companion.fromFEN(testCase.getStart().getFen(), new AlgebraicMoveNameGenerator());
             SearchNode startPos = runner.generateSearchNode();
             final Map<String, String> actualMoves = new HashMap<>();
             for (Move move : startPos.getMoves()) {

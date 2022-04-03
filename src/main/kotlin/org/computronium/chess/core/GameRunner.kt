@@ -17,9 +17,9 @@ class GameRunner(val boardState: BoardState, moveNameGenerator: MoveNameGenerato
 
         private val DEFAULT_MOVE_NAME_GENERATOR = AlgebraicMoveNameGenerator()
 
-        fun fromFEN(s: String) : GameRunner {
+        fun fromFEN(s: String, nameGenerator: MoveNameGenerator = DEFAULT_MOVE_NAME_GENERATOR) : GameRunner {
             val board = BoardState.fromFEN(s)
-            return GameRunner(board, DEFAULT_MOVE_NAME_GENERATOR)
+            return GameRunner(board, nameGenerator)
         }
 
         fun newGame() : GameRunner {

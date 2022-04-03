@@ -5,11 +5,7 @@ import org.computronium.chess.core.PieceType
 import java.util.stream.Collectors
 
 class AlgebraicMoveNameGenerator : MoveNameGenerator {
-    /**
-     * Generates all the possible move names for the given move.  This is used to disambiguate -- if more
-     * than one move has the same 'easy' move name, you can try the next for each, then the next, etc, until
-     * one is found that is unique.
-     */
+
     override fun generateMoveNames(from: Int, to: Int, capture: Boolean, promoteTo: PieceType?, boardState: BoardState): List<String> {
         val plain = StringBuffer()
         val withFile = StringBuffer()

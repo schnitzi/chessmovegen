@@ -2,6 +2,7 @@ package org.computronium.chess
 
 import org.computronium.chess.core.GameRunner
 import org.computronium.chess.core.SearchNode
+import org.computronium.chess.core.moves.PerftreeMoveNameGenerator
 
 /**
  * Spits out moves for a given FEN, as required to run move generator against
@@ -10,7 +11,8 @@ import org.computronium.chess.core.SearchNode
 
 class MoveSpitter(private val maxDepth: Int, startFEN: String) {
 
-    private val runner = GameRunner.fromFEN(startFEN)
+    private val nameGenerator = PerftreeMoveNameGenerator()
+    private val runner = GameRunner.fromFEN(startFEN, nameGenerator)
 
     private fun run() {
 
