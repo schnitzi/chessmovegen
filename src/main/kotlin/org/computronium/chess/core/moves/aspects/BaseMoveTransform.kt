@@ -9,14 +9,10 @@ class BaseMoveTransform : Transform {
 
     private var enPassantCapturePos : Int? = null
 
-    private var whoseTurnIsInCheck : Boolean = false
-
     override fun apply(boardState: BoardState) {
 
         enPassantCapturePos = boardState.enPassantCapturePos
         boardState.enPassantCapturePos = null
-
-        whoseTurnIsInCheck = boardState.whoseTurnData().isInCheck
 
         if (boardState.whoseTurn == BoardState.BLACK) {
             boardState.moveNumber++
@@ -32,8 +28,6 @@ class BaseMoveTransform : Transform {
         if (boardState.whoseTurn == BoardState.BLACK) {
             boardState.moveNumber--
         }
-
-        boardState.whoseTurnData().isInCheck = whoseTurnIsInCheck
 
         boardState.enPassantCapturePos = enPassantCapturePos
     }

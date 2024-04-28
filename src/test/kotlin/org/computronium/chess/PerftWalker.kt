@@ -15,27 +15,28 @@ internal class PerftWalker(maxDepth: Int) {
         node: SearchNode,
         maxDepth: Int,
         currentDepth: Int,
-        perftDatum: PerftDatum,
-        topLevel : Boolean
-    ) {
+        collector: PerftDatum,
+        topLevel : Boolean) {
 
-        perftDatum.moves += node.moves.size
+        if (currentDepth == maxDepth - 1) {
+            collector.moves += node.moves.size
 
-        for (move in node.moves) {
+            for (move in node.moves) {
 
-            if (move.metadata.capture) {
-                perftDatum.captures += 1
+                if (move.metadata.capture) {
+                    collector.captures += 1
+                }
+
+                if (move.metadata.castle) {
+                    collector.castles += 1
+                }
+
+                if (move.metadata.promotion) {
+                    collector.promotions += 1
+                }
             }
-
-            if (move.metadata.castle) {
-                perftDatum.castles += 1
-            }
-
-            if (move.metadata.promotion) {
-                perftDatum.promotions += 1
-            }
-
-            if (currentDepth < maxDepth - 1) {
+        } else {
+            for (move in node.moves) {
                 move.apply(runner.boardState)
                 val newNode = runner.generateSearchNode()
 
@@ -43,11 +44,11 @@ internal class PerftWalker(maxDepth: Int) {
                     if (topLevel) {
                         childDatum.reset()
                         walk(runner, newNode, maxDepth, currentDepth + 1, childDatum, false)
-                        println("move = $move")
-                        println("childDatum = $childDatum")
-                        perftDatum.add(childDatum)
+                        println("$move\t${childDatum.moves}")
+//                        println("childDatum = $childDatum")
+                        collector.add(childDatum)
                     } else {
-                        walk(runner, newNode, maxDepth, currentDepth + 1, perftDatum, false)
+                        walk(runner, newNode, maxDepth, currentDepth + 1, collector, false)
                     }
                 }
                 move.rollback(runner.boardState)

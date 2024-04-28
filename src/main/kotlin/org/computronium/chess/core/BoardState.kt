@@ -345,7 +345,7 @@ class BoardState(private val board: Array<Piece?>) {
                 boardState.sideData[BLACK].canQueenSideCastle = false
             }
 
-            boardState.sideData[boardState.whoseTurn].isInCheck = boardState.isKingInCheck(boardState.whoseTurn)
+            boardState.whoseTurnData().isInCheck = boardState.isKingInCheck(boardState.whoseTurn)
 
             val enPassantCaptureSquare = tokenizer.nextToken()
             if (enPassantCaptureSquare != "-") {

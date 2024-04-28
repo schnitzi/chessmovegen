@@ -23,9 +23,9 @@ class MoveGenerator(val boardState : BoardState, val moveNameGenerator: MoveName
         val moves = unfilteredMoves.filter { !intoCheck(it) }
 
         // Set whether the move results in checking the opposing king, so we can put a "+" after the move name.
-        for (move in moves) {
-            setResultsInCheck(move)
-        }
+//        for (move in moves) {
+//            setResultsInCheck(move)
+//        }
 
         // Remove any ambiguities involving the move names.
         var done = false
@@ -360,6 +360,7 @@ class MoveGenerator(val boardState : BoardState, val moveNameGenerator: MoveName
 
         fun build() : Move {
             transforms.add(SwapTurnsTransform())
+            transforms.add(SetInCheckTransform())
             return Move(moveNames, transforms, metadata)
         }
     }
