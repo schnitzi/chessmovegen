@@ -23,9 +23,9 @@ class MoveGenerator(val boardState : BoardState, val moveNameGenerator: MoveName
         val moves = unfilteredMoves.filter { !intoCheck(it) }
 
         // Set whether the move results in checking the opposing king, so we can put a "+" after the move name.
-//        for (move in moves) {
-//            setResultsInCheck(move)
-//        }
+        for (move in moves) {
+            setResultsInCheck(move)
+        }
 
         // Remove any ambiguities involving the move names.
         var done = false
@@ -42,6 +42,7 @@ class MoveGenerator(val boardState : BoardState, val moveNameGenerator: MoveName
         return moves
     }
 
+    // TODO only place that sets move.resultsInCheck, but this method is not called.
     private fun setResultsInCheck(move: Move) {
         try {
             move.apply(boardState)
@@ -259,7 +260,7 @@ class MoveGenerator(val boardState : BoardState, val moveNameGenerator: MoveName
     }
 
     private fun kingCapture(from: Int, to: Int) : Move {
-        return MoveBuilder(from, to)
+        return MoveBuilder(from, to, true)
                 .add(CaptureTransform(to))
                 .add(KingMoveTransform())
                 .add(MoveTransform(from, to))
@@ -274,7 +275,7 @@ class MoveGenerator(val boardState : BoardState, val moveNameGenerator: MoveName
     }
 
     private fun rookCapture(from: Int, to: Int) : Move {
-        return MoveBuilder(from, to)
+        return MoveBuilder(from, to, true)
                 .add(RookMoveTransform(from))
                 .add(CaptureTransform(to))
                 .add(MoveTransform(from, to))

@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <kotlin.version>1.6.10</kotlin.version>
+        <kotlin.version>1.9.23</kotlin.version>
     </properties>
 
     <dependencies>
@@ -109,6 +109,14 @@
                         <goals>
                             <goal>testCompile</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>none</phase>
                     </execution>
                 </executions>
                 <configuration>

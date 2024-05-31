@@ -198,11 +198,18 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
             JOptionPane.showMessageDialog(this, "Added $transpositionsAdded new test cases.")
         }
 
+        val regenerateMoves = JMenuItem("Regenerate all moves")
+        regenerateMoves.addActionListener {
+            val fensRegenerated = regenerateMovesForAllFens()
+            JOptionPane.showMessageDialog(this, "Regenerated moves for $fensRegenerated fens.")
+        }
+
         val actionMenu = JMenu("Action")
         actionMenu.add(addTestCase)
         actionMenu.add(addMoveAsTestCase)
         actionMenu.add(removeTestCase)
         actionMenu.add(addTranspositions)
+        actionMenu.add(regenerateMoves)
         return actionMenu
     }
 
@@ -213,17 +220,17 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
                 return
             }
         }
-        val newTestCase = createTestCase(newFEN, null)
+        val newTestCase = createTestCase(newFEN, null, null)
         testCaseGroup.add(newTestCase)
         testCaseGroupChanged()
         leftPanel.selectFEN(testCaseGroup.getSize() - 1)
     }
 
-    private fun createTestCase(newFEN: String, description: String?): TestCase {
+    private fun createTestCase(newFEN: String, description: String?, startDescription: String?): TestCase {
         val runner = GameRunner.fromFEN(newFEN)
         val newRoot = runner.generateSearchNode()
         val newTestCase = TestCase(description,
-            TestCase.TestCasePosition(null, null, newFEN),
+            TestCase.TestCasePosition(startDescription, null, newFEN),
             newRoot.moves.map {
                 val move = it.toString()
                 it.apply(newRoot.boardState)
@@ -244,10 +251,38 @@ internal class FENTestFileEditor(private var testCaseGroup: TestCaseGroup = Test
             val transposedBoardState = BoardState.fromFEN(testCase.start.fen).transpose()
             val newFEN = transposedBoardState.toFEN()
             if (!testCaseGroup.contains(newFEN)) {
-                val newTestCase = createTestCase(newFEN, "Transpose of ${testCase.start.fen}")
+                val newTestCase = createTestCase(newFEN, "Transpose of ${testCase.start.fen}",
+                    testCase.start.description!!
+                        .replace("white", "zzz")
+                        .replace("White", "ZZZ")
+                        .replace("black", "white")
+                        .replace("Black", "White")
+                        .replace("zzz", "black")
+                        .replace("ZZZ", "Black"))
                 newTestCases.add(newTestCase)
                 count += 1
             }
+        }
+
+        testCaseGroup.testCases = newTestCases
+        testCaseGroupChanged()
+        if (testCaseGroup.getSize() > 0) {
+            leftPanel.selectFEN(0)
+        }
+
+        return count
+    }
+
+    // TODO -- this function actually loses descriptions when it regenerates the test cases, so
+    // the changed files should be checked carefully before commiting.
+    private fun regenerateMovesForAllFens(): Int {
+        val newTestCases = mutableListOf<TestCase>()
+        var count = 0
+        for (testCase in testCaseGroup.testCases) {
+
+            val regeneratedTestCase = createTestCase(testCase.start.fen, testCase.description, testCase.start.description)
+            newTestCases.add(regeneratedTestCase)
+            count += 1
         }
 
         testCaseGroup.testCases = newTestCases
