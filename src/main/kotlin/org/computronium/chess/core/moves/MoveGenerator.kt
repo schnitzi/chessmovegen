@@ -9,7 +9,7 @@ import org.computronium.chess.core.moves.aspects.*
  */
 class MoveGenerator(val boardState : BoardState, val moveNameGenerator: MoveNameGenerator) {
 
-    fun getMoves() : List<Move> {
+    fun getMoves(getCompleteData: Boolean = true) : List<Move> {
 
         val piecePositions = boardState.piecePositions(boardState.whoseTurn)
 
@@ -19,22 +19,23 @@ class MoveGenerator(val boardState : BoardState, val moveNameGenerator: MoveName
             unfilteredMoves.addAll(findMoves(piecePosition))
         }
 
-        // Get rid of moves into check.
+        // Get rid of moves into check, as they are illegal.
         val moves = unfilteredMoves.filter { !intoCheck(it) }
 
-        // Set whether the move results in checking the opposing king, so we can put a "+" after the move name.
-        for (move in moves) {
-            setResultsInCheck(move)
-        }
-
-        // Remove any ambiguities involving the move names.
-        var done = false
-        while (!done) {
-            done = true
+        if (getCompleteData) {// Set whether the move results in checking the opposing king, so we can put a "+" after the move name.
             for (move in moves) {
-                while (moves.stream().filter {it.moveNames.contains(move.getBaseMoveName())}.count() > 1) {
-                    move.nameIndex += 1
-                    done = false
+                setResultsInCheckOrMate(move)
+            }
+
+            // Remove any ambiguities involving the move names.
+            var done = false
+            while (!done) {
+                done = true
+                for (move in moves) {
+                    while (moves.stream().filter {it.moveNames.contains(move.getBaseMoveName())}.count() > 1) {
+                        move.nameIndex += 1
+                        done = false
+                    }
                 }
             }
         }
@@ -42,11 +43,20 @@ class MoveGenerator(val boardState : BoardState, val moveNameGenerator: MoveName
         return moves
     }
 
-    // TODO only place that sets move.resultsInCheck, but this method is not called.
-    private fun setResultsInCheck(move: Move) {
+    private fun setResultsInCheckOrMate(move: Move) {
         try {
             move.apply(boardState)
             move.resultsInCheck = boardState.isKingInCheck(boardState.whoseTurn)
+
+            // See if the move results in mate or stalemate.
+            val moves = getMoves(false)
+            if (moves.isEmpty()) {
+                if (move.resultsInCheck) {
+                    move.resultsInMate = true
+                } else {
+                    move.resultsInStalemate = true
+                }
+            }
         } finally {
             move.rollback(boardState)
         }

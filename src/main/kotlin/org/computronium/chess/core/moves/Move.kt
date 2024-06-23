@@ -7,6 +7,8 @@ class Move(val moveNames: List<String>, private val transforms: List<Transform>,
 
     var nameIndex: Int = 0
     var resultsInCheck: Boolean = false
+    var resultsInMate: Boolean = false
+    var resultsInStalemate: Boolean = false
 
     fun apply(boardState: BoardState) {
 
@@ -27,6 +29,6 @@ class Move(val moveNames: List<String>, private val transforms: List<Transform>,
     }
 
     override fun toString(): String {
-        return getBaseMoveName() + if (resultsInCheck) "+" else ""
+        return getBaseMoveName() + if (resultsInMate) "#" else if (resultsInCheck) "+" else ""
     }
 }
