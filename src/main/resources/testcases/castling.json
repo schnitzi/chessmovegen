@@ -1388,6 +1388,1054 @@
           "fen": "rnBq1k1r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK1nR b KQ - 0 8"
         }
       ]
+    },
+    {
+      "start": {
+        "fen": "rnbqkN1r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R b KQkq - 1 8",
+        "description": "Can't castle through opposing piece."
+      },
+      "expected": [
+        {
+          "move": "c5",
+          "fen": "rnbqkN1r/pp2bppp/8/2p5/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "a6",
+          "fen": "rnbqkN1r/1p2bppp/p1p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "a5",
+          "fen": "rnbqkN1r/1p2bppp/2p5/p7/2B5/8/PPP1N1PP/RNBQK2R w KQkq a6 0 9"
+        },
+        {
+          "move": "b6",
+          "fen": "rnbqkN1r/p3bppp/1pp5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "b5",
+          "fen": "rnbqkN1r/p3bppp/2p5/1p6/2B5/8/PPP1N1PP/RNBQK2R w KQkq b6 0 9"
+        },
+        {
+          "move": "Bd6",
+          "fen": "rnbqkN1r/pp3ppp/2pb4/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bc5",
+          "fen": "rnbqkN1r/pp3ppp/2p5/2b5/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bb4+",
+          "fen": "rnbqkN1r/pp3ppp/2p5/8/1bB5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Ba3",
+          "fen": "rnbqkN1r/pp3ppp/2p5/8/2B5/b7/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bf6",
+          "fen": "rnbqkN1r/pp3ppp/2p2b2/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bg5",
+          "fen": "rnbqkN1r/pp3ppp/2p5/6b1/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bh4+",
+          "fen": "rnbqkN1r/pp3ppp/2p5/8/2B4b/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bxf8",
+          "fen": "rnbqkb1r/pp3ppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "f6",
+          "fen": "rnbqkN1r/pp2b1pp/2p2p2/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "f5",
+          "fen": "rnbqkN1r/pp2b1pp/2p5/5p2/2B5/8/PPP1N1PP/RNBQK2R w KQkq f6 0 9"
+        },
+        {
+          "move": "g6",
+          "fen": "rnbqkN1r/pp2bp1p/2p3p1/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "g5",
+          "fen": "rnbqkN1r/pp2bp1p/2p5/6p1/2B5/8/PPP1N1PP/RNBQK2R w KQkq g6 0 9"
+        },
+        {
+          "move": "h6",
+          "fen": "rnbqkN1r/pp2bpp1/2p4p/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "h5",
+          "fen": "rnbqkN1r/pp2bpp1/2p5/7p/2B5/8/PPP1N1PP/RNBQK2R w KQkq h6 0 9"
+        },
+        {
+          "move": "Na6",
+          "fen": "r1bqkN1r/pp2bppp/n1p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Nd7",
+          "fen": "r1bqkN1r/pp1nbppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bd7",
+          "fen": "rn1qkN1r/pp1bbppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Be6",
+          "fen": "rn1qkN1r/pp2bppp/2p1b3/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bf5",
+          "fen": "rn1qkN1r/pp2bppp/2p5/5b2/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bg4",
+          "fen": "rn1qkN1r/pp2bppp/2p5/8/2B3b1/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bh3",
+          "fen": "rn1qkN1r/pp2bppp/2p5/8/2B5/7b/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qc7",
+          "fen": "rnb1kN1r/ppq1bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qb6",
+          "fen": "rnb1kN1r/pp2bppp/1qp5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qa5+",
+          "fen": "rnb1kN1r/pp2bppp/2p5/q7/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd7",
+          "fen": "rnb1kN1r/pp1qbppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd6",
+          "fen": "rnb1kN1r/pp2bppp/2pq4/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd5",
+          "fen": "rnb1kN1r/pp2bppp/2p5/3q4/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd4",
+          "fen": "rnb1kN1r/pp2bppp/2p5/8/2Bq4/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd3",
+          "fen": "rnb1kN1r/pp2bppp/2p5/8/2B5/3q4/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd2+",
+          "fen": "rnb1kN1r/pp2bppp/2p5/8/2B5/8/PPPqN1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qxd1+",
+          "fen": "rnb1kN1r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBqK2R w KQkq - 0 9"
+        },
+        {
+          "move": "Kxf8",
+          "fen": "rnbq1k1r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQ - 0 9"
+        },
+        {
+          "move": "Rg8",
+          "fen": "rnbqkNr1/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQq - 2 9"
+        },
+        {
+          "move": "Rxf8",
+          "fen": "rnbqkr2/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQq - 0 9"
+        }
+      ]
+    },
+    {
+      "start": {
+        "fen": "rnbqk1Nr/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R b KQkq - 1 8",
+        "description": "Can't castle through opposing piece."
+      },
+      "expected": [
+        {
+          "move": "c5",
+          "fen": "rnbqk1Nr/pp2bppp/8/2p5/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "a6",
+          "fen": "rnbqk1Nr/1p2bppp/p1p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "a5",
+          "fen": "rnbqk1Nr/1p2bppp/2p5/p7/2B5/8/PPP1N1PP/RNBQK2R w KQkq a6 0 9"
+        },
+        {
+          "move": "b6",
+          "fen": "rnbqk1Nr/p3bppp/1pp5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "b5",
+          "fen": "rnbqk1Nr/p3bppp/2p5/1p6/2B5/8/PPP1N1PP/RNBQK2R w KQkq b6 0 9"
+        },
+        {
+          "move": "Bd6",
+          "fen": "rnbqk1Nr/pp3ppp/2pb4/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bc5",
+          "fen": "rnbqk1Nr/pp3ppp/2p5/2b5/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bb4+",
+          "fen": "rnbqk1Nr/pp3ppp/2p5/8/1bB5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Ba3",
+          "fen": "rnbqk1Nr/pp3ppp/2p5/8/2B5/b7/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bf6",
+          "fen": "rnbqk1Nr/pp3ppp/2p2b2/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bg5",
+          "fen": "rnbqk1Nr/pp3ppp/2p5/6b1/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bh4+",
+          "fen": "rnbqk1Nr/pp3ppp/2p5/8/2B4b/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bf8",
+          "fen": "rnbqkbNr/pp3ppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "f6",
+          "fen": "rnbqk1Nr/pp2b1pp/2p2p2/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "f5",
+          "fen": "rnbqk1Nr/pp2b1pp/2p5/5p2/2B5/8/PPP1N1PP/RNBQK2R w KQkq f6 0 9"
+        },
+        {
+          "move": "g6",
+          "fen": "rnbqk1Nr/pp2bp1p/2p3p1/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "g5",
+          "fen": "rnbqk1Nr/pp2bp1p/2p5/6p1/2B5/8/PPP1N1PP/RNBQK2R w KQkq g6 0 9"
+        },
+        {
+          "move": "h6",
+          "fen": "rnbqk1Nr/pp2bpp1/2p4p/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "h5",
+          "fen": "rnbqk1Nr/pp2bpp1/2p5/7p/2B5/8/PPP1N1PP/RNBQK2R w KQkq h6 0 9"
+        },
+        {
+          "move": "Na6",
+          "fen": "r1bqk1Nr/pp2bppp/n1p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Nd7",
+          "fen": "r1bqk1Nr/pp1nbppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bd7",
+          "fen": "rn1qk1Nr/pp1bbppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Be6",
+          "fen": "rn1qk1Nr/pp2bppp/2p1b3/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bf5",
+          "fen": "rn1qk1Nr/pp2bppp/2p5/5b2/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bg4",
+          "fen": "rn1qk1Nr/pp2bppp/2p5/8/2B3b1/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bh3",
+          "fen": "rn1qk1Nr/pp2bppp/2p5/8/2B5/7b/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qc7",
+          "fen": "rnb1k1Nr/ppq1bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qb6",
+          "fen": "rnb1k1Nr/pp2bppp/1qp5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qa5+",
+          "fen": "rnb1k1Nr/pp2bppp/2p5/q7/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd7",
+          "fen": "rnb1k1Nr/pp1qbppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd6",
+          "fen": "rnb1k1Nr/pp2bppp/2pq4/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd5",
+          "fen": "rnb1k1Nr/pp2bppp/2p5/3q4/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd4",
+          "fen": "rnb1k1Nr/pp2bppp/2p5/8/2Bq4/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd3",
+          "fen": "rnb1k1Nr/pp2bppp/2p5/8/2B5/3q4/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qd2+",
+          "fen": "rnb1k1Nr/pp2bppp/2p5/8/2B5/8/PPPqN1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Qxd1+",
+          "fen": "rnb1k1Nr/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBqK2R w KQkq - 0 9"
+        },
+        {
+          "move": "Kf8",
+          "fen": "rnbq1kNr/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQ - 2 9"
+        },
+        {
+          "move": "Rxg8",
+          "fen": "rnbqk1r1/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQq - 0 9"
+        }
+      ]
+    },
+    {
+      "start": {
+        "fen": "r2Nk2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R b KQkq - 1 8",
+        "description": "Can't castle through opposing piece."
+      },
+      "expected": [
+        {
+          "move": "c5",
+          "fen": "r2Nk2r/pp2bppp/8/2p5/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "a6",
+          "fen": "r2Nk2r/1p2bppp/p1p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "a5",
+          "fen": "r2Nk2r/1p2bppp/2p5/p7/2B5/8/PPP1N1PP/RNBQK2R w KQkq a6 0 9"
+        },
+        {
+          "move": "b6",
+          "fen": "r2Nk2r/p3bppp/1pp5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "b5",
+          "fen": "r2Nk2r/p3bppp/2p5/1p6/2B5/8/PPP1N1PP/RNBQK2R w KQkq b6 0 9"
+        },
+        {
+          "move": "Bd6",
+          "fen": "r2Nk2r/pp3ppp/2pb4/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bc5",
+          "fen": "r2Nk2r/pp3ppp/2p5/2b5/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bb4+",
+          "fen": "r2Nk2r/pp3ppp/2p5/8/1bB5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Ba3",
+          "fen": "r2Nk2r/pp3ppp/2p5/8/2B5/b7/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bf6",
+          "fen": "r2Nk2r/pp3ppp/2p2b2/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bg5",
+          "fen": "r2Nk2r/pp3ppp/2p5/6b1/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bh4+",
+          "fen": "r2Nk2r/pp3ppp/2p5/8/2B4b/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bxd8",
+          "fen": "r2bk2r/pp3ppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "Bf8",
+          "fen": "r2Nkb1r/pp3ppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "f6",
+          "fen": "r2Nk2r/pp2b1pp/2p2p2/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "f5",
+          "fen": "r2Nk2r/pp2b1pp/2p5/5p2/2B5/8/PPP1N1PP/RNBQK2R w KQkq f6 0 9"
+        },
+        {
+          "move": "g6",
+          "fen": "r2Nk2r/pp2bp1p/2p3p1/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "g5",
+          "fen": "r2Nk2r/pp2bp1p/2p5/6p1/2B5/8/PPP1N1PP/RNBQK2R w KQkq g6 0 9"
+        },
+        {
+          "move": "h6",
+          "fen": "r2Nk2r/pp2bpp1/2p4p/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "h5",
+          "fen": "r2Nk2r/pp2bpp1/2p5/7p/2B5/8/PPP1N1PP/RNBQK2R w KQkq h6 0 9"
+        },
+        {
+          "move": "Rb8",
+          "fen": "1r1Nk2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQk - 2 9"
+        },
+        {
+          "move": "Rc8",
+          "fen": "2rNk2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQk - 2 9"
+        },
+        {
+          "move": "Rxd8",
+          "fen": "3rk2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQk - 0 9"
+        },
+        {
+          "move": "Kf8",
+          "fen": "r2N1k1r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQ - 2 9"
+        },
+        {
+          "move": "O-O",
+          "fen": "r2N1rk1/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQ - 2 9"
+        },
+        {
+          "move": "Rg8",
+          "fen": "r2Nk1r1/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQq - 2 9"
+        },
+        {
+          "move": "Rf8",
+          "fen": "r2Nkr2/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQq - 2 9"
+        }
+      ]
+    },
+    {
+      "start": {
+        "fen": "r1N1k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R b KQkq - 1 8",
+        "description": "Can't castle through opposing piece."
+      },
+      "expected": [
+        {
+          "move": "c5",
+          "fen": "r1N1k2r/pp2bppp/8/2p5/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "a6",
+          "fen": "r1N1k2r/1p2bppp/p1p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "a5",
+          "fen": "r1N1k2r/1p2bppp/2p5/p7/2B5/8/PPP1N1PP/RNBQK2R w KQkq a6 0 9"
+        },
+        {
+          "move": "b6",
+          "fen": "r1N1k2r/p3bppp/1pp5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "b5",
+          "fen": "r1N1k2r/p3bppp/2p5/1p6/2B5/8/PPP1N1PP/RNBQK2R w KQkq b6 0 9"
+        },
+        {
+          "move": "Bd6",
+          "fen": "r1N1k2r/pp3ppp/2pb4/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bc5",
+          "fen": "r1N1k2r/pp3ppp/2p5/2b5/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bb4+",
+          "fen": "r1N1k2r/pp3ppp/2p5/8/1bB5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Ba3",
+          "fen": "r1N1k2r/pp3ppp/2p5/8/2B5/b7/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bf6",
+          "fen": "r1N1k2r/pp3ppp/2p2b2/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bg5",
+          "fen": "r1N1k2r/pp3ppp/2p5/6b1/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bh4+",
+          "fen": "r1N1k2r/pp3ppp/2p5/8/2B4b/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bd8",
+          "fen": "r1Nbk2r/pp3ppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bf8",
+          "fen": "r1N1kb1r/pp3ppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "f6",
+          "fen": "r1N1k2r/pp2b1pp/2p2p2/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "f5",
+          "fen": "r1N1k2r/pp2b1pp/2p5/5p2/2B5/8/PPP1N1PP/RNBQK2R w KQkq f6 0 9"
+        },
+        {
+          "move": "g6",
+          "fen": "r1N1k2r/pp2bp1p/2p3p1/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "g5",
+          "fen": "r1N1k2r/pp2bp1p/2p5/6p1/2B5/8/PPP1N1PP/RNBQK2R w KQkq g6 0 9"
+        },
+        {
+          "move": "h6",
+          "fen": "r1N1k2r/pp2bpp1/2p4p/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "h5",
+          "fen": "r1N1k2r/pp2bpp1/2p5/7p/2B5/8/PPP1N1PP/RNBQK2R w KQkq h6 0 9"
+        },
+        {
+          "move": "Rb8",
+          "fen": "1rN1k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQk - 2 9"
+        },
+        {
+          "move": "Rxc8",
+          "fen": "2r1k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQk - 0 9"
+        },
+        {
+          "move": "Kf8",
+          "fen": "r1N2k1r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQ - 2 9"
+        },
+        {
+          "move": "O-O",
+          "fen": "r1N2rk1/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQ - 2 9"
+        },
+        {
+          "move": "Rg8",
+          "fen": "r1N1k1r1/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQq - 2 9"
+        },
+        {
+          "move": "Rf8",
+          "fen": "r1N1kr2/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQq - 2 9"
+        }
+      ]
+    },
+    {
+      "start": {
+        "fen": "rN2k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R b KQkq - 1 8",
+        "description": "Can't castle through opposing piece."
+      },
+      "expected": [
+        {
+          "move": "c5",
+          "fen": "rN2k2r/pp2bppp/8/2p5/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "a6",
+          "fen": "rN2k2r/1p2bppp/p1p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "a5",
+          "fen": "rN2k2r/1p2bppp/2p5/p7/2B5/8/PPP1N1PP/RNBQK2R w KQkq a6 0 9"
+        },
+        {
+          "move": "b6",
+          "fen": "rN2k2r/p3bppp/1pp5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "b5",
+          "fen": "rN2k2r/p3bppp/2p5/1p6/2B5/8/PPP1N1PP/RNBQK2R w KQkq b6 0 9"
+        },
+        {
+          "move": "Bd6",
+          "fen": "rN2k2r/pp3ppp/2pb4/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bc5",
+          "fen": "rN2k2r/pp3ppp/2p5/2b5/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bb4+",
+          "fen": "rN2k2r/pp3ppp/2p5/8/1bB5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Ba3",
+          "fen": "rN2k2r/pp3ppp/2p5/8/2B5/b7/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bf6",
+          "fen": "rN2k2r/pp3ppp/2p2b2/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bg5",
+          "fen": "rN2k2r/pp3ppp/2p5/6b1/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bh4+",
+          "fen": "rN2k2r/pp3ppp/2p5/8/2B4b/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bd8",
+          "fen": "rN1bk2r/pp3ppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "Bf8",
+          "fen": "rN2kb1r/pp3ppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 2 9"
+        },
+        {
+          "move": "f6",
+          "fen": "rN2k2r/pp2b1pp/2p2p2/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "f5",
+          "fen": "rN2k2r/pp2b1pp/2p5/5p2/2B5/8/PPP1N1PP/RNBQK2R w KQkq f6 0 9"
+        },
+        {
+          "move": "g6",
+          "fen": "rN2k2r/pp2bp1p/2p3p1/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "g5",
+          "fen": "rN2k2r/pp2bp1p/2p5/6p1/2B5/8/PPP1N1PP/RNBQK2R w KQkq g6 0 9"
+        },
+        {
+          "move": "h6",
+          "fen": "rN2k2r/pp2bpp1/2p4p/8/2B5/8/PPP1N1PP/RNBQK2R w KQkq - 0 9"
+        },
+        {
+          "move": "h5",
+          "fen": "rN2k2r/pp2bpp1/2p5/7p/2B5/8/PPP1N1PP/RNBQK2R w KQkq h6 0 9"
+        },
+        {
+          "move": "Rxb8",
+          "fen": "1r2k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQk - 0 9"
+        },
+        {
+          "move": "Kf8",
+          "fen": "rN3k1r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQ - 2 9"
+        },
+        {
+          "move": "O-O",
+          "fen": "rN3rk1/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQ - 2 9"
+        },
+        {
+          "move": "Rg8",
+          "fen": "rN2k1r1/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQq - 2 9"
+        },
+        {
+          "move": "Rf8",
+          "fen": "rN2kr2/pp2bppp/2p5/8/2B5/8/PPP1N1PP/RNBQK2R w KQq - 2 9"
+        }
+      ]
+    },
+    {
+      "start": {
+        "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/Rn2K2R w KQkq - 1 8",
+        "description": "Can't castle through opposing piece."
+      },
+      "expected": [
+        {
+          "move": "Rxb1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/1R2K2R b Kkq - 0 8"
+        },
+        {
+          "move": "Kd1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/Rn1K3R b kq - 2 8"
+        },
+        {
+          "move": "Kf1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/Rn3K1R b kq - 2 8"
+        },
+        {
+          "move": "Kf2",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1NKPP/Rn5R b kq - 2 8"
+        },
+        {
+          "move": "O-O",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/Rn3RK1 b kq - 2 8"
+        },
+        {
+          "move": "Rg1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/Rn2K1R1 b Qkq - 2 8"
+        },
+        {
+          "move": "Rf1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/Rn2KR2 b Qkq - 2 8"
+        },
+        {
+          "move": "a3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/P7/1PP1N1PP/Rn2K2R b KQkq - 0 8"
+        },
+        {
+          "move": "a4",
+          "fen": "r3k2r/pp2bppp/2p5/8/P1B5/8/1PP1N1PP/Rn2K2R b KQkq a3 0 8"
+        },
+        {
+          "move": "b3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/1P6/P1P1N1PP/Rn2K2R b KQkq - 0 8"
+        },
+        {
+          "move": "b4",
+          "fen": "r3k2r/pp2bppp/2p5/8/1PB5/8/P1P1N1PP/Rn2K2R b KQkq b3 0 8"
+        },
+        {
+          "move": "c3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/2P5/PP2N1PP/Rn2K2R b KQkq - 0 8"
+        },
+        {
+          "move": "Nc1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP3PP/RnN1K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Ng1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP3PP/Rn2K1NR b KQkq - 2 8"
+        },
+        {
+          "move": "Nc3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/2N5/PPP3PP/Rn2K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Ng3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/6N1/PPP3PP/Rn2K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Nd4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2BN4/8/PPP3PP/Rn2K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Nf4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B2N2/8/PPP3PP/Rn2K2R b KQkq - 2 8"
+        },
+        {
+          "move": "g3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/6P1/PPP1N2P/Rn2K2R b KQkq - 0 8"
+        },
+        {
+          "move": "g4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B3P1/8/PPP1N2P/Rn2K2R b KQkq g3 0 8"
+        },
+        {
+          "move": "h3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/7P/PPP1N1P1/Rn2K2R b KQkq - 0 8"
+        },
+        {
+          "move": "h4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B4P/8/PPP1N1P1/Rn2K2R b KQkq h3 0 8"
+        },
+        {
+          "move": "Bb3",
+          "fen": "r3k2r/pp2bppp/2p5/8/8/1B6/PPP1N1PP/Rn2K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bd3",
+          "fen": "r3k2r/pp2bppp/2p5/8/8/3B4/PPP1N1PP/Rn2K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bb5",
+          "fen": "r3k2r/pp2bppp/2p5/1B6/8/8/PPP1N1PP/Rn2K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Ba6",
+          "fen": "r3k2r/pp2bppp/B1p5/8/8/8/PPP1N1PP/Rn2K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bd5",
+          "fen": "r3k2r/pp2bppp/2p5/3B4/8/8/PPP1N1PP/Rn2K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Be6",
+          "fen": "r3k2r/pp2bppp/2p1B3/8/8/8/PPP1N1PP/Rn2K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bxf7+",
+          "fen": "r3k2r/pp2bBpp/2p5/8/8/8/PPP1N1PP/Rn2K2R b KQkq - 0 8"
+        }
+      ]
+    },
+    {
+      "start": {
+        "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R1n1K2R w KQkq - 1 8",
+        "description": "Can't castle through opposing piece."
+      },
+      "expected": [
+        {
+          "move": "Rb1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/1Rn1K2R b Kkq - 2 8"
+        },
+        {
+          "move": "Rxc1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/2R1K2R b Kkq - 0 8"
+        },
+        {
+          "move": "Kd1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R1nK3R b kq - 2 8"
+        },
+        {
+          "move": "Kf1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R1n2K1R b kq - 2 8"
+        },
+        {
+          "move": "Kd2",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPPKN1PP/R1n4R b kq - 2 8"
+        },
+        {
+          "move": "Kf2",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1NKPP/R1n4R b kq - 2 8"
+        },
+        {
+          "move": "O-O",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R1n2RK1 b kq - 2 8"
+        },
+        {
+          "move": "Rg1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R1n1K1R1 b Qkq - 2 8"
+        },
+        {
+          "move": "Rf1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R1n1KR2 b Qkq - 2 8"
+        },
+        {
+          "move": "a3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/P7/1PP1N1PP/R1n1K2R b KQkq - 0 8"
+        },
+        {
+          "move": "a4",
+          "fen": "r3k2r/pp2bppp/2p5/8/P1B5/8/1PP1N1PP/R1n1K2R b KQkq a3 0 8"
+        },
+        {
+          "move": "b3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/1P6/P1P1N1PP/R1n1K2R b KQkq - 0 8"
+        },
+        {
+          "move": "b4",
+          "fen": "r3k2r/pp2bppp/2p5/8/1PB5/8/P1P1N1PP/R1n1K2R b KQkq b3 0 8"
+        },
+        {
+          "move": "c3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/2P5/PP2N1PP/R1n1K2R b KQkq - 0 8"
+        },
+        {
+          "move": "Nxc1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP3PP/R1N1K2R b KQkq - 0 8"
+        },
+        {
+          "move": "Ng1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP3PP/R1n1K1NR b KQkq - 2 8"
+        },
+        {
+          "move": "Nc3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/2N5/PPP3PP/R1n1K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Ng3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/6N1/PPP3PP/R1n1K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Nd4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2BN4/8/PPP3PP/R1n1K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Nf4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B2N2/8/PPP3PP/R1n1K2R b KQkq - 2 8"
+        },
+        {
+          "move": "g3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/6P1/PPP1N2P/R1n1K2R b KQkq - 0 8"
+        },
+        {
+          "move": "g4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B3P1/8/PPP1N2P/R1n1K2R b KQkq g3 0 8"
+        },
+        {
+          "move": "h3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/7P/PPP1N1P1/R1n1K2R b KQkq - 0 8"
+        },
+        {
+          "move": "h4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B4P/8/PPP1N1P1/R1n1K2R b KQkq h3 0 8"
+        },
+        {
+          "move": "Bb3",
+          "fen": "r3k2r/pp2bppp/2p5/8/8/1B6/PPP1N1PP/R1n1K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bd3",
+          "fen": "r3k2r/pp2bppp/2p5/8/8/3B4/PPP1N1PP/R1n1K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bb5",
+          "fen": "r3k2r/pp2bppp/2p5/1B6/8/8/PPP1N1PP/R1n1K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Ba6",
+          "fen": "r3k2r/pp2bppp/B1p5/8/8/8/PPP1N1PP/R1n1K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bd5",
+          "fen": "r3k2r/pp2bppp/2p5/3B4/8/8/PPP1N1PP/R1n1K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Be6",
+          "fen": "r3k2r/pp2bppp/2p1B3/8/8/8/PPP1N1PP/R1n1K2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bxf7+",
+          "fen": "r3k2r/pp2bBpp/2p5/8/8/8/PPP1N1PP/R1n1K2R b KQkq - 0 8"
+        }
+      ]
+    },
+    {
+      "start": {
+        "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R2nK2R w KQkq - 1 8",
+        "description": "Can't castle through opposing piece."
+      },
+      "expected": [
+        {
+          "move": "Rb1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/1R1nK2R b Kkq - 2 8"
+        },
+        {
+          "move": "Rc1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/2RnK2R b Kkq - 2 8"
+        },
+        {
+          "move": "Rxd1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/3RK2R b Kkq - 0 8"
+        },
+        {
+          "move": "Kxd1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R2K3R b kq - 0 8"
+        },
+        {
+          "move": "Kf1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R2n1K1R b kq - 2 8"
+        },
+        {
+          "move": "Kd2",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPPKN1PP/R2n3R b kq - 2 8"
+        },
+        {
+          "move": "O-O",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R2n1RK1 b kq - 2 8"
+        },
+        {
+          "move": "Rg1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R2nK1R1 b Qkq - 2 8"
+        },
+        {
+          "move": "Rf1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP1N1PP/R2nKR2 b Qkq - 2 8"
+        },
+        {
+          "move": "a3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/P7/1PP1N1PP/R2nK2R b KQkq - 0 8"
+        },
+        {
+          "move": "a4",
+          "fen": "r3k2r/pp2bppp/2p5/8/P1B5/8/1PP1N1PP/R2nK2R b KQkq a3 0 8"
+        },
+        {
+          "move": "b3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/1P6/P1P1N1PP/R2nK2R b KQkq - 0 8"
+        },
+        {
+          "move": "b4",
+          "fen": "r3k2r/pp2bppp/2p5/8/1PB5/8/P1P1N1PP/R2nK2R b KQkq b3 0 8"
+        },
+        {
+          "move": "c3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/2P5/PP2N1PP/R2nK2R b KQkq - 0 8"
+        },
+        {
+          "move": "Nc1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP3PP/R1NnK2R b KQkq - 2 8"
+        },
+        {
+          "move": "Ng1",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/8/PPP3PP/R2nK1NR b KQkq - 2 8"
+        },
+        {
+          "move": "Nc3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/2N5/PPP3PP/R2nK2R b KQkq - 2 8"
+        },
+        {
+          "move": "Ng3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/6N1/PPP3PP/R2nK2R b KQkq - 2 8"
+        },
+        {
+          "move": "Nd4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2BN4/8/PPP3PP/R2nK2R b KQkq - 2 8"
+        },
+        {
+          "move": "Nf4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B2N2/8/PPP3PP/R2nK2R b KQkq - 2 8"
+        },
+        {
+          "move": "g3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/6P1/PPP1N2P/R2nK2R b KQkq - 0 8"
+        },
+        {
+          "move": "g4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B3P1/8/PPP1N2P/R2nK2R b KQkq g3 0 8"
+        },
+        {
+          "move": "h3",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B5/7P/PPP1N1P1/R2nK2R b KQkq - 0 8"
+        },
+        {
+          "move": "h4",
+          "fen": "r3k2r/pp2bppp/2p5/8/2B4P/8/PPP1N1P1/R2nK2R b KQkq h3 0 8"
+        },
+        {
+          "move": "Bb3",
+          "fen": "r3k2r/pp2bppp/2p5/8/8/1B6/PPP1N1PP/R2nK2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bd3",
+          "fen": "r3k2r/pp2bppp/2p5/8/8/3B4/PPP1N1PP/R2nK2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bb5",
+          "fen": "r3k2r/pp2bppp/2p5/1B6/8/8/PPP1N1PP/R2nK2R b KQkq - 2 8"
+        },
+        {
+          "move": "Ba6",
+          "fen": "r3k2r/pp2bppp/B1p5/8/8/8/PPP1N1PP/R2nK2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bd5",
+          "fen": "r3k2r/pp2bppp/2p5/3B4/8/8/PPP1N1PP/R2nK2R b KQkq - 2 8"
+        },
+        {
+          "move": "Be6",
+          "fen": "r3k2r/pp2bppp/2p1B3/8/8/8/PPP1N1PP/R2nK2R b KQkq - 2 8"
+        },
+        {
+          "move": "Bxf7+",
+          "fen": "r3k2r/pp2bBpp/2p5/8/8/8/PPP1N1PP/R2nK2R b KQkq - 0 8"
+        }
+      ]
     }
   ]
 }
