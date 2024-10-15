@@ -4,6 +4,11 @@ import org.computronium.chess.core.BoardState
 import org.computronium.chess.core.PieceType
 import java.util.stream.Collectors
 
+/**
+ * Generates move names in the "shortened" (but not "minimal") algebraic notation.
+ *
+ * @see https://en.wikipedia.org/wiki/Algebraic_notation_(chess)
+ */
 class AlgebraicMoveNameGenerator : MoveNameGenerator {
 
     override fun generateMoveNames(from: Int, to: Int, capture: Boolean, promoteTo: PieceType?, boardState: BoardState): List<String> {
