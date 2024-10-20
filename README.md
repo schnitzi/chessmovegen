@@ -15,7 +15,7 @@ This project contains:
 
 2.  A viewer for the test data files.
 
-3.  A graphical tool for creating and editing these test data files.
+3.  A graphical tool for creating and editing these test data files, which includes a move generator used in generating test cases.
 
 This project does NOT contain:
 
@@ -59,7 +59,7 @@ can be reached in a standard game of chess.
 So to use these data files, you will need the ability to parse JSON
 (there are a number of libraries that will help you do that, for
 most modern languages), and the ability to convert a FEN into your
-internal board representation and vice versa (which I guarantee will
+internal board representation (and vice versa, which I promise will
 be handy for other purposes later).
 
 As this project contains its own move generator, I've included
@@ -89,8 +89,8 @@ backwards.  Very often, chess engines have bugs in their undo
 features, where pieces get put back wrong, 'already castled' flags
 don't get unset, etc.  You can test your undo feature easily enough
 by performing the undo for each test case and seeing if you end up with
-a FEN that matches the starting position.  You will find that the
-included sample tests also perform this rollback test.
+a FEN that matches the starting position.  The included sample tests
+contain just such a rollback test.
 
 ### Algebraic move names
 
